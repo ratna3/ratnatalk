@@ -1,0 +1,122 @@
+.cursorBackground {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* Main cursor glow */
+.cursorGlow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    will-change: transform;
+}
+
+.glowInner {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+            rgba(245, 158, 11, 0.12) 0%,
+            rgba(245, 158, 11, 0.06) 30%,
+            rgba(245, 158, 11, 0.02) 50%,
+            transparent 70%);
+    filter: blur(20px);
+}
+
+.glowOuter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+            rgba(180, 83, 9, 0.06) 0%,
+            rgba(180, 83, 9, 0.02) 40%,
+            transparent 60%);
+    filter: blur(40px);
+}
+
+/* Subtle ambient orbs for depth */
+.ambientOrb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.4;
+}
+
+.orb1 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle,
+            rgba(245, 158, 11, 0.08) 0%,
+            transparent 70%);
+    top: -5%;
+    right: -5%;
+    animation: floatSlow 20s ease-in-out infinite;
+}
+
+.orb2 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle,
+            rgba(180, 83, 9, 0.06) 0%,
+            transparent 70%);
+    bottom: 10%;
+    left: -5%;
+    animation: floatSlow 25s ease-in-out infinite reverse;
+}
+
+.orb3 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle,
+            rgba(234, 179, 8, 0.05) 0%,
+            transparent 70%);
+    top: 50%;
+    right: 15%;
+    animation: floatSlow 18s ease-in-out infinite;
+    animation-delay: -5s;
+}
+
+@keyframes floatSlow {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(15px, -15px);
+    }
+
+    50% {
+        transform: translate(-10px, 10px);
+    }
+
+    75% {
+        transform: translate(-15px, -10px);
+    }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .cursorGlow {
+        display: none;
+    }
+
+    .ambientOrb {
+        animation: none;
+    }
+}
+
+/* Simplify on mobile */
+@media (max-width: 768px) {
+    .cursorGlow {
+        display: none;
+    }
+}

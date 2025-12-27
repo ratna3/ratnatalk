@@ -1,0 +1,327 @@
+.blogDetail {
+    min-height: 100vh;
+    padding-top: 80px;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    padding: 3rem 1.5rem 4rem;
+    overflow: hidden;
+}
+
+.heroBackground {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.95) 0%,
+            rgba(254, 249, 239, 0.9) 50%,
+            rgba(252, 211, 77, 0.15) 100%);
+    z-index: 0;
+}
+
+.heroContainer {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.backLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    transition: color 0.3s ease;
+}
+
+.backLink:hover {
+    color: var(--color-primary);
+}
+
+.heroMeta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.category {
+    padding: 0.35rem 0.85rem;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-copper) 100%);
+    color: var(--color-white);
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.date,
+.readTime {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+}
+
+.title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    color: var(--color-charcoal);
+    line-height: 1.2;
+    margin-bottom: 2rem;
+}
+
+.author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.authorAvatar {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-copper) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.authorInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.authorName {
+    font-weight: 600;
+    color: var(--color-charcoal);
+}
+
+.authorRole {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+}
+
+/* Content Section */
+.contentSection {
+    padding: 3rem 1.5rem 4rem;
+    background: var(--color-white);
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.article {
+    font-size: 1.1rem;
+    line-height: 1.85;
+    color: var(--color-text-secondary);
+}
+
+.contentH2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-charcoal);
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(245, 158, 11, 0.2);
+}
+
+.contentH3 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--color-charcoal);
+    margin: 2rem 0 0.75rem;
+}
+
+.paragraph {
+    margin-bottom: 1.25rem;
+}
+
+.boldText {
+    font-weight: 600;
+    color: var(--color-charcoal);
+    margin-bottom: 0.5rem;
+}
+
+.listItem {
+    margin-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
+}
+
+.listItem::marker {
+    color: var(--color-primary);
+}
+
+/* Tags */
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    padding-top: 2rem;
+    margin-top: 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.tagsLabel {
+    font-weight: 600;
+    color: var(--color-charcoal);
+}
+
+.tag {
+    padding: 0.4rem 0.85rem;
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--color-copper);
+    font-size: 0.85rem;
+    font-weight: 500;
+    border-radius: var(--radius-full);
+    transition: all 0.3s ease;
+}
+
+.tag:hover {
+    background: rgba(245, 158, 11, 0.2);
+}
+
+/* Share */
+.share {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 2rem;
+    margin-top: 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.shareLabel {
+    font-weight: 600;
+    color: var(--color-charcoal);
+}
+
+.shareButtons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.shareBtn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.05);
+    border: none;
+    border-radius: var(--radius-lg);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.shareBtn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.shareBtn:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+    transform: translateY(-2px);
+}
+
+/* Related Section */
+.relatedSection {
+    padding: 4rem 1.5rem;
+    background: var(--color-off-white);
+}
+
+.relatedSection h2 {
+    font-size: 1.5rem;
+    color: var(--color-charcoal);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.relatedGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.relatedCard {
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(245, 158, 11, 0.1);
+    transition: all 0.4s ease;
+    text-decoration: none;
+}
+
+.relatedCard:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(245, 158, 11, 0.3);
+}
+
+.relatedCategory {
+    display: inline-block;
+    padding: 0.25rem 0.65rem;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-copper) 100%);
+    color: var(--color-white);
+    font-size: 0.7rem;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+}
+
+.relatedCard h3 {
+    font-size: 1.1rem;
+    color: var(--color-charcoal);
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+    transition: color 0.3s ease;
+}
+
+.relatedCard:hover h3 {
+    color: var(--color-primary-dark);
+}
+
+.relatedMeta {
+    display: flex;
+    gap: 1rem;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .heroMeta {
+        gap: 0.5rem;
+    }
+
+    .share {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .tags {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .relatedGrid {
+        grid-template-columns: 1fr;
+    }
+}

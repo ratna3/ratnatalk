@@ -1,0 +1,392 @@
+.blogsPage {
+    min-height: 100vh;
+    padding-top: 80px;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    padding: 4rem 1.5rem;
+    overflow: hidden;
+}
+
+.heroBackground {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.95) 0%,
+            rgba(254, 249, 239, 0.9) 50%,
+            rgba(252, 211, 77, 0.1) 100%);
+    z-index: 0;
+}
+
+.heroContainer {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+.heroContent {
+    max-width: 600px;
+}
+
+.heroTag {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--color-copper);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.heroContent h1 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: var(--color-charcoal);
+    margin-bottom: 1rem;
+}
+
+.gradient {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-copper) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.heroContent p {
+    font-size: 1.15rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+}
+
+.heroAnimation {
+    flex-shrink: 0;
+}
+
+/* Filters Section */
+.filtersSection {
+    padding: 2rem 1.5rem;
+    background: var(--color-white);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 70px;
+    z-index: 100;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.searchBar {
+    position: relative;
+    max-width: 400px;
+    margin-bottom: 1.5rem;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-muted);
+}
+
+.searchInput {
+    width: 100%;
+    padding: 1rem 1rem 1rem 3rem;
+    border: 2px solid #E5E7EB;
+    border-radius: var(--radius-lg);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: var(--color-off-white);
+}
+
+.searchInput:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    background: var(--color-white);
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1);
+}
+
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.categoryBtn {
+    padding: 0.625rem 1.25rem;
+    border: 2px solid #E5E7EB;
+    border-radius: var(--radius-full);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    background: var(--color-white);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.categoryBtn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.categoryBtn.active {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-copper) 100%);
+    border-color: transparent;
+    color: var(--color-white);
+}
+
+/* Blogs Section */
+.blogsSection {
+    padding: 3rem 1.5rem 5rem;
+    background: var(--color-off-white);
+    min-height: 50vh;
+}
+
+.blogsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.blogCard {
+    position: relative;
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(245, 158, 11, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fadeInUp 0.6s ease-out both;
+    display: flex;
+    flex-direction: column;
+}
+
+.blogCard:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-xl);
+    border-color: rgba(245, 158, 11, 0.3);
+}
+
+.blogCard.featured {
+    border: 2px solid rgba(245, 158, 11, 0.3);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(254, 249, 239, 0.5) 100%);
+}
+
+.featuredBadge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.25rem 0.75rem;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-gold) 100%);
+    color: var(--color-white);
+    font-size: 0.7rem;
+    font-weight: 700;
+    border-radius: var(--radius-full);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.blogCardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.blogCategory {
+    padding: 0.25rem 0.75rem;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-copper) 100%);
+    color: var(--color-white);
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.blogDate {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+}
+
+.blogTitle {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--color-charcoal);
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+    transition: color 0.3s ease;
+}
+
+.blogCard:hover .blogTitle {
+    color: var(--color-primary-dark);
+}
+
+.blogExcerpt {
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    flex-grow: 1;
+    margin-bottom: 1.5rem;
+}
+
+.blogCardFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.readTime {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+}
+
+.readMore {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-primary-dark);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.readMore:hover {
+    gap: 0.75rem;
+    color: var(--color-copper);
+}
+
+/* No Results */
+.noResults {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+}
+
+.noResults h3 {
+    font-size: 1.5rem;
+    color: var(--color-charcoal);
+    margin-bottom: 0.5rem;
+}
+
+.noResults p {
+    color: var(--color-text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+/* Newsletter Section */
+.newsletterSection {
+    padding: 5rem 1.5rem;
+    background: linear-gradient(135deg, var(--color-charcoal) 0%, var(--color-dark-slate) 100%);
+}
+
+.newsletterContent {
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.newsletterContent h2 {
+    font-size: 2rem;
+    color: var(--color-white);
+    margin-bottom: 1rem;
+}
+
+.newsletterContent p {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+}
+
+.newsletterForm {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.emailInput {
+    flex: 1;
+    min-width: 250px;
+    padding: 1rem 1.25rem;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-lg);
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-white);
+    transition: all 0.3s ease;
+}
+
+.emailInput::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.emailInput:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .heroContainer {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .heroAnimation {
+        order: -1;
+    }
+
+    .filtersSection {
+        position: static;
+    }
+
+    .searchBar {
+        max-width: 100%;
+    }
+
+    .categories {
+        justify-content: center;
+    }
+
+    .blogsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .newsletterForm {
+        flex-direction: column;
+    }
+
+    .emailInput {
+        min-width: auto;
+    }
+}
