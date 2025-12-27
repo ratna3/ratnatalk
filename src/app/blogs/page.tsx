@@ -5,6 +5,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import styles from "./page.module.css";
 import writingAnimation from "@/animations/writing.json";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const LottieAnimation = dynamic(() => import("@/components/LottieAnimation"), {
     ssr: false,
@@ -117,6 +118,10 @@ export default function BlogsPage() {
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [searchQuery, setSearchQuery] = useState("");
 
+    const [filtersRef, filtersVisible] = useScrollAnimation<HTMLDivElement>();
+    const [blogsGridRef, blogsGridVisible] = useScrollAnimation<HTMLDivElement>();
+    const [newsletterRef, newsletterVisible] = useScrollAnimation<HTMLDivElement>();
+
     const filteredBlogs = allBlogs.filter((blog) => {
         const matchesCategory =
             selectedCategory === "All" || blog.category === selectedCategory;
@@ -153,7 +158,10 @@ export default function BlogsPage() {
 
             {/* Filters Section */}
             <section className={styles.filtersSection}>
-                <div className={styles.container}>
+                <div
+                    ref={filtersRef}
+                    className={`${styles.container} scroll-reveal ${filtersVisible ? "visible" : ""}`}
+                >
                     <div className={styles.searchBar}>
                         <svg
                             className={styles.searchIcon}
@@ -195,13 +203,14 @@ export default function BlogsPage() {
             <section className={styles.blogsSection}>
                 <div className={styles.container}>
                     {filteredBlogs.length > 0 ? (
-                        <div className={styles.blogsGrid}>
+                        <div
+                            ref={blogsGridRef}
+                            className={`${styles.blogsGrid} scroll-reveal-float ${blogsGridVisible ? "visible" : ""}`}
+                        >
                             {filteredBlogs.map((blog, index) => (
                                 <article
                                     key={blog.id}
-                                    className={`${styles.blogCard} ${blog.featured ? styles.featured : ""
-                                        }`}
-                                    style={{ animationDelay: `${index * 100}ms` }}
+                                    className={`${styles.blogCard} ${blog.featured ? styles.featured : ""} stagger-${Math.min(index + 1, 10)}`}
                                 >
                                     {blog.featured && (
                                         <span className={styles.featuredBadge}>Featured</span>
@@ -255,7 +264,10 @@ export default function BlogsPage() {
             {/* Newsletter Section */}
             <section className={styles.newsletterSection}>
                 <div className={styles.container}>
-                    <div className={styles.newsletterContent}>
+                    <div
+                        ref={newsletterRef}
+                        className={`${styles.newsletterContent} scroll-reveal-zoom ${newsletterVisible ? "visible" : ""}`}
+                    >
                         <h2>Stay Updated</h2>
                         <p>
                             Subscribe to get notified when I publish new articles. No spam,

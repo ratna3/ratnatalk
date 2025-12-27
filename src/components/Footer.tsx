@@ -30,9 +30,9 @@ const Footer = () => {
                         <div className={styles.linkGroup}>
                             <h4>Connect</h4>
                             <Link href="/contact">Contact</Link>
-                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
-                            <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
+                            <a href="https://github.com/ratna3" target="_blank" rel="noopener noreferrer">GitHub</a>
+                            <a href="https://x.com/RatnaKirti1" target="_blank" rel="noopener noreferrer">Twitter/X</a>
+                            <a href="https://discord.gg/zUWK77Yn" target="_blank" rel="noopener noreferrer">Discord</a>
                         </div>
                     </div>
                 </div>

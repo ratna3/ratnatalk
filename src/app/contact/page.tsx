@@ -6,13 +6,13 @@ import styles from "./page.module.css";
 import successAnimation from "@/animations/success.json";
 import {
     FaEnvelope,
-    FaLinkedin,
     FaTwitter,
     FaMapMarkerAlt,
     FaGithub,
-    FaYoutube,
+    FaDiscord,
     FaPaperPlane
 } from "react-icons/fa";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const LottieAnimation = dynamic(() => import("@/components/LottieAnimation"), {
     ssr: false,
@@ -22,20 +22,20 @@ const contactInfo = [
     {
         icon: <FaEnvelope />,
         title: "Email",
-        value: "hello@rktalks.com",
-        link: "mailto:hello@rktalks.com",
+        value: "ratnakirtiscr@gmail.com",
+        link: "mailto:ratnakirtiscr@gmail.com",
     },
     {
-        icon: <FaLinkedin />,
-        title: "LinkedIn",
-        value: "linkedin.com/in/rk",
-        link: "https://linkedin.com/in/rk",
+        icon: <FaGithub />,
+        title: "GitHub",
+        value: "@ratna3",
+        link: "https://github.com/ratna3",
     },
     {
         icon: <FaTwitter />,
-        title: "Twitter",
-        value: "@rk_talks",
-        link: "https://twitter.com/rk_talks",
+        title: "Twitter/X",
+        value: "@RatnaKirti1",
+        link: "https://x.com/RatnaKirti1",
     },
     {
         icon: <FaMapMarkerAlt />,
@@ -54,6 +54,9 @@ export default function ContactPage() {
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+
+    const [contactInfoRef, contactInfoVisible] = useScrollAnimation<HTMLDivElement>();
+    const [formRef, formVisible] = useScrollAnimation<HTMLDivElement>();
 
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -101,7 +104,10 @@ export default function ContactPage() {
                 <div className={styles.container}>
                     <div className={styles.contactGrid}>
                         {/* Contact Info */}
-                        <div className={styles.contactInfo}>
+                        <div
+                            ref={contactInfoRef}
+                            className={`${styles.contactInfo} scroll-reveal-left ${contactInfoVisible ? "visible" : ""}`}
+                        >
                             <h2>Contact Information</h2>
                             <p className={styles.infoDescription}>
                                 Feel free to reach out through any of these channels. I typically
@@ -112,8 +118,7 @@ export default function ContactPage() {
                                 {contactInfo.map((info, index) => (
                                     <div
                                         key={info.title}
-                                        className={styles.infoCard}
-                                        style={{ animationDelay: `${index * 100}ms` }}
+                                        className={`${styles.infoCard} stagger-${index + 1}`}
                                     >
                                         <span className={styles.infoIcon}>{info.icon}</span>
                                         <div className={styles.infoContent}>
@@ -139,7 +144,7 @@ export default function ContactPage() {
                                 <h3>Follow Me</h3>
                                 <div className={styles.socialIcons}>
                                     <a
-                                        href="https://github.com"
+                                        href="https://github.com/ratna3"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className={styles.socialIcon}
@@ -148,38 +153,32 @@ export default function ContactPage() {
                                         <FaGithub />
                                     </a>
                                     <a
-                                        href="https://linkedin.com"
+                                        href="https://x.com/RatnaKirti1"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className={styles.socialIcon}
-                                        aria-label="LinkedIn"
-                                    >
-                                        <FaLinkedin />
-                                    </a>
-                                    <a
-                                        href="https://twitter.com"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className={styles.socialIcon}
-                                        aria-label="Twitter"
+                                        aria-label="Twitter/X"
                                     >
                                         <FaTwitter />
                                     </a>
                                     <a
-                                        href="https://youtube.com"
+                                        href="https://discord.gg/zUWK77Yn"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className={styles.socialIcon}
-                                        aria-label="YouTube"
+                                        aria-label="Discord"
                                     >
-                                        <FaYoutube />
+                                        <FaDiscord />
                                     </a>
                                 </div>
                             </div>
                         </div>
 
                         {/* Contact Form */}
-                        <div className={styles.contactForm}>
+                        <div
+                            ref={formRef}
+                            className={`${styles.contactForm} scroll-reveal-right ${formVisible ? "visible" : ""}`}
+                        >
                             <h2>Send a Message</h2>
                             <form onSubmit={handleSubmit}>
                                 <div className={styles.formRow}>

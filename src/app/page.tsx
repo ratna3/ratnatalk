@@ -8,6 +8,7 @@ import writingAnimation from "@/animations/writing.json";
 import scrollAnimation from "@/animations/scroll.json";
 import sparkAnimation from "@/animations/spark.json";
 import { FaArrowRight, FaQuoteLeft } from "react-icons/fa";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const LottieAnimation = dynamic(() => import("@/components/LottieAnimation"), {
   ssr: false,
@@ -52,6 +53,13 @@ const stats = [
 ];
 
 export default function Home() {
+  const [statsRef, statsVisible] = useScrollAnimation<HTMLDivElement>();
+  const [blogsHeaderRef, blogsHeaderVisible] = useScrollAnimation<HTMLDivElement>();
+  const [blogsGridRef, blogsGridVisible] = useScrollAnimation<HTMLDivElement>();
+  const [aboutContentRef, aboutContentVisible] = useScrollAnimation<HTMLDivElement>();
+  const [aboutVisualRef, aboutVisualVisible] = useScrollAnimation<HTMLDivElement>();
+  const [ctaRef, ctaVisible] = useScrollAnimation<HTMLDivElement>();
+
   return (
     <div className={styles.page}>
       {/* Hero Section */}
@@ -100,12 +108,14 @@ export default function Home() {
       {/* Stats Section */}
       <section className={styles.statsSection}>
         <div className={styles.container}>
-          <div className={styles.statsGrid}>
+          <div
+            ref={statsRef}
+            className={`${styles.statsGrid} scroll-reveal ${statsVisible ? "visible" : ""}`}
+          >
             {stats.map((stat, index) => (
               <div
                 key={index}
-                className={styles.statCard}
-                style={{ animationDelay: `${index * 100}ms` }}
+                className={`${styles.statCard} stagger-${index + 1}`}
               >
                 <span className={styles.statNumber}>{stat.number}</span>
                 <span className={styles.statLabel}>{stat.label}</span>
@@ -118,7 +128,10 @@ export default function Home() {
       {/* Featured Blogs Section */}
       <section className={styles.blogsSection}>
         <div className={styles.container}>
-          <div className={styles.sectionHeader}>
+          <div
+            ref={blogsHeaderRef}
+            className={`${styles.sectionHeader} scroll-reveal ${blogsHeaderVisible ? "visible" : ""}`}
+          >
             <div className={styles.sectionHeaderContent}>
               <span className={styles.sectionTag}>Latest Insights</span>
               <h2>Featured Blogs</h2>
@@ -136,12 +149,14 @@ export default function Home() {
             </div>
           </div>
 
-          <div className={styles.blogsGrid}>
+          <div
+            ref={blogsGridRef}
+            className={`${styles.blogsGrid} scroll-reveal-flip ${blogsGridVisible ? "visible" : ""}`}
+          >
             {featuredBlogs.map((blog, index) => (
               <article
                 key={blog.id}
-                className={styles.blogCard}
-                style={{ animationDelay: `${index * 150}ms` }}
+                className={`${styles.blogCard} stagger-${index + 1}`}
               >
                 <div className={styles.blogCardHeader}>
                   <span className={styles.blogCategory}>{blog.category}</span>
@@ -175,7 +190,10 @@ export default function Home() {
       {/* About Preview Section */}
       <section className={styles.aboutPreview}>
         <div className={styles.container}>
-          <div className={styles.aboutContent}>
+          <div
+            ref={aboutContentRef}
+            className={`${styles.aboutContent} scroll-reveal-left ${aboutContentVisible ? "visible" : ""}`}
+          >
             <span className={styles.sectionTag}>About Me</span>
             <h2>
               Hi, I&apos;m <span className={styles.gradient}>RK</span>
@@ -197,7 +215,10 @@ export default function Home() {
               <FaArrowRight />
             </Link>
           </div>
-          <div className={styles.aboutVisual}>
+          <div
+            ref={aboutVisualRef}
+            className={`${styles.aboutVisual} scroll-reveal-right ${aboutVisualVisible ? "visible" : ""}`}
+          >
             <div className={styles.aboutCard}>
               <div className={styles.sparkEffect}>
                 <LottieAnimation
@@ -223,7 +244,10 @@ export default function Home() {
       {/* CTA Section */}
       <section className={styles.ctaSection}>
         <div className={styles.container}>
-          <div className={styles.ctaContent}>
+          <div
+            ref={ctaRef}
+            className={`${styles.ctaContent} scroll-reveal-zoom ${ctaVisible ? "visible" : ""}`}
+          >
             <h2>Ready to Start Learning?</h2>
             <p>
               Explore my collection of articles and certifications to fuel your

@@ -10,6 +10,7 @@ import {
     FaBullseye,
     FaArrowRight
 } from "react-icons/fa";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const LottieAnimation = dynamic(() => import("@/components/LottieAnimation"), {
     ssr: false,
@@ -69,6 +70,12 @@ const values = [
 ];
 
 export default function AboutPage() {
+    const [storyRef, storyVisible] = useScrollAnimation<HTMLDivElement>();
+    const [valuesRef, valuesVisible] = useScrollAnimation<HTMLDivElement>();
+    const [timelineRef, timelineVisible] = useScrollAnimation<HTMLDivElement>();
+    const [skillsRef, skillsVisible] = useScrollAnimation<HTMLDivElement>();
+    const [ctaRef, ctaVisible] = useScrollAnimation<HTMLDivElement>();
+
     return (
         <div className={styles.aboutPage}>
             {/* Hero Section */}
@@ -116,12 +123,15 @@ export default function AboutPage() {
             {/* Story Section */}
             <section className={styles.storySection}>
                 <div className={styles.container}>
-                    <div className={styles.sectionHeader}>
+                    <div
+                        ref={storyRef}
+                        className={`${styles.sectionHeader} scroll-reveal ${storyVisible ? "visible" : ""}`}
+                    >
                         <span className={styles.sectionTag}>My Story</span>
                         <h2>The Journey So Far</h2>
                         <div className="divider"></div>
                     </div>
-                    <div className={styles.storyContent}>
+                    <div className={`${styles.storyContent} scroll-reveal ${storyVisible ? "visible" : ""}`}>
                         <p>
                             My journey in technology began with a simple curiosity about how things work.
                             From writing my first lines of code to architecting complex cloud solutions,
@@ -144,17 +154,19 @@ export default function AboutPage() {
             {/* Values Section */}
             <section className={styles.valuesSection}>
                 <div className={styles.container}>
-                    <div className={styles.sectionHeader}>
+                    <div
+                        ref={valuesRef}
+                        className={`${styles.sectionHeader} scroll-reveal ${valuesVisible ? "visible" : ""}`}
+                    >
                         <span className={styles.sectionTag}>Core Values</span>
                         <h2>What Drives Me</h2>
                         <div className="divider"></div>
                     </div>
-                    <div className={styles.valuesGrid}>
+                    <div className={`${styles.valuesGrid} scroll-reveal-float ${valuesVisible ? "visible" : ""}`}>
                         {values.map((value, index) => (
                             <div
                                 key={value.title}
-                                className={styles.valueCard}
-                                style={{ animationDelay: `${index * 100}ms` }}
+                                className={`${styles.valueCard} stagger-${index + 1}`}
                             >
                                 <span className={styles.valueIcon}>{value.icon}</span>
                                 <h3>{value.title}</h3>
@@ -168,17 +180,19 @@ export default function AboutPage() {
             {/* Timeline Section */}
             <section className={styles.timelineSection}>
                 <div className={styles.container}>
-                    <div className={styles.sectionHeader}>
+                    <div
+                        ref={timelineRef}
+                        className={`${styles.sectionHeader} scroll-reveal ${timelineVisible ? "visible" : ""}`}
+                    >
                         <span className={styles.sectionTag}>Career Path</span>
                         <h2>My Journey</h2>
                         <div className="divider"></div>
                     </div>
-                    <div className={styles.timeline}>
+                    <div className={`${styles.timeline} scroll-reveal-flip ${timelineVisible ? "visible" : ""}`}>
                         {timeline.map((item, index) => (
                             <div
                                 key={item.year}
-                                className={styles.timelineItem}
-                                style={{ animationDelay: `${index * 150}ms` }}
+                                className={`${styles.timelineItem} stagger-${index + 1}`}
                             >
                                 <div className={styles.timelineYear}>{item.year}</div>
                                 <div className={styles.timelineContent}>
@@ -194,17 +208,19 @@ export default function AboutPage() {
             {/* Skills Section */}
             <section className={styles.skillsSection}>
                 <div className={styles.container}>
-                    <div className={styles.sectionHeader}>
+                    <div
+                        ref={skillsRef}
+                        className={`${styles.sectionHeader} scroll-reveal ${skillsVisible ? "visible" : ""}`}
+                    >
                         <span className={styles.sectionTag}>Expertise</span>
                         <h2>Skills & Technologies</h2>
                         <div className="divider"></div>
                     </div>
-                    <div className={styles.skillsGrid}>
+                    <div className={`${styles.skillsGrid} scroll-reveal ${skillsVisible ? "visible" : ""}`}>
                         {skills.map((skillGroup, index) => (
                             <div
                                 key={skillGroup.category}
-                                className={styles.skillCard}
-                                style={{ animationDelay: `${index * 100}ms` }}
+                                className={`${styles.skillCard} stagger-${index + 1}`}
                             >
                                 <h3>{skillGroup.category}</h3>
                                 <div className={styles.skillTags}>
@@ -223,7 +239,10 @@ export default function AboutPage() {
             {/* CTA Section */}
             <section className={styles.ctaSection}>
                 <div className={styles.container}>
-                    <div className={styles.ctaContent}>
+                    <div
+                        ref={ctaRef}
+                        className={`${styles.ctaContent} scroll-reveal-zoom ${ctaVisible ? "visible" : ""}`}
+                    >
                         <h2>Let&apos;s Connect</h2>
                         <p>
                             Interested in collaborating or just want to say hi? I&apos;d love to hear from you!

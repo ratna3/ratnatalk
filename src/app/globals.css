@@ -579,3 +579,208 @@ textarea:focus {
   transform: translateY(-8px) scale(1.02);
   box-shadow: 0 24px 48px rgba(0, 0, 0, 0.12);
 }
+
+/* ============================================
+   Creative Scroll Reveal Animations
+   ============================================ */
+
+/* Base scroll reveal - Elegant blur + slide up */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(60px) scale(0.95);
+  filter: blur(10px);
+  transition:
+    opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
+}
+
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+/* Slide from left with rotation */
+.scroll-reveal-left {
+  opacity: 0;
+  transform: translateX(-80px) rotate(-3deg);
+  filter: blur(8px);
+  transition:
+    opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.8s ease-out;
+  will-change: opacity, transform, filter;
+}
+
+.scroll-reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0) rotate(0deg);
+  filter: blur(0);
+}
+
+/* Slide from right with rotation */
+.scroll-reveal-right {
+  opacity: 0;
+  transform: translateX(80px) rotate(3deg);
+  filter: blur(8px);
+  transition:
+    opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.8s ease-out;
+  will-change: opacity, transform, filter;
+}
+
+.scroll-reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0) rotate(0deg);
+  filter: blur(0);
+}
+
+/* 3D Scale with spring physics */
+.scroll-reveal-scale {
+  opacity: 0;
+  transform: scale(0.7) perspective(1000px) rotateX(10deg);
+  filter: blur(12px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.6s ease-out;
+  will-change: opacity, transform, filter;
+}
+
+.scroll-reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1) perspective(1000px) rotateX(0deg);
+  filter: blur(0);
+}
+
+/* Elegant fade with glow */
+.scroll-reveal-fade {
+  opacity: 0;
+  filter: blur(6px) brightness(1.5);
+  transition:
+    opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1s ease-out;
+  will-change: opacity, filter;
+}
+
+.scroll-reveal-fade.visible {
+  opacity: 1;
+  filter: blur(0) brightness(1);
+}
+
+/* Flip from bottom - 3D card flip */
+.scroll-reveal-flip {
+  opacity: 0;
+  transform: perspective(1200px) rotateX(-30deg) translateY(40px);
+  transform-origin: center bottom;
+  filter: blur(4px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.6s ease-out;
+  will-change: opacity, transform, filter;
+}
+
+.scroll-reveal-flip.visible {
+  opacity: 1;
+  transform: perspective(1200px) rotateX(0deg) translateY(0);
+  filter: blur(0);
+}
+
+/* Zoom burst - expands from center */
+.scroll-reveal-zoom {
+  opacity: 0;
+  transform: scale(0.5);
+  filter: blur(20px) saturate(0.5);
+  transition:
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.8s ease-out;
+  will-change: opacity, transform, filter;
+}
+
+.scroll-reveal-zoom.visible {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0) saturate(1);
+}
+
+/* Float up with wobble - playful effect */
+.scroll-reveal-float {
+  opacity: 0;
+  transform: translateY(100px) rotate(-5deg);
+  filter: blur(8px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.6s ease-out;
+  will-change: opacity, transform, filter;
+}
+
+.scroll-reveal-float.visible {
+  opacity: 1;
+  transform: translateY(0) rotate(0deg);
+  filter: blur(0);
+}
+
+/* Stagger delay classes - smoother cascade */
+.stagger-1 {
+  transition-delay: 0.05s;
+}
+
+.stagger-2 {
+  transition-delay: 0.12s;
+}
+
+.stagger-3 {
+  transition-delay: 0.19s;
+}
+
+.stagger-4 {
+  transition-delay: 0.26s;
+}
+
+.stagger-5 {
+  transition-delay: 0.33s;
+}
+
+.stagger-6 {
+  transition-delay: 0.40s;
+}
+
+.stagger-7 {
+  transition-delay: 0.47s;
+}
+
+.stagger-8 {
+  transition-delay: 0.54s;
+}
+
+.stagger-9 {
+  transition-delay: 0.61s;
+}
+
+.stagger-10 {
+  transition-delay: 0.68s;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+
+  .scroll-reveal,
+  .scroll-reveal-left,
+  .scroll-reveal-right,
+  .scroll-reveal-scale,
+  .scroll-reveal-fade,
+  .scroll-reveal-flip,
+  .scroll-reveal-zoom,
+  .scroll-reveal-float {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+}
