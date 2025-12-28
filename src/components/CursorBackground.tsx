@@ -6,7 +6,7 @@ import styles from "./CursorBackground.module.css";
 const CursorBackground = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const glowRef = useRef<HTMLDivElement>(null);
-    const requestRef = useRef<number>();
+    const requestRef = useRef<number | null>(null);
     const mouseRef = useRef({ x: 0, y: 0 });
     const currentRef = useRef({ x: 0, y: 0 });
 
