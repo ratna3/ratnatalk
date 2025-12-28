@@ -17,32 +17,37 @@ const LottieAnimation = dynamic(() => import("@/components/LottieAnimation"), {
 });
 
 const skills = [
-    { category: "Cloud Platforms", items: ["AWS", "Google Cloud", "Azure", "DigitalOcean"] },
-    { category: "DevOps & Tools", items: ["Docker", "Kubernetes", "Terraform", "Jenkins", "GitHub Actions"] },
-    { category: "Programming", items: ["Python", "JavaScript", "TypeScript", "Go", "Node.js"] },
-    { category: "Leadership", items: ["Team Management", "Agile/Scrum", "Strategic Planning", "Mentoring"] },
+    { category: "Software Engineering", items: ["Python", "JavaScript", "TypeScript", "Node.js", "React", "Next.js"] },
+    { category: "DevOps & Cloud", items: ["Docker", "Kubernetes", "AWS", "Azure", "GitHub Actions", "CI/CD"] },
+    { category: "Cybersecurity", items: ["Penetration Testing", "Hack The Box", "Security Audits", "Threat Analysis"] },
+    { category: "Tools & Platforms", items: ["Microsoft", "GitHub", "Atlassian", "Adobe Creative Suite", "AI/ML Tools"] },
 ];
 
 const timeline = [
     {
+        year: "2025",
+        title: "Founding Member at Lloyd Structure House Inc",
+        description: "I am effectively managing and giving advice to the team members and CEO of the company. ",
+    },
+    {
+        year: "2025",
+        title: "Team Member at Integrity",
+        description: "Where I am effectively managing a dedicated lead system at Integrity, driving significant growth for America's largest insurance agency. ",
+    },
+    {
+        year: "2025",
+        title: "40+ Certifications Achieved",
+        description: "Mastered Microsoft, GitHub, Atlassian, Docker, DevOps, Adobe, AI, and Cybersecurity.",
+    },
+    {
         year: "2024",
-        title: "Cloud Architect",
-        description: "Leading cloud transformation initiatives and architecting enterprise-grade solutions.",
+        title: "Software Developement Intern",
+        description: "As a Software Development Intern at BIPS System Limited, I joined a dynamic team of 23 professionals focused on developing cutting-edge Automatic Water Flow Control Systems for Canals and Barrages.",
     },
     {
-        year: "2022",
-        title: "Senior Engineer",
-        description: "Spearheaded DevOps practices and mentored junior developers in best practices.",
-    },
-    {
-        year: "2020",
-        title: "Software Engineer",
-        description: "Built scalable microservices and contributed to open-source projects.",
-    },
-    {
-        year: "2018",
-        title: "Started Tech Journey",
-        description: "Began my journey in technology with a passion for learning and innovation.",
+        year: "2021",
+        title: "Founded Deo Exotic Attar & Perfume",
+        description: "Deo Exotic Attar and Perfume is a specialized online and offline store that offers premium quality oil-based perfume and attar.",
     },
 ];
 
@@ -85,29 +90,29 @@ export default function AboutPage() {
                     <div className={styles.heroContent}>
                         <span className={styles.heroTag}>About Me</span>
                         <h1>
-                            Hi, I&apos;m <span className={styles.gradient}>RK</span>
+                            Hi, I&apos;m <span className={styles.gradient}>Ratna Kirti</span>
                         </h1>
                         <p className={styles.heroSubtitle}>
-                            Cloud Architect • Tech Enthusiast • Lifelong Learner
+                            Software Engineer • Cybersecurity Expert • Global Digital Craftsman
                         </p>
                         <p className={styles.heroDescription}>
-                            I&apos;m a passionate technologist with a love for building scalable systems and sharing
-                            knowledge. With years of experience in cloud architecture and software development,
-                            I help organizations transform their technical capabilities while continuously growing
-                            my own expertise.
+                            From the vibrant heart of Lucknow to Knox College, Illinois—I&apos;m a digital
+                            architect who sees technology as an infinite canvas. With 40+ professional
+                            certifications and expertise spanning Software Engineering, DevOps, and
+                            Cybersecurity, I build secure, elegant, and world-class digital solutions.
                         </p>
                         <div className={styles.heroStats}>
                             <div className={styles.heroStat}>
-                                <span className={styles.heroStatNumber}>5+</span>
-                                <span className={styles.heroStatLabel}>Years Experience</span>
-                            </div>
-                            <div className={styles.heroStat}>
-                                <span className={styles.heroStatNumber}>15+</span>
+                                <span className={styles.heroStatNumber}>40+</span>
                                 <span className={styles.heroStatLabel}>Certifications</span>
                             </div>
                             <div className={styles.heroStat}>
-                                <span className={styles.heroStatNumber}>50+</span>
-                                <span className={styles.heroStatLabel}>Articles Written</span>
+                                <span className={styles.heroStatNumber}>20+</span>
+                                <span className={styles.heroStatLabel}>Websites Launched</span>
+                            </div>
+                            <div className={styles.heroStat}>
+                                <span className={styles.heroStatNumber}>10+</span>
+                                <span className={styles.heroStatLabel}>Software Solutions</span>
                             </div>
                         </div>
                     </div>
@@ -132,20 +137,52 @@ export default function AboutPage() {
                         <div className="divider"></div>
                     </div>
                     <div className={`${styles.storyContent} scroll-reveal ${storyVisible ? "visible" : ""}`}>
+                        <h3 className={styles.storySubheading}>From the City of Nawabs to the World Stage</h3>
                         <p>
-                            My journey in technology began with a simple curiosity about how things work.
-                            From writing my first lines of code to architecting complex cloud solutions,
-                            every step has been driven by an insatiable desire to learn and create.
+                            In the vibrant heart of Lucknow, Uttar Pradesh, a digital architect was being forged.
+                            For me, the world was never just a collection of objects—it was a series of systems
+                            waiting to be understood. From early childhood, while others saw a computer as a tool,
+                            I saw it as an infinite canvas. Whether it was the intricate puzzle of hardware or the
+                            logical elegance of software, technology didn&apos;t just &quot;click&quot;—it felt like a second
+                            language I was born to speak.
                         </p>
                         <p>
-                            Through RK Talks, I aim to share the insights and experiences I&apos;ve gathered
-                            over the years. Whether it&apos;s breaking down complex technical concepts or
-                            discussing leadership principles, I believe in making knowledge accessible to everyone.
+                            My journey of excellence began at City Montessori School (CMS). Within the halls of the
+                            world&apos;s largest school, I learned to navigate complexity at scale. CMS provided the
+                            perfect forge for my ambitions, teaching me that true mastery requires both technical
+                            prowess and the ability to lead. My dedication was rewarded with a prestigious scholarship
+                            to Knox College in Galesburg, Illinois.
+                        </p>
+
+                        <h3 className={styles.storySubheading}>The Knox Transformation</h3>
+                        <p>
+                            Crossing the globe to Knox College marked the transition from a gifted student to a
+                            high-level engineer. Here, I didn&apos;t just learn languages; I learned the philosophy of
+                            development. I spent my time in Galesburg dissecting the real-world applications of my
+                            skills, ensuring that every line of code I wrote served a purpose in the global economy.
+                        </p>
+
+                        <h3 className={styles.storySubheading}>The Certified Expert: A Global Endorsement</h3>
+                        <p>
+                            I didn&apos;t just build a portfolio; I built a fortress of credibility. Through disciplined
+                            late-night sessions and rigorous testing, I secured 40+ professional certifications,
+                            earning the respect and endorsement of the world&apos;s leading tech giants—from Microsoft,
+                            GitHub, and Atlassian to mastering DevOps, Docker, Adobe, AI, and Cybersecurity through
+                            Hack The Box.
+                        </p>
+
+                        <h3 className={styles.storySubheading}>The Security-First Visionary</h3>
+                        <p>
+                            What sets me apart is not just the ability to create, but the wisdom to protect. Because
+                            of my deep-rooted expertise in cybersecurity, I possess a &quot;hacker&apos;s eye&quot; for software
+                            development. I don&apos;t just build applications; I architect secure, resilient digital
+                            environments. I understand how malicious users think, allowing me to preemptively close
+                            backdoors that others don&apos;t even know exist.
                         </p>
                         <p>
-                            When I&apos;m not coding or writing, you&apos;ll find me exploring new technologies,
-                            contributing to open-source projects, or mentoring aspiring developers.
-                            I believe that true growth comes from both learning and teaching.
+                            From the streets of Lucknow to the international arena of Knox College, my story is one
+                            of constant evolution. I am no longer just a resident of Uttar Pradesh—I am a global
+                            digital craftsman, turning complex problems into secure, elegant, and world-class realities.
                         </p>
                     </div>
                 </div>
@@ -191,7 +228,7 @@ export default function AboutPage() {
                     <div className={`${styles.timeline} scroll-reveal-flip ${timelineVisible ? "visible" : ""}`}>
                         {timeline.map((item, index) => (
                             <div
-                                key={item.year}
+                                key={index}
                                 className={`${styles.timelineItem} stagger-${index + 1}`}
                             >
                                 <div className={styles.timelineYear}>{item.year}</div>

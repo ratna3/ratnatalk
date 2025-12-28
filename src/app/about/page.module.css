@@ -163,6 +163,23 @@
     margin-bottom: 0;
 }
 
+.storySubheading {
+    font-family: var(--font-playfair), serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--color-charcoal);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-copper) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.storyContent h3:first-of-type {
+    margin-top: 0;
+}
+
 /* Values Section */
 .valuesSection {
     padding: 5rem 1.5rem;

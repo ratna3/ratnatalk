@@ -198,11 +198,17 @@
     letter-spacing: 0.05em;
 }
 
+.blogCard.featured .blogCardHeader {
+    padding-top: 1.5rem;
+}
+
 .blogCardHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
 .blogCategory {
