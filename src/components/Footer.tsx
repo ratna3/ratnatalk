@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./Footer.module.css";
 
 const Footer = () => {
@@ -10,8 +11,15 @@ const Footer = () => {
                 <div className={styles.topSection}>
                     <div className={styles.branding}>
                         <Link href="/" className={styles.logo}>
-                            <span className={styles.logoRk}>RK</span>
-                            <span className={styles.logoTalks}>Talks</span>
+                            <Image
+                                src="/images/logo.png"
+                                alt="RK Talks Logo"
+                                width={65}
+                                height={65}
+                                className={styles.logoImage}
+                                unoptimized
+                            />
+                            <span className={styles.logoText}>RK Talks</span>
                         </Link>
                         <p className={styles.tagline}>
                             Sharing insights, experiences, and knowledge through thoughtful content.

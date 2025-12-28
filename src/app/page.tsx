@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import dynamic from "next/dynamic";
 import styles from "./page.module.css";
 import heroAnimation from "@/animations/hero.json";
@@ -89,11 +90,17 @@ export default function Home() {
               </Link>
             </div>
           </div>
-          <div className={styles.heroAnimation}>
-            <LottieAnimation
-              animationData={heroAnimation}
-              style={{ width: "100%", maxWidth: "450px" }}
-            />
+          <div className={styles.heroVisual}>
+            <div className={styles.profileImageWrapper}>
+              <Image
+                src="/images/myself.jpg"
+                alt="RK Profile"
+                width={450}
+                height={450}
+                className={styles.profileImage}
+                priority
+              />
+            </div>
           </div>
         </div>
         <div className={styles.scrollIndicator}>

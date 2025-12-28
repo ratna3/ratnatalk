@@ -43,8 +43,10 @@
 .heroContainer {
     position: relative;
     z-index: 1;
-    max-width: 1200px;
+    width: 100%;
+    max-width: 1400px;
     margin: 0 auto;
+    padding: 0 3rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
@@ -69,18 +71,24 @@
 }
 
 .heroTitle {
+    font-family: var(--font-playfair), serif;
     font-size: clamp(3rem, 6vw, 5rem);
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1.1;
     margin-bottom: 1.5rem;
     color: var(--color-charcoal);
 }
 
 .gradient {
+    font-family: var(--font-playfair), serif;
+    font-weight: 800;
+    font-style: italic;
     background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-copper) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    padding-right: 0.15em;
+    display: inline-block;
 }
 
 .heroSubtitle {
@@ -97,11 +105,47 @@
     flex-wrap: wrap;
 }
 
-.heroAnimation {
+.heroVisual {
     display: flex;
     justify-content: center;
     align-items: center;
     animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.profileImageWrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profileImageWrapper::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-copper) 50%, var(--color-gold) 100%);
+    border-radius: var(--radius-xl);
+    z-index: 0;
+}
+
+.profileImageWrapper::after {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(180, 83, 9, 0.1) 100%);
+    border-radius: var(--radius-xl);
+    z-index: -1;
+    filter: blur(20px);
+}
+
+.profileImage {
+    position: relative;
+    z-index: 1;
+    border-radius: var(--radius-xl);
+    object-fit: cover;
+    display: block;
+    border: 5px solid var(--color-white);
+    box-shadow: var(--shadow-xl);
 }
 
 .scrollIndicator {
@@ -157,8 +201,9 @@
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
+    padding: 0 3rem;
 }
 
 .statsGrid {
@@ -475,14 +520,24 @@
         grid-template-columns: 1fr;
         text-align: center;
         gap: 3rem;
+        padding: 0 2rem;
+    }
+
+    .container {
+        padding: 0 2rem;
     }
 
     .heroContent {
         order: 1;
     }
 
-    .heroAnimation {
+    .heroVisual {
         order: 0;
+    }
+
+    .profileImage {
+        width: 350px !important;
+        height: 350px !important;
     }
 
     .heroSubtitle {
@@ -517,6 +572,14 @@
         padding: 5rem 1rem 2rem;
     }
 
+    .heroContainer {
+        padding: 0 1.5rem;
+    }
+
+    .container {
+        padding: 0 1.5rem;
+    }
+
     .statsGrid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -546,6 +609,11 @@
 @media (max-width: 480px) {
     .heroTitle {
         font-size: 2.5rem;
+    }
+
+    .profileImage {
+        width: 280px !important;
+        height: 280px !important;
     }
 
     .heroSubtitle {

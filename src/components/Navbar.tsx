@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import styles from "./Navbar.module.css";
 
@@ -29,8 +30,15 @@ const Navbar = () => {
         <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ""}`}>
             <div className={styles.container}>
                 <Link href="/" className={styles.logo}>
-                    <span className={styles.logoRk}>RK</span>
-                    <span className={styles.logoTalks}>Talks</span>
+                    <Image
+                        src="/images/logo.png"
+                        alt="RK Talks Logo"
+                        width={75}
+                        height={75}
+                        className={styles.logoImage}
+                        unoptimized
+                    />
+                    <span className={styles.logoText}>RK Talks</span>
                 </Link>
 
                 <div className={styles.navLinks}>
