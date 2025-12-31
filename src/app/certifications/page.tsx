@@ -615,6 +615,12 @@ export default function CertificationsPage() {
     const cybersecurityCerts = certifications.filter((c) => c.category === "Cybersecurity").length;
     const devOpsCerts = certifications.filter((c) => c.category === "DevOps").length;
     const aiCerts = certifications.filter((c) => c.category === "AI").length;
+    const githubCerts = certifications.filter((c) => c.category === "GitHub").length;
+    const developmentCerts = certifications.filter((c) => c.category === "Development").length;
+    const webDevCerts = certifications.filter((c) => c.category === "Web Dev").length;
+    const itsmCerts = certifications.filter((c) => c.category === "ITSM").length;
+    const leadershipCerts = certifications.filter((c) => c.category === "Leadership").length;
+    const achievementCerts = certifications.filter((c) => c.category === "Achievement").length;
 
     return (
         <div className={styles.certificationsPage}>
@@ -671,10 +677,52 @@ export default function CertificationsPage() {
                         </div>
                         <div className={`${styles.statCard} stagger-4`}>
                             <span className={styles.statIcon}>
+                                <FaGithub />
+                            </span>
+                            <span className={styles.statNumber}>{githubCerts}</span>
+                            <span className={styles.statLabel}>GitHub</span>
+                        </div>
+                        <div className={`${styles.statCard} stagger-5`}>
+                            <span className={styles.statIcon}>
+                                <FaServer />
+                            </span>
+                            <span className={styles.statNumber}>{itsmCerts}</span>
+                            <span className={styles.statLabel}>ITSM</span>
+                        </div>
+                        <div className={`${styles.statCard} stagger-6`}>
+                            <span className={styles.statIcon}>
+                                <FaReact />
+                            </span>
+                            <span className={styles.statNumber}>{webDevCerts}</span>
+                            <span className={styles.statLabel}>Web Dev</span>
+                        </div>
+                        <div className={`${styles.statCard} stagger-7`}>
+                            <span className={styles.statIcon}>
+                                <FaCode />
+                            </span>
+                            <span className={styles.statNumber}>{developmentCerts}</span>
+                            <span className={styles.statLabel}>Development</span>
+                        </div>
+                        <div className={`${styles.statCard} stagger-8`}>
+                            <span className={styles.statIcon}>
                                 <FaDocker />
                             </span>
                             <span className={styles.statNumber}>{devOpsCerts}</span>
                             <span className={styles.statLabel}>DevOps</span>
+                        </div>
+                        <div className={`${styles.statCard} stagger-9`}>
+                            <span className={styles.statIcon}>
+                                <FaProjectDiagram />
+                            </span>
+                            <span className={styles.statNumber}>{leadershipCerts}</span>
+                            <span className={styles.statLabel}>Leadership</span>
+                        </div>
+                        <div className={`${styles.statCard} stagger-10`}>
+                            <span className={styles.statIcon}>
+                                <FaTrophy />
+                            </span>
+                            <span className={styles.statNumber}>{achievementCerts}</span>
+                            <span className={styles.statLabel}>Achievement</span>
                         </div>
                     </div>
                 </div>
