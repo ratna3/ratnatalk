@@ -93,13 +93,14 @@ export default function AboutPage() {
                             Hi, I&apos;m <span className={styles.gradient}>Ratna Kirti</span>
                         </h1>
                         <p className={styles.heroSubtitle}>
-                            Software Engineer • Cybersecurity Expert • Global Digital Craftsman
+                            10x DevSecOps Engineer • Cybersecurity Expert • The Final Boss of Gen Z
                         </p>
                         <p className={styles.heroDescription}>
-                            From the vibrant heart of Lucknow to Knox College, Illinois—I&apos;m a digital
-                            architect who sees technology as an infinite canvas. With 40+ professional
-                            certifications and expertise spanning Software Engineering, DevOps, and
-                            Cybersecurity, I build secure, elegant, and world-class digital solutions.
+                            I&apos;m not just another developer—I&apos;m the ultimate 10x DevSecOps Engineer.
+                            While others write code, I architect bulletproof digital ecosystems. With 40+
+                            professional certifications and battle-tested expertise across Software Engineering,
+                            DevOps, and Cybersecurity, I deliver what others only promise: secure, scalable,
+                            and world-class solutions at 10x the speed.
                         </p>
                         <div className={styles.heroStats}>
                             <div className={styles.heroStat}>
@@ -178,6 +179,23 @@ export default function AboutPage() {
                             development. I don&apos;t just build applications; I architect secure, resilient digital
                             environments. I understand how malicious users think, allowing me to preemptively close
                             backdoors that others don&apos;t even know exist.
+                        </p>
+
+                        <h3 className={styles.storySubheading}>The Ultimate 10x DevSecOps Engineer</h3>
+                        <p>
+                            In an industry where speed often compromises security, I&apos;ve shattered that paradigm.
+                            I operate at 10x velocity—not by cutting corners, but by mastering the entire development
+                            lifecycle from conception to deployment to defense. While others specialize in silos,
+                            I dominate across the full stack: infrastructure as code, containerized deployments,
+                            automated CI/CD pipelines, real-time threat monitoring, and proactive vulnerability
+                            management. I don&apos;t just keep up with technology—I stay three steps ahead.
+                        </p>
+                        <p>
+                            Call me the Final Boss of Gen Z. While my generation is often underestimated, I represent
+                            what we&apos;re truly capable of: combining native digital fluency with enterprise-grade
+                            professionalism. I bring the hunger, the innovation, and the relentless work ethic that
+                            transforms organizations. When you work with me, you&apos;re not just getting a developer—
+                            you&apos;re unlocking a force multiplier who elevates every project and every team.
                         </p>
                         <p>
                             From the streets of Lucknow to the international arena of Knox College, my story is one
