@@ -1,8 +1,8 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import styles from "./page.module.css";
-import heroAnimation from "@/animations/hero.json";
 import {
     FaBookOpen,
     FaHandshake,
@@ -117,10 +117,14 @@ export default function AboutPage() {
                             </div>
                         </div>
                     </div>
-                    <div className={styles.heroAnimation}>
-                        <LottieAnimation
-                            animationData={heroAnimation}
-                            style={{ width: "350px", height: "350px" }}
+                    <div className={styles.heroImageWrapper}>
+                        <Image
+                            src="/images/myself.jpg"
+                            alt="Ratna Kirti - 10x DevSecOps Engineer"
+                            width={350}
+                            height={350}
+                            className={styles.heroImage}
+                            priority
                         />
                     </div>
                 </div>
