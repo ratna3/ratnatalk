@@ -258,6 +258,29 @@
     color: var(--color-charcoal);
     margin-bottom: 0.5rem;
     line-height: 1.3;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.certTitleLink {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+.certTitleLink:hover .certTitle {
+    color: var(--color-primary);
+}
+
+.externalLinkIcon {
+    font-size: 0.85rem;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+.certTitleLink:hover .externalLinkIcon {
+    opacity: 1;
 }
 
 .certIssuer {

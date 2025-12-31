@@ -20,7 +20,8 @@ import {
     FaLaptopCode,
     FaProjectDiagram,
     FaBrain,
-    FaPalette
+    FaPalette,
+    FaExternalLinkAlt
 } from "react-icons/fa";
 import { SiDocker, SiMongodb, SiAngular, SiD3Dotjs, SiAtlassian } from "react-icons/si";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
@@ -41,6 +42,7 @@ const certifications = [
         category: "Cybersecurity",
         skills: ["Cybersecurity Fundamentals", "Security Awareness", "Threat Prevention"],
         icon: <FaShieldAlt />,
+        credentialUrl: "https://lnkd.in/gFbrRSwU",
     },
     {
         id: 2,
@@ -51,6 +53,7 @@ const certifications = [
         category: "Cybersecurity",
         skills: ["Security Basics", "Risk Management", "Network Security"],
         icon: <FaLock />,
+        credentialUrl: "https://www.linkedin.com/learning/certificates/725ad607530eb09d28f3fcab82b22901cd69c7ab933e83fb73680bc399b20e35",
     },
     {
         id: 3,
@@ -61,6 +64,7 @@ const certifications = [
         category: "Cybersecurity",
         skills: ["Security Terminology", "Threat Landscape"],
         icon: <FaShieldAlt />,
+        credentialUrl: "https://www.linkedin.com/learning/certificates/ef36ee488b33da0522fe50d04782545f6e2aa92826d25dd078532c60c76c8d6b",
     },
     {
         id: 4,
@@ -71,6 +75,7 @@ const certifications = [
         category: "Cybersecurity",
         skills: ["Threat Analysis", "Attack Vectors", "Security Trends"],
         icon: <FaShieldAlt />,
+        credentialUrl: "https://www.linkedin.com/learning/certificates/a3db18069b60c7d8b565b79427590b11ec44582e1819eb7f0ac7370ea590bc34",
     },
     {
         id: 5,
@@ -81,6 +86,7 @@ const certifications = [
         category: "Cybersecurity",
         skills: ["AI Security", "Security Copilot", "Threat Detection"],
         icon: <FaMicrosoft />,
+        credentialUrl: "https://www.linkedin.com/learning/certificates/6fe505bbdfb924843bb3f36af07c8937997c7d8b7b33068393dd1cc9bb39de12",
     },
     {
         id: 6,
@@ -91,6 +97,7 @@ const certifications = [
         category: "Cybersecurity",
         skills: ["Malware Analysis", "Ethical Hacking", "Reverse Engineering"],
         icon: <FaLock />,
+        credentialUrl: "https://lnkd.in/gGpwuFXD",
     },
     {
         id: 7,
@@ -101,6 +108,7 @@ const certifications = [
         category: "Cybersecurity",
         skills: ["OSINT", "Web Reconnaissance", "Penetration Testing"],
         icon: <FaNetworkWired />,
+        credentialUrl: "https://www.linkedin.com/learning/certificates/9469d2ecb238dee78285bee12d402d72934e409495839bbd6b72017919e4019b",
     },
     {
         id: 8,
@@ -111,6 +119,7 @@ const certifications = [
         category: "Cybersecurity",
         skills: ["Network Analysis", "Traffic Monitoring", "Wireshark"],
         icon: <FaNetworkWired />,
+        credentialUrl: "https://lnkd.in/gRScNVHv",
     },
     {
         id: 9,
@@ -121,6 +130,7 @@ const certifications = [
         category: "Cybersecurity",
         skills: ["SIEM", "Security Monitoring", "Log Analysis"],
         icon: <FaServer />,
+        credentialUrl: "https://lnkd.in/gr8fyeRw",
     },
     {
         id: 10,
@@ -131,6 +141,7 @@ const certifications = [
         category: "Cybersecurity",
         skills: ["Windows Security", "Event Logs", "Incident Response"],
         icon: <FaMicrosoft />,
+        credentialUrl: "https://lnkd.in/g_ZE7zWy",
     },
     {
         id: 11,
@@ -141,6 +152,7 @@ const certifications = [
         category: "Cybersecurity",
         skills: ["Footprinting", "Reconnaissance", "Information Gathering"],
         icon: <FaShieldAlt />,
+        credentialUrl: "https://lnkd.in/gyhaAmi3",
     },
     // DevOps/Docker
     {
@@ -152,6 +164,7 @@ const certifications = [
         category: "DevOps",
         skills: ["Docker", "Containerization", "Container Management"],
         icon: <SiDocker />,
+        credentialUrl: "https://lnkd.in/gMwzfaPa",
     },
     {
         id: 13,
@@ -162,6 +175,7 @@ const certifications = [
         category: "DevOps",
         skills: ["Docker Basics", "Container Deployment"],
         icon: <FaDocker />,
+        credentialUrl: "https://www.linkedin.com/learning/certificates/ff5d6f61958c24868f61e2a5f43e5ca68a590b3994fbfe3911da4763e87329d3",
     },
     {
         id: 14,
@@ -172,6 +186,7 @@ const certifications = [
         category: "DevOps",
         skills: ["Docker", "Images", "Containers"],
         icon: <FaDocker />,
+        credentialUrl: "https://www.linkedin.com/learning/certificates/22a2e5626af30bc9405b9c61b66aedb9dfec01959e3cbecdfea5764407a8adb2",
     },
     {
         id: 15,
@@ -182,6 +197,7 @@ const certifications = [
         category: "DevOps",
         skills: ["Docker Compose", "Multi-container Apps", "Orchestration"],
         icon: <FaDocker />,
+        credentialUrl: "https://www.linkedin.com/learning/certificates/8d3c7349deb5bf6db6e49833fa839b6a951f665d0b7cfb80aca8b778d7d22a39",
     },
     // GitHub
     {
@@ -193,6 +209,7 @@ const certifications = [
         category: "GitHub",
         skills: ["GitHub", "Version Control", "Collaboration"],
         icon: <FaGithub />,
+        credentialUrl: "https://lnkd.in/gtA59fXc",
     },
     {
         id: 17,
@@ -203,6 +220,7 @@ const certifications = [
         category: "GitHub",
         skills: ["Code Search", "GitHub Navigation"],
         icon: <FaGithub />,
+        credentialUrl: "https://www.linkedin.com/learning/certificates/f7110d657b88f3d42a13d7d62b98e240786d01f3def436a53e98ff55869f4628",
     },
     {
         id: 18,
@@ -213,16 +231,18 @@ const certifications = [
         category: "GitHub",
         skills: ["GitHub Copilot", "AI Coding", "Productivity"],
         icon: <FaGithub />,
+        credentialUrl: "https://lnkd.in/guYa6z53",
     },
     {
         id: 19,
         title: "GitHub Copilot Challenge",
-        issuer: "GitHub",
+        issuer: "Microsoft Americas Azure Team",
         issueDate: "2025",
         expiryDate: "No Expiry",
         category: "GitHub",
         skills: ["AI Pair Programming", "Code Generation"],
         icon: <FaGithub />,
+        credentialUrl: "https://www.credly.com/badges/de951714-3ac4-4d33-ab8c-091b609c744c/linked_in_profile",
     },
     {
         id: 20,
@@ -233,6 +253,7 @@ const certifications = [
         category: "GitHub",
         skills: ["GitHub Actions", "CI/CD", "Automation"],
         icon: <FaGithub />,
+        credentialUrl: "https://www.linkedin.com/learning/certificates/0080935b2bcccfe2a98e06782cf94afac2ff805312745b05b87d621630502814",
     },
     {
         id: 21,
@@ -243,6 +264,7 @@ const certifications = [
         category: "GitHub",
         skills: ["Project Management", "GitHub Projects", "Team Collaboration"],
         icon: <FaProjectDiagram />,
+        credentialUrl: "https://www.linkedin.com/learning/certificates/595998e9027e9f8dd408934e49930584e787027bbef1b997a77773db71d806b2",
     },
     // Software Development
     {
@@ -254,6 +276,7 @@ const certifications = [
         category: "Development",
         skills: ["Software Development", "Best Practices", "SDLC"],
         icon: <FaCode />,
+        credentialUrl: "https://lnkd.in/g9FjMMWF",
     },
     {
         id: 23,
@@ -264,6 +287,7 @@ const certifications = [
         category: "Development",
         skills: ["Career Skills", "Professional Development"],
         icon: <FaLaptopCode />,
+        credentialUrl: "https://www.linkedin.com/learning/certificates/1195851e66bf542061465bd040652bf61827e44b474681d274b51577cf03e3e3",
     },
     {
         id: 24,
@@ -274,6 +298,7 @@ const certifications = [
         category: "Development",
         skills: ["Programming Basics", "Logic", "Algorithms"],
         icon: <FaCode />,
+        credentialUrl: "https://www.linkedin.com/learning/certificates/303af4d1c8fc5411de90d4456d465a33ede1ae46ddbefeb2b7dbc492c2af9d7b",
     },
     {
         id: 25,
@@ -284,6 +309,7 @@ const certifications = [
         category: "Development",
         skills: ["Advanced Programming", "Data Structures", "OOP"],
         icon: <FaCode />,
+        credentialUrl: "https://www.linkedin.com/learning/certificates/e6e8ccbefe72a2abb90e6b2053b2f6fa85bc1fc2d478f59798456a8115619647",
     },
     // Web Development
     {
@@ -295,6 +321,7 @@ const certifications = [
         category: "Web Dev",
         skills: ["Angular", "TypeScript", "Frontend Development"],
         icon: <SiAngular />,
+        credentialUrl: "https://lnkd.in/gE-ygVjr",
     },
     {
         id: 27,
@@ -305,6 +332,7 @@ const certifications = [
         category: "Web Dev",
         skills: ["D3.js", "Data Visualization", "JavaScript"],
         icon: <SiD3Dotjs />,
+        credentialUrl: "https://lnkd.in/gtJ5Yg52",
     },
     {
         id: 28,
@@ -315,6 +343,7 @@ const certifications = [
         category: "Web Dev",
         skills: ["Redux", "State Management", "React"],
         icon: <FaReact />,
+        credentialUrl: "https://lnkd.in/gM_PCyrq",
     },
     {
         id: 29,
@@ -325,6 +354,7 @@ const certifications = [
         category: "Web Dev",
         skills: ["React.js", "UI Development", "Components"],
         icon: <FaReact />,
+        credentialUrl: "https://lnkd.in/gXgFB_cW",
     },
     {
         id: 30,
@@ -335,6 +365,7 @@ const certifications = [
         category: "Web Dev",
         skills: ["Full-Stack", "MERN Stack", "Node.js", "MongoDB"],
         icon: <SiMongodb />,
+        credentialUrl: "https://lnkd.in/gsduHDH5",
     },
     // AI/Generative AI
     {
@@ -346,6 +377,7 @@ const certifications = [
         category: "AI",
         skills: ["Azure AI", "Machine Learning", "AI Services"],
         icon: <FaMicrosoft />,
+        credentialUrl: "https://lnkd.in/gbhQjWWN",
     },
     {
         id: 32,
@@ -356,6 +388,7 @@ const certifications = [
         category: "AI",
         skills: ["MCP", "AI Integration", "Anthropic"],
         icon: <FaBrain />,
+        credentialUrl: "http://verify.skilljar.com/c/rqadmm8qbaiz",
     },
     {
         id: 33,
@@ -366,6 +399,7 @@ const certifications = [
         category: "AI",
         skills: ["Generative AI", "AI Fundamentals"],
         icon: <FaRobot />,
+        credentialUrl: "https://lnkd.in/gcS4Tcyf",
     },
     {
         id: 34,
@@ -376,6 +410,7 @@ const certifications = [
         category: "AI",
         skills: ["Generative AI", "Creative AI", "Adobe Firefly"],
         icon: <FaPalette />,
+        credentialUrl: "https://lnkd.in/gbNAwe2e",
     },
     {
         id: 35,
@@ -386,6 +421,7 @@ const certifications = [
         category: "AI",
         skills: ["AI Imaging", "Creative Tools"],
         icon: <FaPalette />,
+        credentialUrl: "https://lnkd.in/gVqPJBef",
     },
     {
         id: 36,
@@ -396,6 +432,7 @@ const certifications = [
         category: "AI",
         skills: ["AI Ethics", "Legal Considerations", "IP Rights"],
         icon: <FaRobot />,
+        credentialUrl: "https://lnkd.in/g8PweP2i",
     },
     {
         id: 37,
@@ -406,6 +443,7 @@ const certifications = [
         category: "AI",
         skills: ["Adobe AI", "Photoshop", "Creative Cloud"],
         icon: <FaPalette />,
+        credentialUrl: "https://lnkd.in/gRBJDYiM",
     },
     // IT Service Management
     {
@@ -417,6 +455,7 @@ const certifications = [
         category: "ITSM",
         skills: ["ITSM", "Jira Service Management", "Atlassian"],
         icon: <SiAtlassian />,
+        credentialUrl: "https://lnkd.in/g6K2_baa",
     },
     {
         id: 39,
@@ -427,6 +466,7 @@ const certifications = [
         category: "ITSM",
         skills: ["Problem Management", "ITIL", "Root Cause Analysis"],
         icon: <FaCogs />,
+        credentialUrl: "https://lnkd.in/g9RBgPXf",
     },
     {
         id: 40,
@@ -437,6 +477,7 @@ const certifications = [
         category: "ITSM",
         skills: ["Change Management", "ITIL", "CAB"],
         icon: <FaServer />,
+        credentialUrl: "https://lnkd.in/ghNxPNFQ",
     },
     {
         id: 41,
@@ -447,6 +488,7 @@ const certifications = [
         category: "ITSM",
         skills: ["Service Desk", "KPIs", "Monitoring"],
         icon: <FaServer />,
+        credentialUrl: "https://lnkd.in/gjrJCb7R",
     },
     {
         id: 42,
@@ -457,6 +499,7 @@ const certifications = [
         category: "ITSM",
         skills: ["Service Management", "Ticketing", "User Support"],
         icon: <FaServer />,
+        credentialUrl: "https://www.linkedin.com/learning/certificates/eda523289dd3e73fe715f7b8790e422f8bcbc09003a26c9d2caf0c066bf5e246",
     },
     // Leadership/Other
     {
@@ -468,6 +511,7 @@ const certifications = [
         category: "Leadership",
         skills: ["Scrum", "Agile", "Project Management"],
         icon: <FaProjectDiagram />,
+        credentialUrl: "https://www.linkedin.com/learning/certificates/d05acb175ffb0e53578798ed95c29b81d8bb047b67e4a5ceb6f7306e20a322f9",
     },
     {
         id: 44,
@@ -478,6 +522,7 @@ const certifications = [
         category: "Achievement",
         skills: ["Entrepreneurship", "Pitching", "Innovation"],
         icon: <FaTrophy />,
+        credentialUrl: "https://www.linkedin.com/posts/ratna-kirti_teamwork-collaboration-nevergiveup-ugcPost-7376195157190369280-aPU7",
     },
 ];
 
@@ -515,7 +560,17 @@ function CertPairRow({ certs, pairIndex }: CertPairRowProps) {
                         </span>
                         <span className={styles.certCategory}>{cert.category}</span>
                     </div>
-                    <h2 className={styles.certTitle}>{cert.title}</h2>
+                    <a
+                        href={cert.credentialUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.certTitleLink}
+                    >
+                        <h2 className={styles.certTitle}>
+                            {cert.title}
+                            <FaExternalLinkAlt className={styles.externalLinkIcon} />
+                        </h2>
+                    </a>
                     <p className={styles.certIssuer}>{cert.issuer}</p>
 
                     <div className={styles.certDates}>
