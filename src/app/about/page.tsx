@@ -121,8 +121,8 @@ export default function AboutPage() {
                         <Image
                             src="/images/myself.jpg"
                             alt="Ratna Kirti - 10x DevSecOps Engineer"
-                            width={350}
-                            height={350}
+                            width={450}
+                            height={450}
                             className={styles.heroImage}
                             priority
                         />

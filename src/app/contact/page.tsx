@@ -162,7 +162,7 @@ export default function ContactPage() {
                                         <FaTwitter />
                                     </a>
                                     <a
-                                        href="https://discord.gg/zUWK77Yn"
+                                        href="https://discord.gg/n2Zrr4c5NU"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className={styles.socialIcon}

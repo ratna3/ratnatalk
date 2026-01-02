@@ -40,7 +40,7 @@ const Footer = () => {
                             <Link href="/contact">Contact</Link>
                             <a href="https://github.com/ratna3" target="_blank" rel="noopener noreferrer">GitHub</a>
                             <a href="https://x.com/RatnaKirti1" target="_blank" rel="noopener noreferrer">Twitter/X</a>
-                            <a href="https://discord.gg/zUWK77Yn" target="_blank" rel="noopener noreferrer">Discord</a>
+                            <a href="https://discord.gg/n2Zrr4c5NU" target="_blank" rel="noopener noreferrer">Discord</a>
                         </div>
                     </div>
                 </div>
