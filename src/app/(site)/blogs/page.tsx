@@ -17,6 +17,7 @@ interface Blog {
     content: string;
     created_at: string;
     updated_at: string;
+    featured: boolean;
 }
 
 // Helper functions to extract blog metadata from content
@@ -92,7 +93,13 @@ export default function BlogsPage() {
 
     const fetchBlogs = async () => {
         try {
-            const response = await fetch('/api/blogs');
+            const response = await fetch('/api/blogs', {
+                cache: 'no-store',
+                headers: {
+                    'Pragma': 'no-cache',
+                    'Cache-Control': 'no-cache, no-store, must-revalidate'
+                }
+            });
             if (response.ok) {
                 const data = await response.json();
                 setBlogs(data);
@@ -118,14 +125,14 @@ export default function BlogsPage() {
         return matchesCategory && matchesSearch;
     });
 
-    // Mark first 3 as featured
-    const blogsWithMeta = filteredBlogs.map((blog, index) => ({
+    // Map blogs with metadata
+    const blogsWithMeta = filteredBlogs.map((blog) => ({
         ...blog,
         category: getCategory(blog.content),
         excerpt: getExcerpt(blog.content),
         readTime: getReadTime(blog.content),
         date: formatDate(blog.created_at),
-        featured: index < 3,
+        // featured property is now coming directly from the database
     }));
 
     return (
