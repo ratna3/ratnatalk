@@ -1,6 +1,7 @@
 "use client";
 
 import { use, useEffect, useState } from "react";
+import ReactMarkdown from 'react-markdown';
 import Link from "next/link";
 import styles from "./page.module.css";
 
@@ -101,54 +102,6 @@ export default function BlogDetailPage({
         }
     };
 
-    // Simple markdown-like rendering
-    const renderContent = (content: string) => {
-        return content.split("\n").map((line, index) => {
-            line = line.trim();
-            if (!line) return <br key={index} />;
-            if (line.startsWith("## ")) {
-                return (
-                    <h2 key={index} className={styles.contentH2}>
-                        {line.slice(3)}
-                    </h2>
-                );
-            }
-            if (line.startsWith("### ")) {
-                return (
-                    <h3 key={index} className={styles.contentH3}>
-                        {line.slice(4)}
-                    </h3>
-                );
-            }
-            if (line.startsWith("- ")) {
-                return (
-                    <li key={index} className={styles.listItem}>
-                        {line.slice(2)}
-                    </li>
-                );
-            }
-            if (line.match(/^\d+\./)) {
-                return (
-                    <li key={index} className={styles.listItem}>
-                        {line.slice(3)}
-                    </li>
-                );
-            }
-            if (line.startsWith("**") && line.endsWith("**")) {
-                return (
-                    <p key={index} className={styles.boldText}>
-                        {line.slice(2, -2)}
-                    </p>
-                );
-            }
-            return (
-                <p key={index} className={styles.paragraph}>
-                    {line}
-                </p>
-            );
-        });
-    };
-
     if (loading) {
         return (
             <div className={styles.blogDetail}>
@@ -217,7 +170,9 @@ export default function BlogDetailPage({
             {/* Content Section */}
             <section className={styles.contentSection}>
                 <div className={styles.container}>
-                    <article className={styles.article}>{renderContent(blog.content)}</article>
+                    <article className={styles.article}>
+                        <ReactMarkdown className={styles.markdown}>{blog.content}</ReactMarkdown>
+                    </article>
 
                     {/* Tags */}
                     {tags.length > 0 && (

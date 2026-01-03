@@ -153,40 +153,70 @@
     color: var(--color-text-secondary);
 }
 
-.contentH2 {
-    font-size: 1.75rem;
-    font-weight: 700;
+/* Markdown Styling */
+.markdown {
+    color: var(--color-text-secondary);
+    line-height: 1.85;
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4 {
     color: var(--color-charcoal);
     margin: 2.5rem 0 1rem;
+    font-weight: 700;
+}
+
+.markdown h2 {
+    font-size: 1.75rem;
     padding-bottom: 0.5rem;
     border-bottom: 2px solid rgba(245, 158, 11, 0.2);
 }
 
-.contentH3 {
+.markdown h3 {
     font-size: 1.35rem;
-    font-weight: 600;
-    color: var(--color-charcoal);
-    margin: 2rem 0 0.75rem;
+    margin-top: 2rem;
 }
 
-.paragraph {
+.markdown p {
     margin-bottom: 1.25rem;
 }
 
-.boldText {
-    font-weight: 600;
+.markdown strong {
+    font-weight: 700;
     color: var(--color-charcoal);
+}
+
+.markdown ul,
+.markdown ol {
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+}
+
+.markdown li {
     margin-bottom: 0.5rem;
 }
 
-.listItem {
-    margin-left: 1.5rem;
-    margin-bottom: 0.5rem;
-    padding-left: 0.5rem;
-}
-
-.listItem::marker {
+.markdown li::marker {
     color: var(--color-primary);
+}
+
+.markdown blockquote {
+    border-left: 4px solid var(--color-primary);
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: var(--color-text-muted);
+}
+
+.markdown code {
+    background: rgba(0, 0, 0, 0.05);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-family: monospace;
+    color: var(--color-primary-dark);
 }
 
 /* Tags */
