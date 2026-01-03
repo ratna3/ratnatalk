@@ -169,7 +169,7 @@
 
 .tableHeader {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr 120px;
+    grid-template-columns: 2fr 1fr 1fr 1fr 260px;
     gap: 1.5rem;
     padding: 1rem 1.5rem;
     background: var(--color-off-white);
@@ -184,7 +184,7 @@
 
 .tableRow {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr 120px;
+    grid-template-columns: 2fr 1fr 1fr 1fr 260px;
     gap: 1.5rem;
     padding: 1.25rem 1.5rem;
     align-items: center;
