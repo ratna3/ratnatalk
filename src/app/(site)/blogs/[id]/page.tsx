@@ -171,7 +171,9 @@ export default function BlogDetailPage({
             <section className={styles.contentSection}>
                 <div className={styles.container}>
                     <article className={styles.article}>
-                        <ReactMarkdown className={styles.markdown}>{blog.content}</ReactMarkdown>
+                        <div className={styles.markdown}>
+                            <ReactMarkdown>{blog.content}</ReactMarkdown>
+                        </div>
                     </article>
 
                     {/* Tags */}
