@@ -24,11 +24,13 @@ export async function GET(request: NextRequest) {
         if (category && category !== "All") {
             blogs = await sql`
                 SELECT * FROM blog 
+                WHERE category = ${category}
                 ORDER BY created_at DESC
             `;
         } else if (featured === "true") {
             blogs = await sql`
                 SELECT * FROM blog 
+                WHERE featured = true
                 ORDER BY created_at DESC 
                 LIMIT ${limit ? parseInt(limit) : 3}
             `;

@@ -75,13 +75,19 @@ export default function BlogsPage() {
     const [loading, setLoading] = useState(true);
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [searchQuery, setSearchQuery] = useState("");
+    const [error, setError] = useState<string | null>(null);
+    const [forceVisible, setForceVisible] = useState(false);
 
     const [filtersRef, filtersVisible] = useScrollAnimation<HTMLDivElement>();
-    const [blogsGridRef, blogsGridVisible] = useScrollAnimation<HTMLDivElement>();
+    const [blogsGridRef, scrollVisible] = useScrollAnimation<HTMLDivElement>();
+    const blogsGridVisible = scrollVisible || forceVisible;
     const [newsletterRef, newsletterVisible] = useScrollAnimation<HTMLDivElement>();
 
     useEffect(() => {
         fetchBlogs();
+        // Fallback to force visibility after 500ms in case intersection observer fails
+        const timer = setTimeout(() => setForceVisible(true), 500);
+        return () => clearTimeout(timer);
     }, []);
 
     const fetchBlogs = async () => {
@@ -90,9 +96,13 @@ export default function BlogsPage() {
             if (response.ok) {
                 const data = await response.json();
                 setBlogs(data);
+                setError(null);
+            } else {
+                throw new Error('Failed to fetch blogs');
             }
         } catch (error) {
             console.error('Error fetching blogs:', error);
+            setError('Unable to load blogs at this time. Please try again later.');
         } finally {
             setLoading(false);
         }
@@ -191,10 +201,25 @@ export default function BlogsPage() {
                 <div className={styles.container}>
                     {loading ? (
                         <div className={styles.loading}>Loading blogs...</div>
+                    ) : error ? (
+                        <div className={styles.noResults}>
+                            <h3>Ooops!</h3>
+                            <p>{error}</p>
+                            <button
+                                className="btn-primary"
+                                onClick={() => {
+                                    setLoading(true);
+                                    fetchBlogs();
+                                }}
+                            >
+                                Retry
+                            </button>
+                        </div>
                     ) : blogsWithMeta.length > 0 ? (
                         <div
                             ref={blogsGridRef}
                             className={`${styles.blogsGrid} scroll-reveal-float ${blogsGridVisible ? "visible" : ""}`}
+                            style={{ opacity: blogsGridVisible ? 1 : 0 }}
                         >
                             {blogsWithMeta.map((blog, index) => (
                                 <article
