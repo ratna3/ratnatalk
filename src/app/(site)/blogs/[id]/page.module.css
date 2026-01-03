@@ -188,6 +188,18 @@
     color: var(--color-charcoal);
 }
 
+.markdown a {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.markdown a:hover {
+    color: var(--color-primary);
+}
+
 .markdown ul,
 .markdown ol {
     margin: 1.5rem 0;

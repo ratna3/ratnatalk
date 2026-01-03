@@ -84,9 +84,33 @@ export default function NewBlogPage() {
 
                     <div className={styles.formGroup}>
                         <label htmlFor="content">Content</label>
-                        <p className={styles.hint}>
-                            Supports Markdown: ## Heading, **bold**, - list items
-                        </p>
+                        <div className={styles.markdownGuide}>
+                            <div className={styles.markdownGuideTitle}>
+                                <span>Markdown Guide</span>
+                            </div>
+                            <div className={styles.markdownGrid}>
+                                <div className={styles.markdownItem}>
+                                    <span>Bold</span>
+                                    <code>**text**</code>
+                                </div>
+                                <div className={styles.markdownItem}>
+                                    <span>Italic</span>
+                                    <code>*text*</code>
+                                </div>
+                                <div className={styles.markdownItem}>
+                                    <span>Link</span>
+                                    <code>[Title](url)</code>
+                                </div>
+                                <div className={styles.markdownItem}>
+                                    <span>Bullet List</span>
+                                    <code>- item</code>
+                                </div>
+                                <div className={styles.markdownItem}>
+                                    <span>Heading</span>
+                                    <code>## Title</code>
+                                </div>
+                            </div>
+                        </div>
                         <textarea
                             id="content"
                             value={content}
