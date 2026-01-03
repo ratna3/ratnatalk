@@ -141,7 +141,7 @@
 
 .saveBtn {
     padding: 0.875rem 1.5rem;
-    background: var(--gradient-primary);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-copper) 100%);
     border: none;
     border-radius: 12px;
     font-size: 0.875rem;
