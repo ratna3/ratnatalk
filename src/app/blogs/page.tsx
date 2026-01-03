@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import styles from "./page.module.css";
@@ -11,99 +11,55 @@ const LottieAnimation = dynamic(() => import("@/components/LottieAnimation"), {
     ssr: false,
 });
 
-// Sample blog data - in production, this would come from a CMS or database
-const allBlogs = [
-    {
-        id: 1,
-        title: "The Art of Building Scalable Systems",
-        excerpt:
-            "Exploring the principles and patterns that make software systems truly scalable and maintainable over time. Learn how to design systems that grow with your business.",
-        date: "Dec 25, 2024",
-        category: "Technology",
-        readTime: "8 min read",
-        featured: true,
-    },
-    {
-        id: 2,
-        title: "Leadership in the Digital Age",
-        excerpt:
-            "How modern leaders can navigate the complexities of digital transformation while maintaining team cohesion and driving innovation.",
-        date: "Dec 20, 2024",
-        category: "Leadership",
-        readTime: "6 min read",
-        featured: true,
-    },
-    {
-        id: 3,
-        title: "Mastering Cloud Architecture",
-        excerpt:
-            "A comprehensive guide to designing robust cloud-native applications that stand the test of time and scale efficiently.",
-        date: "Dec 15, 2024",
-        category: "Cloud",
-        readTime: "10 min read",
-        featured: true,
-    },
-    {
-        id: 4,
-        title: "The Power of Continuous Learning",
-        excerpt:
-            "Why lifelong learning is essential in today's rapidly evolving tech landscape and how to build effective learning habits.",
-        date: "Dec 10, 2024",
-        category: "Personal Growth",
-        readTime: "5 min read",
-        featured: false,
-    },
-    {
-        id: 5,
-        title: "Understanding Microservices Architecture",
-        excerpt:
-            "Deep dive into microservices patterns, best practices, and when to use them versus monolithic approaches.",
-        date: "Dec 5, 2024",
-        category: "Technology",
-        readTime: "12 min read",
-        featured: false,
-    },
-    {
-        id: 6,
-        title: "Effective Communication for Tech Leaders",
-        excerpt:
-            "Master the art of communication to lead engineering teams effectively and drive successful project outcomes.",
-        date: "Nov 30, 2024",
-        category: "Leadership",
-        readTime: "7 min read",
-        featured: false,
-    },
-    {
-        id: 7,
-        title: "DevOps Best Practices 2024",
-        excerpt:
-            "Essential DevOps practices every team should adopt to improve deployment frequency and system reliability.",
-        date: "Nov 25, 2024",
-        category: "DevOps",
-        readTime: "9 min read",
-        featured: false,
-    },
-    {
-        id: 8,
-        title: "Building High-Performance Teams",
-        excerpt:
-            "Strategies for creating and nurturing engineering teams that consistently deliver exceptional results.",
-        date: "Nov 20, 2024",
-        category: "Leadership",
-        readTime: "8 min read",
-        featured: false,
-    },
-    {
-        id: 9,
-        title: "Introduction to System Design",
-        excerpt:
-            "A beginner-friendly guide to understanding system design principles and preparing for technical interviews.",
-        date: "Nov 15, 2024",
-        category: "Technology",
-        readTime: "15 min read",
-        featured: false,
-    },
-];
+interface Blog {
+    id: number;
+    title: string;
+    content: string;
+    created_at: string;
+    updated_at: string;
+}
+
+// Helper functions to extract blog metadata from content
+const getExcerpt = (content: string, maxLength: number = 150): string => {
+    // Remove markdown formatting and get first paragraph
+    const plainText = content
+        .replace(/#{1,6}\s/g, '') // Remove headers
+        .replace(/\*\*/g, '') // Remove bold
+        .replace(/\*/g, '') // Remove italic
+        .replace(/- /g, '') // Remove list markers
+        .split('\n')
+        .filter(line => line.trim())
+        .join(' ')
+        .trim();
+
+    if (plainText.length <= maxLength) return plainText;
+    return plainText.substring(0, maxLength).trim() + '...';
+};
+
+const getReadTime = (content: string): string => {
+    const wordsPerMinute = 200;
+    const words = content.split(/\s+/).length;
+    const minutes = Math.ceil(words / wordsPerMinute);
+    return `${minutes} min read`;
+};
+
+const getCategory = (content: string): string => {
+    // Extract category from content based on keywords
+    const lowerContent = content.toLowerCase();
+    if (lowerContent.includes('leadership') || lowerContent.includes('team')) return 'Leadership';
+    if (lowerContent.includes('cloud') || lowerContent.includes('aws') || lowerContent.includes('azure')) return 'Cloud';
+    if (lowerContent.includes('devops') || lowerContent.includes('ci/cd') || lowerContent.includes('pipeline')) return 'DevOps';
+    if (lowerContent.includes('learning') || lowerContent.includes('growth') || lowerContent.includes('career')) return 'Personal Growth';
+    return 'Technology';
+};
+
+const formatDate = (dateString: string): string => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+    });
+};
 
 const categories = [
     "All",
@@ -115,6 +71,8 @@ const categories = [
 ];
 
 export default function BlogsPage() {
+    const [blogs, setBlogs] = useState<Blog[]>([]);
+    const [loading, setLoading] = useState(true);
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [searchQuery, setSearchQuery] = useState("");
 
@@ -122,14 +80,43 @@ export default function BlogsPage() {
     const [blogsGridRef, blogsGridVisible] = useScrollAnimation<HTMLDivElement>();
     const [newsletterRef, newsletterVisible] = useScrollAnimation<HTMLDivElement>();
 
-    const filteredBlogs = allBlogs.filter((blog) => {
+    useEffect(() => {
+        fetchBlogs();
+    }, []);
+
+    const fetchBlogs = async () => {
+        try {
+            const response = await fetch('/api/blogs');
+            if (response.ok) {
+                const data = await response.json();
+                setBlogs(data);
+            }
+        } catch (error) {
+            console.error('Error fetching blogs:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const filteredBlogs = blogs.filter((blog) => {
+        const category = getCategory(blog.content);
         const matchesCategory =
-            selectedCategory === "All" || blog.category === selectedCategory;
+            selectedCategory === "All" || category === selectedCategory;
         const matchesSearch =
             blog.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            blog.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+            blog.content.toLowerCase().includes(searchQuery.toLowerCase());
         return matchesCategory && matchesSearch;
     });
+
+    // Mark first 3 as featured
+    const blogsWithMeta = filteredBlogs.map((blog, index) => ({
+        ...blog,
+        category: getCategory(blog.content),
+        excerpt: getExcerpt(blog.content),
+        readTime: getReadTime(blog.content),
+        date: formatDate(blog.created_at),
+        featured: index < 3,
+    }));
 
     return (
         <div className={styles.blogsPage}>
@@ -202,12 +189,14 @@ export default function BlogsPage() {
             {/* Blogs Grid */}
             <section className={styles.blogsSection}>
                 <div className={styles.container}>
-                    {filteredBlogs.length > 0 ? (
+                    {loading ? (
+                        <div className={styles.loading}>Loading blogs...</div>
+                    ) : blogsWithMeta.length > 0 ? (
                         <div
                             ref={blogsGridRef}
                             className={`${styles.blogsGrid} scroll-reveal-float ${blogsGridVisible ? "visible" : ""}`}
                         >
-                            {filteredBlogs.map((blog, index) => (
+                            {blogsWithMeta.map((blog, index) => (
                                 <article
                                     key={blog.id}
                                     className={`${styles.blogCard} ${blog.featured ? styles.featured : ""} stagger-${Math.min(index + 1, 10)}`}

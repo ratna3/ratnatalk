@@ -293,6 +293,14 @@
     margin-bottom: 3rem;
 }
 
+.loadingBlogs {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: var(--color-text-secondary);
+    font-size: 1.125rem;
+    margin-bottom: 3rem;
+}
+
 .blogCard {
     background: var(--color-white);
     border-radius: var(--radius-xl);

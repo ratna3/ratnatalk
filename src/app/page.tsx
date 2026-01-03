@@ -1,10 +1,10 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import styles from "./page.module.css";
-import heroAnimation from "@/animations/hero.json";
 import writingAnimation from "@/animations/writing.json";
 import scrollAnimation from "@/animations/scroll.json";
 import sparkAnimation from "@/animations/spark.json";
@@ -15,36 +15,52 @@ const LottieAnimation = dynamic(() => import("@/components/LottieAnimation"), {
   ssr: false,
 });
 
-// Sample blog data - in production, this would come from a CMS or database
-const featuredBlogs = [
-  {
-    id: 1,
-    title: "The Art of Building Scalable Systems",
-    excerpt:
-      "Exploring the principles and patterns that make software systems truly scalable and maintainable over time.",
-    date: "Dec 25, 2024",
-    category: "Technology",
-    readTime: "8 min read",
-  },
-  {
-    id: 2,
-    title: "Leadership in the Digital Age",
-    excerpt:
-      "How modern leaders can navigate the complexities of digital transformation while maintaining team cohesion.",
-    date: "Dec 20, 2024",
-    category: "Leadership",
-    readTime: "6 min read",
-  },
-  {
-    id: 3,
-    title: "Mastering Cloud Architecture",
-    excerpt:
-      "A comprehensive guide to designing robust cloud-native applications that stand the test of time.",
-    date: "Dec 15, 2024",
-    category: "Cloud",
-    readTime: "10 min read",
-  },
-];
+interface Blog {
+  id: number;
+  title: string;
+  content: string;
+  created_at: string;
+}
+
+// Helper functions
+const getExcerpt = (content: string, maxLength: number = 120): string => {
+  const plainText = content
+    .replace(/#{1,6}\s/g, '')
+    .replace(/\*\*/g, '')
+    .replace(/\*/g, '')
+    .replace(/- /g, '')
+    .split('\n')
+    .filter(line => line.trim())
+    .join(' ')
+    .trim();
+
+  if (plainText.length <= maxLength) return plainText;
+  return plainText.substring(0, maxLength).trim() + '...';
+};
+
+const getReadTime = (content: string): string => {
+  const wordsPerMinute = 200;
+  const words = content.split(/\s+/).length;
+  const minutes = Math.ceil(words / wordsPerMinute);
+  return `${minutes} min read`;
+};
+
+const getCategory = (content: string): string => {
+  const lowerContent = content.toLowerCase();
+  if (lowerContent.includes('leadership') || lowerContent.includes('team')) return 'Leadership';
+  if (lowerContent.includes('cloud') || lowerContent.includes('aws') || lowerContent.includes('azure')) return 'Cloud';
+  if (lowerContent.includes('devops') || lowerContent.includes('ci/cd') || lowerContent.includes('pipeline')) return 'DevOps';
+  if (lowerContent.includes('learning') || lowerContent.includes('growth') || lowerContent.includes('career')) return 'Personal Growth';
+  return 'Technology';
+};
+
+const formatDate = (dateString: string): string => {
+  return new Date(dateString).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
+};
 
 const stats = [
   { number: "50+", label: "Articles Published" },
@@ -54,12 +70,42 @@ const stats = [
 ];
 
 export default function Home() {
+  const [featuredBlogs, setFeaturedBlogs] = useState<Blog[]>([]);
+  const [loading, setLoading] = useState(true);
+
   const [statsRef, statsVisible] = useScrollAnimation<HTMLDivElement>();
   const [blogsHeaderRef, blogsHeaderVisible] = useScrollAnimation<HTMLDivElement>();
   const [blogsGridRef, blogsGridVisible] = useScrollAnimation<HTMLDivElement>();
   const [aboutContentRef, aboutContentVisible] = useScrollAnimation<HTMLDivElement>();
   const [aboutVisualRef, aboutVisualVisible] = useScrollAnimation<HTMLDivElement>();
   const [ctaRef, ctaVisible] = useScrollAnimation<HTMLDivElement>();
+
+  useEffect(() => {
+    fetchFeaturedBlogs();
+  }, []);
+
+  const fetchFeaturedBlogs = async () => {
+    try {
+      const response = await fetch('/api/blogs?limit=3');
+      if (response.ok) {
+        const data = await response.json();
+        setFeaturedBlogs(data);
+      }
+    } catch (error) {
+      console.error('Error fetching blogs:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const blogsWithMeta = featuredBlogs.map((blog) => ({
+    id: blog.id,
+    title: blog.title,
+    excerpt: getExcerpt(blog.content),
+    date: formatDate(blog.created_at),
+    category: getCategory(blog.content),
+    readTime: getReadTime(blog.content),
+  }));
 
   return (
     <div className={styles.page}>
@@ -156,34 +202,38 @@ export default function Home() {
             </div>
           </div>
 
-          <div
-            ref={blogsGridRef}
-            className={`${styles.blogsGrid} scroll-reveal-flip ${blogsGridVisible ? "visible" : ""}`}
-          >
-            {featuredBlogs.map((blog, index) => (
-              <article
-                key={blog.id}
-                className={`${styles.blogCard} stagger-${index + 1}`}
-              >
-                <div className={styles.blogCardHeader}>
-                  <span className={styles.blogCategory}>{blog.category}</span>
-                  <span className={styles.blogDate}>{blog.date}</span>
-                </div>
-                <h3 className={styles.blogTitle}>{blog.title}</h3>
-                <p className={styles.blogExcerpt}>{blog.excerpt}</p>
-                <div className={styles.blogCardFooter}>
-                  <span className={styles.readTime}>{blog.readTime}</span>
-                  <Link
-                    href={`/blogs/${blog.id}`}
-                    className={styles.readMore}
-                  >
-                    Read More
-                    <FaArrowRight size={14} />
-                  </Link>
-                </div>
-              </article>
-            ))}
-          </div>
+          {loading ? (
+            <div className={styles.loadingBlogs}>Loading blogs...</div>
+          ) : (
+            <div
+              ref={blogsGridRef}
+              className={`${styles.blogsGrid} scroll-reveal-flip ${blogsGridVisible ? "visible" : ""}`}
+            >
+              {blogsWithMeta.map((blog, index) => (
+                <article
+                  key={blog.id}
+                  className={`${styles.blogCard} stagger-${index + 1}`}
+                >
+                  <div className={styles.blogCardHeader}>
+                    <span className={styles.blogCategory}>{blog.category}</span>
+                    <span className={styles.blogDate}>{blog.date}</span>
+                  </div>
+                  <h3 className={styles.blogTitle}>{blog.title}</h3>
+                  <p className={styles.blogExcerpt}>{blog.excerpt}</p>
+                  <div className={styles.blogCardFooter}>
+                    <span className={styles.readTime}>{blog.readTime}</span>
+                    <Link
+                      href={`/blogs/${blog.id}`}
+                      className={styles.readMore}
+                    >
+                      Read More
+                      <FaArrowRight size={14} />
+                    </Link>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
 
           <div className={styles.viewAllContainer}>
             <Link href="/blogs" className="btn-primary">

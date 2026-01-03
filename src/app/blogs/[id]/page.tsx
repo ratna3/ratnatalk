@@ -1,178 +1,60 @@
 "use client";
 
-import { use } from "react";
+import { use, useEffect, useState } from "react";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import styles from "./page.module.css";
 
-// Sample blog data - in production, this would come from a CMS or database
-const blogs = [
-    {
-        id: 1,
-        title: "The Art of Building Scalable Systems",
-        content: `
-      Building scalable systems is both an art and a science. It requires deep understanding of 
-      architecture patterns, careful consideration of trade-offs, and a vision for future growth.
+interface Blog {
+    id: number;
+    title: string;
+    content: string;
+    created_at: string;
+    updated_at: string;
+}
 
-      ## Understanding Scalability
+// Helper functions
+const getCategory = (content: string): string => {
+    const lowerContent = content.toLowerCase();
+    if (lowerContent.includes('leadership') || lowerContent.includes('team')) return 'Leadership';
+    if (lowerContent.includes('cloud') || lowerContent.includes('aws') || lowerContent.includes('azure')) return 'Cloud';
+    if (lowerContent.includes('devops') || lowerContent.includes('ci/cd') || lowerContent.includes('pipeline')) return 'DevOps';
+    if (lowerContent.includes('learning') || lowerContent.includes('growth') || lowerContent.includes('career')) return 'Personal Growth';
+    return 'Technology';
+};
 
-      Scalability isn't just about handling more users or data. It's about designing systems that 
-      can grow gracefully without requiring complete rewrites. A truly scalable system maintains 
-      its performance characteristics as load increases.
+const getReadTime = (content: string): string => {
+    const wordsPerMinute = 200;
+    const words = content.split(/\s+/).length;
+    const minutes = Math.ceil(words / wordsPerMinute);
+    return `${minutes} min read`;
+};
 
-      ### Horizontal vs Vertical Scaling
+const getTags = (content: string): string[] => {
+    const tags: string[] = [];
+    const lowerContent = content.toLowerCase();
 
-      **Vertical scaling** (scaling up) involves adding more resources to existing servers. While 
-      simpler, it has physical limits and can become prohibitively expensive.
+    if (lowerContent.includes('architecture')) tags.push('Architecture');
+    if (lowerContent.includes('scalab')) tags.push('Scalability');
+    if (lowerContent.includes('system design')) tags.push('System Design');
+    if (lowerContent.includes('backend')) tags.push('Backend');
+    if (lowerContent.includes('leadership')) tags.push('Leadership');
+    if (lowerContent.includes('team')) tags.push('Team Building');
+    if (lowerContent.includes('cloud')) tags.push('Cloud');
+    if (lowerContent.includes('aws')) tags.push('AWS');
+    if (lowerContent.includes('microservice')) tags.push('Microservices');
+    if (lowerContent.includes('devops')) tags.push('DevOps');
+    if (lowerContent.includes('ci/cd')) tags.push('CI/CD');
 
-      **Horizontal scaling** (scaling out) involves adding more machines to handle increased load. 
-      This approach offers better fault tolerance and is generally more cost-effective at scale.
+    return tags.slice(0, 4);
+};
 
-      ## Key Principles
-
-      1. **Design for failure** - Assume components will fail and plan accordingly
-      2. **Embrace eventual consistency** - Not everything needs to be immediately consistent
-      3. **Cache aggressively** - Reduce database load through smart caching strategies
-      4. **Decompose monoliths** - Break down large systems into manageable services
-
-      ## Practical Strategies
-
-      ### Database Optimization
-      
-      Start with proper indexing and query optimization. Consider read replicas for read-heavy 
-      workloads and implement connection pooling to manage database connections efficiently.
-
-      ### Caching Layers
-
-      Implement multi-level caching: browser cache, CDN, application cache, and database cache. 
-      Each layer reduces load on the layers below it.
-
-      ### Load Balancing
-
-      Distribute traffic across multiple servers using load balancers. Consider both layer 4 
-      (TCP) and layer 7 (HTTP) load balancing based on your needs.
-
-      ## Conclusion
-
-      Building scalable systems is a journey, not a destination. Start with solid foundations, 
-      measure everything, and iterate based on real-world data. Remember, premature optimization 
-      is the root of all evil, but so is ignoring scalability entirely.
-    `,
-        date: "Dec 25, 2024",
-        category: "Technology",
-        readTime: "8 min read",
-        author: "RK",
-        tags: ["Architecture", "Scalability", "System Design", "Backend"],
-    },
-    {
-        id: 2,
-        title: "Leadership in the Digital Age",
-        content: `
-      The role of leadership has evolved dramatically in the digital age. Traditional command-and-control 
-      approaches are giving way to more collaborative, empowering styles of leadership.
-
-      ## The Changing Landscape
-
-      Digital transformation has fundamentally changed how organizations operate. Leaders must now 
-      navigate remote teams, rapid technological change, and increased expectations for transparency 
-      and agility.
-
-      ## Key Leadership Qualities
-
-      ### Adaptability
-      
-      The pace of change requires leaders who can pivot quickly and embrace uncertainty. Rigid 
-      adherence to plans is less valuable than the ability to respond to new information.
-
-      ### Emotional Intelligence
-
-      Understanding and managing emotions—both your own and others'—is crucial when leading 
-      distributed teams and managing through change.
-
-      ### Technical Fluency
-
-      While leaders don't need to be technical experts, they must understand technology well 
-      enough to make informed decisions and communicate effectively with technical teams.
-
-      ## Building High-Performance Teams
-
-      1. **Trust your team** - Micromanagement kills motivation
-      2. **Provide context** - Help people understand the "why"
-      3. **Create psychological safety** - Encourage experimentation and learning from failure
-      4. **Celebrate wins** - Recognition drives engagement
-
-      ## Conclusion
-
-      Leadership in the digital age requires a blend of traditional wisdom and new approaches. 
-      The best leaders are those who continue learning and adapting alongside their teams.
-    `,
-        date: "Dec 20, 2024",
-        category: "Leadership",
-        readTime: "6 min read",
-        author: "RK",
-        tags: ["Leadership", "Management", "Team Building", "Digital Transformation"],
-    },
-    {
-        id: 3,
-        title: "Mastering Cloud Architecture",
-        content: `
-      Cloud architecture has become the backbone of modern software systems. Understanding how to 
-      design and implement cloud-native applications is essential for any technology professional.
-
-      ## Cloud Computing Fundamentals
-
-      Cloud computing offers on-demand access to computing resources without direct active management 
-      by the user. The three main service models are:
-
-      - **IaaS** (Infrastructure as a Service)
-      - **PaaS** (Platform as a Service)
-      - **SaaS** (Software as a Service)
-
-      ## Designing for the Cloud
-
-      ### Microservices Architecture
-
-      Break applications into small, independently deployable services. Each service should have a 
-      single responsibility and communicate through well-defined APIs.
-
-      ### Containerization
-
-      Containers provide consistent environments across development, testing, and production. 
-      Kubernetes has become the standard for container orchestration.
-
-      ### Serverless Computing
-
-      For certain workloads, serverless architectures can reduce operational overhead and costs. 
-      Functions like AWS Lambda or Azure Functions scale automatically based on demand.
-
-      ## Best Practices
-
-      1. **Infrastructure as Code** - Manage infrastructure through version-controlled code
-      2. **Immutable Infrastructure** - Replace rather than modify infrastructure components
-      3. **Observability** - Implement comprehensive logging, monitoring, and tracing
-      4. **Security by Design** - Build security into every layer from the start
-
-      ## Cost Optimization
-
-      Cloud costs can spiral quickly without proper governance. Implement:
-      
-      - Resource tagging and allocation
-      - Auto-scaling policies
-      - Reserved instances for predictable workloads
-      - Regular cost reviews
-
-      ## Conclusion
-
-      Mastering cloud architecture is an ongoing journey. Stay current with new services and 
-      patterns, but always focus on solving real business problems efficiently.
-    `,
-        date: "Dec 15, 2024",
-        category: "Cloud",
-        readTime: "10 min read",
-        author: "RK",
-        tags: ["Cloud", "AWS", "Architecture", "Microservices"],
-    },
-];
+const formatDate = (dateString: string): string => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+    });
+};
 
 export default function BlogDetailPage({
     params,
@@ -180,17 +62,44 @@ export default function BlogDetailPage({
     params: Promise<{ id: string }>;
 }) {
     const { id } = use(params);
-    const blogId = parseInt(id, 10);
-    const blog = blogs.find((b) => b.id === blogId);
+    const [blog, setBlog] = useState<Blog | null>(null);
+    const [relatedBlogs, setRelatedBlogs] = useState<Blog[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [notFound, setNotFound] = useState(false);
 
-    if (!blog) {
-        notFound();
-    }
+    useEffect(() => {
+        fetchBlog();
+        fetchRelatedBlogs();
+    }, [id]);
 
-    // Find related blogs
-    const relatedBlogs = blogs
-        .filter((b) => b.id !== blog.id && b.category === blog.category)
-        .slice(0, 2);
+    const fetchBlog = async () => {
+        try {
+            const response = await fetch(`/api/blogs/${id}`);
+            if (response.ok) {
+                const data = await response.json();
+                setBlog(data);
+            } else if (response.status === 404) {
+                setNotFound(true);
+            }
+        } catch (error) {
+            console.error('Error fetching blog:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const fetchRelatedBlogs = async () => {
+        try {
+            const response = await fetch('/api/blogs?limit=3');
+            if (response.ok) {
+                const data = await response.json();
+                // Filter out current blog
+                setRelatedBlogs(data.filter((b: Blog) => b.id !== parseInt(id)));
+            }
+        } catch (error) {
+            console.error('Error fetching related blogs:', error);
+        }
+    };
 
     // Simple markdown-like rendering
     const renderContent = (content: string) => {
@@ -240,6 +149,33 @@ export default function BlogDetailPage({
         });
     };
 
+    if (loading) {
+        return (
+            <div className={styles.blogDetail}>
+                <div className={styles.loading}>Loading...</div>
+            </div>
+        );
+    }
+
+    if (notFound || !blog) {
+        return (
+            <div className={styles.blogDetail}>
+                <div className={styles.notFound}>
+                    <h1>Blog Not Found</h1>
+                    <p>The blog you&apos;re looking for doesn&apos;t exist.</p>
+                    <Link href="/blogs" className="btn-primary">
+                        Back to Blogs
+                    </Link>
+                </div>
+            </div>
+        );
+    }
+
+    const category = getCategory(blog.content);
+    const readTime = getReadTime(blog.content);
+    const tags = getTags(blog.content);
+    const date = formatDate(blog.created_at);
+
     return (
         <div className={styles.blogDetail}>
             {/* Hero Section */}
@@ -261,9 +197,9 @@ export default function BlogDetailPage({
                     </Link>
 
                     <div className={styles.heroMeta}>
-                        <span className={styles.category}>{blog.category}</span>
-                        <span className={styles.date}>{blog.date}</span>
-                        <span className={styles.readTime}>{blog.readTime}</span>
+                        <span className={styles.category}>{category}</span>
+                        <span className={styles.date}>{date}</span>
+                        <span className={styles.readTime}>{readTime}</span>
                     </div>
 
                     <h1 className={styles.title}>{blog.title}</h1>
@@ -271,7 +207,7 @@ export default function BlogDetailPage({
                     <div className={styles.author}>
                         <div className={styles.authorAvatar}>RK</div>
                         <div className={styles.authorInfo}>
-                            <span className={styles.authorName}>{blog.author}</span>
+                            <span className={styles.authorName}>RK</span>
                             <span className={styles.authorRole}>Author & Cloud Architect</span>
                         </div>
                     </div>
@@ -284,14 +220,16 @@ export default function BlogDetailPage({
                     <article className={styles.article}>{renderContent(blog.content)}</article>
 
                     {/* Tags */}
-                    <div className={styles.tags}>
-                        <span className={styles.tagsLabel}>Tags:</span>
-                        {blog.tags.map((tag) => (
-                            <span key={tag} className={styles.tag}>
-                                {tag}
-                            </span>
-                        ))}
-                    </div>
+                    {tags.length > 0 && (
+                        <div className={styles.tags}>
+                            <span className={styles.tagsLabel}>Tags:</span>
+                            {tags.map((tag) => (
+                                <span key={tag} className={styles.tag}>
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
+                    )}
 
                     {/* Share */}
                     <div className={styles.share}>
@@ -324,17 +262,17 @@ export default function BlogDetailPage({
                     <div className={styles.container}>
                         <h2>Related Articles</h2>
                         <div className={styles.relatedGrid}>
-                            {relatedBlogs.map((relatedBlog) => (
+                            {relatedBlogs.slice(0, 2).map((relatedBlog) => (
                                 <Link
                                     key={relatedBlog.id}
                                     href={`/blogs/${relatedBlog.id}`}
                                     className={styles.relatedCard}
                                 >
-                                    <span className={styles.relatedCategory}>{relatedBlog.category}</span>
+                                    <span className={styles.relatedCategory}>{getCategory(relatedBlog.content)}</span>
                                     <h3>{relatedBlog.title}</h3>
                                     <div className={styles.relatedMeta}>
-                                        <span>{relatedBlog.date}</span>
-                                        <span>{relatedBlog.readTime}</span>
+                                        <span>{formatDate(relatedBlog.created_at)}</span>
+                                        <span>{getReadTime(relatedBlog.content)}</span>
                                     </div>
                                 </Link>
                             ))}

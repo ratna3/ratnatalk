@@ -154,6 +154,13 @@
     min-height: 50vh;
 }
 
+.loading {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--color-text-secondary);
+    font-size: 1.125rem;
+}
+
 .blogsGrid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));

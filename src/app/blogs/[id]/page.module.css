@@ -3,6 +3,33 @@
     padding-top: 80px;
 }
 
+.loading,
+.notFound {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    text-align: center;
+    padding: 2rem;
+}
+
+.loading {
+    color: var(--color-text-secondary);
+    font-size: 1.125rem;
+}
+
+.notFound h1 {
+    font-size: 2rem;
+    color: var(--color-charcoal);
+    margin-bottom: 1rem;
+}
+
+.notFound p {
+    color: var(--color-text-secondary);
+    margin-bottom: 2rem;
+}
+
 /* Hero Section */
 .hero {
     position: relative;
