@@ -2,6 +2,8 @@ import { sql, isDatabaseConfigured } from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
+export const dynamic = "force-dynamic";
+
 // GET /api/blogs - List all blogs
 export async function GET(request: NextRequest) {
     try {

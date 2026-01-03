@@ -79,14 +79,24 @@ export default function Home() {
   const [aboutContentRef, aboutContentVisible] = useScrollAnimation<HTMLDivElement>();
   const [aboutVisualRef, aboutVisualVisible] = useScrollAnimation<HTMLDivElement>();
   const [ctaRef, ctaVisible] = useScrollAnimation<HTMLDivElement>();
+  const [forceVisible, setForceVisible] = useState(false);
+  const effectiveBlogsGridVisible = blogsGridVisible || forceVisible;
 
   useEffect(() => {
     fetchFeaturedBlogs();
+    const timer = setTimeout(() => setForceVisible(true), 500);
+    return () => clearTimeout(timer);
   }, []);
 
   const fetchFeaturedBlogs = async () => {
     try {
-      const response = await fetch('/api/blogs?featured=true&limit=3');
+      const response = await fetch('/api/blogs?featured=true&limit=3', {
+        cache: 'no-store',
+        headers: {
+          'Pragma': 'no-cache',
+          'Cache-Control': 'no-cache, no-store, must-revalidate'
+        }
+      });
       if (response.ok) {
         const data = await response.json();
         setFeaturedBlogs(data);
@@ -207,7 +217,7 @@ export default function Home() {
           ) : (
             <div
               ref={blogsGridRef}
-              className={`${styles.blogsGrid} scroll-reveal-flip ${blogsGridVisible ? "visible" : ""}`}
+              className={`${styles.blogsGrid} scroll-reveal-flip ${effectiveBlogsGridVisible ? "visible" : ""}`}
             >
               {blogsWithMeta.map((blog, index) => (
                 <article
