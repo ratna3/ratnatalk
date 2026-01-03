@@ -86,7 +86,7 @@ export default function Home() {
 
   const fetchFeaturedBlogs = async () => {
     try {
-      const response = await fetch('/api/blogs?limit=3');
+      const response = await fetch('/api/blogs?featured=true&limit=3');
       if (response.ok) {
         const data = await response.json();
         setFeaturedBlogs(data);

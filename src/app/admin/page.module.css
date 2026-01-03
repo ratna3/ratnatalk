@@ -169,7 +169,7 @@
 
 .tableHeader {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr 1fr 120px;
     gap: 1.5rem;
     padding: 1rem 1.5rem;
     background: var(--color-off-white);
@@ -184,7 +184,7 @@
 
 .tableRow {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr 1fr 120px;
     gap: 1.5rem;
     padding: 1.25rem 1.5rem;
     align-items: center;
@@ -267,6 +267,28 @@
 .deleteBtn:hover {
     background: rgba(239, 68, 68, 0.2);
     transform: translateY(-1px);
+}
+
+.featuredBtn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-secondary);
+    transition: all 0.2s ease;
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.featuredBtn:hover {
+    transform: scale(1.1);
+}
+
+.featuredBtn.active {
+    color: #eab308;
+    /* Yellow-500 */
+    filter: drop-shadow(0 0 2px rgba(234, 179, 8, 0.5));
 }
 
 /* Modal */

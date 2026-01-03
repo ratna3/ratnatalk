@@ -9,6 +9,7 @@ interface Blog {
     id: number;
     title: string;
     content: string;
+    featured: boolean;
     created_at: string;
     updated_at: string;
 }
@@ -55,6 +56,35 @@ export default function AdminDashboard() {
             router.push("/login");
         } catch (error) {
             console.error("Logout error:", error);
+        }
+    };
+
+    const handleToggleFeatured = async (id: number, currentStatus: boolean) => {
+        try {
+            // Optimistic update
+            setBlogs(blogs.map(blog =>
+                blog.id === id ? { ...blog, featured: !currentStatus } : blog
+            ));
+
+            const response = await fetch(`/api/blogs/${id}/feature`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ featured: !currentStatus }),
+            });
+
+            if (!response.ok) {
+                // Revert if failed
+                setBlogs(blogs.map(blog =>
+                    blog.id === id ? { ...blog, featured: currentStatus } : blog
+                ));
+                console.error("Failed to update featured status");
+            }
+        } catch (error) {
+            console.error("Error toggling featured status:", error);
+            // Revert on error
+            setBlogs(blogs.map(blog =>
+                blog.id === id ? { ...blog, featured: currentStatus } : blog
+            ));
         }
     };
 
@@ -115,6 +145,12 @@ export default function AdminDashboard() {
                             <span className={styles.statNumber}>{blogs.length}</span>
                             <span className={styles.statLabel}>Total Blogs</span>
                         </div>
+                        <div className={styles.statCard}>
+                            <span className={styles.statNumber}>
+                                {blogs.filter(b => b.featured).length}
+                            </span>
+                            <span className={styles.statLabel}>Featured Blogs</span>
+                        </div>
                     </div>
 
                     <section className={styles.blogsSection}>
@@ -133,6 +169,7 @@ export default function AdminDashboard() {
                                     <span>Title</span>
                                     <span>Created</span>
                                     <span>Updated</span>
+                                    <span>Featured</span>
                                     <span>Actions</span>
                                 </div>
                                 {blogs.map((blog) => (
@@ -144,6 +181,24 @@ export default function AdminDashboard() {
                                         <span className={styles.blogDate}>
                                             {formatDate(blog.updated_at)}
                                         </span>
+                                        <div className={styles.featuredCell}>
+                                            <button
+                                                onClick={() => handleToggleFeatured(blog.id, blog.featured)}
+                                                className={`${styles.featuredBtn} ${blog.featured ? styles.active : ''}`}
+                                                title={blog.featured ? "Unfeature" : "Feature"}
+                                            >
+                                                <svg
+                                                    width="20"
+                                                    height="20"
+                                                    viewBox="0 0 24 24"
+                                                    fill={blog.featured ? "currentColor" : "none"}
+                                                    stroke="currentColor"
+                                                    strokeWidth="2"
+                                                >
+                                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                                </svg>
+                                            </button>
+                                        </div>
                                         <div className={styles.actions}>
                                             <Link
                                                 href={`/blogs/${blog.id}`}
