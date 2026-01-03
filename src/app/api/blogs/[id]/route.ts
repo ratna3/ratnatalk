@@ -1,4 +1,4 @@
-import { sql } from "@/lib/db";
+import { sql, isDatabaseConfigured } from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
@@ -8,6 +8,13 @@ export async function GET(
     { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        if (!isDatabaseConfigured() || !sql) {
+            return NextResponse.json(
+                { error: "Database not configured" },
+                { status: 503 }
+            );
+        }
+
         const { id } = await params;
         const blogId = parseInt(id, 10);
 
@@ -19,8 +26,8 @@ export async function GET(
         }
 
         const blogs = await sql`
-      SELECT * FROM blog WHERE id = ${blogId}
-    `;
+            SELECT * FROM blog WHERE id = ${blogId}
+        `;
 
         if (blogs.length === 0) {
             return NextResponse.json(
@@ -45,6 +52,13 @@ export async function PUT(
     { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        if (!isDatabaseConfigured() || !sql) {
+            return NextResponse.json(
+                { error: "Database not configured" },
+                { status: 503 }
+            );
+        }
+
         // Check admin authentication
         const cookieStore = await cookies();
         const session = cookieStore.get("admin_session");
@@ -77,11 +91,11 @@ export async function PUT(
         }
 
         const result = await sql`
-      UPDATE blog 
-      SET title = ${title}, content = ${content}, updated_at = NOW()
-      WHERE id = ${blogId}
-      RETURNING *
-    `;
+            UPDATE blog 
+            SET title = ${title}, content = ${content}, updated_at = NOW()
+            WHERE id = ${blogId}
+            RETURNING *
+        `;
 
         if (result.length === 0) {
             return NextResponse.json(
@@ -106,6 +120,13 @@ export async function DELETE(
     { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        if (!isDatabaseConfigured() || !sql) {
+            return NextResponse.json(
+                { error: "Database not configured" },
+                { status: 503 }
+            );
+        }
+
         // Check admin authentication
         const cookieStore = await cookies();
         const session = cookieStore.get("admin_session");
@@ -128,8 +149,8 @@ export async function DELETE(
         }
 
         const result = await sql`
-      DELETE FROM blog WHERE id = ${blogId} RETURNING *
-    `;
+            DELETE FROM blog WHERE id = ${blogId} RETURNING *
+        `;
 
         if (result.length === 0) {
             return NextResponse.json(

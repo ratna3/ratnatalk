@@ -1,10 +1,17 @@
-import { sql } from "@/lib/db";
+import { sql, isDatabaseConfigured } from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { cookies } from "next/headers";
 
 export async function POST(request: NextRequest) {
     try {
+        if (!isDatabaseConfigured() || !sql) {
+            return NextResponse.json(
+                { error: "Database not configured" },
+                { status: 503 }
+            );
+        }
+
         const body = await request.json();
         const { email, password } = body;
 
@@ -17,8 +24,8 @@ export async function POST(request: NextRequest) {
 
         // Find admin by email
         const admins = await sql`
-      SELECT * FROM admin WHERE email = ${email}
-    `;
+            SELECT * FROM admin WHERE email = ${email}
+        `;
 
         if (admins.length === 0) {
             return NextResponse.json(

@@ -1,12 +1,14 @@
-import { neon } from "@neondatabase/serverless";
+import { neon, NeonQueryFunction } from "@neondatabase/serverless";
 
 const databaseUrl = process.env.DATABASE_URL;
 
-if (!databaseUrl) {
-    throw new Error("DATABASE_URL environment variable is not set");
-}
+// Create sql function only if DATABASE_URL is available
+export const sql: NeonQueryFunction<false, false> | null = databaseUrl ? neon(databaseUrl) : null;
 
-export const sql = neon(databaseUrl);
+// Helper to check if database is configured
+export const isDatabaseConfigured = (): boolean => {
+    return !!databaseUrl && !!sql;
+};
 
 // Blog types
 export interface Blog {
