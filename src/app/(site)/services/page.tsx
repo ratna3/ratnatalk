@@ -24,6 +24,7 @@ import {
 } from "react-icons/fa";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import Link from "next/link";
+import ScrollIndicator from "@/components/ScrollIndicator";
 
 const LottieAnimation = dynamic(() => import("@/components/LottieAnimation"), {
     ssr: false,
@@ -238,6 +239,7 @@ export default function ServicesPage() {
                         I&apos;m here to bring your vision to life. Fill out the form below to get started.
                     </p>
                 </div>
+                <ScrollIndicator />
             </section>
 
             {/* Form Section */}

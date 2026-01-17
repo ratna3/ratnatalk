@@ -13,6 +13,7 @@ import {
     FaPaperPlane
 } from "react-icons/fa";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import ScrollIndicator from "@/components/ScrollIndicator";
 
 const LottieAnimation = dynamic(() => import("@/components/LottieAnimation"), {
     ssr: false,
@@ -97,6 +98,7 @@ export default function ContactPage() {
                         I&apos;d love to hear from you. Drop me a message below!
                     </p>
                 </div>
+                <ScrollIndicator />
             </section>
 
             {/* Contact Section */}

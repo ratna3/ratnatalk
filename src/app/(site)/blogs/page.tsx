@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import styles from "./page.module.css";
 import writingAnimation from "@/animations/writing.json";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import ScrollIndicator from "@/components/ScrollIndicator";
 
 const LottieAnimation = dynamic(() => import("@/components/LottieAnimation"), {
     ssr: false,
@@ -158,6 +159,7 @@ export default function BlogsPage() {
                         />
                     </div>
                 </div>
+                <ScrollIndicator />
             </section>
 
             {/* Filters Section */}

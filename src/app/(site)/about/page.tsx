@@ -11,6 +11,7 @@ import {
     FaArrowRight
 } from "react-icons/fa";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import ScrollIndicator from "@/components/ScrollIndicator";
 
 const LottieAnimation = dynamic(() => import("@/components/LottieAnimation"), {
     ssr: false,
@@ -128,6 +129,7 @@ export default function AboutPage() {
                         />
                     </div>
                 </div>
+                <ScrollIndicator />
             </section>
 
             {/* Story Section */}

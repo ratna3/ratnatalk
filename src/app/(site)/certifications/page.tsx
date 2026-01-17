@@ -25,6 +25,7 @@ import {
 } from "react-icons/fa";
 import { SiDocker, SiMongodb, SiAngular, SiD3Dotjs, SiAtlassian } from "react-icons/si";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import ScrollIndicator from "@/components/ScrollIndicator";
 
 const LottieAnimation = dynamic(() => import("@/components/LottieAnimation"), {
     ssr: false,
@@ -645,6 +646,7 @@ export default function CertificationsPage() {
                         />
                     </div>
                 </div>
+                <ScrollIndicator />
             </section>
 
             {/* Stats Section */}
