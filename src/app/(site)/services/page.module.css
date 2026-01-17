@@ -332,6 +332,13 @@
     opacity: 0;
 }
 
+.radioLabel {
+    margin-left: 0.5rem;
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+}
+
 /* Submit Section */
 .submitSection {
     text-align: center;

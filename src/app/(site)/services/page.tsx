@@ -422,7 +422,7 @@ export default function ServicesPage() {
                                                 required
                                             />
                                             <span className={styles.radioCustom}></span>
-                                            <span>{pref.label}</span>
+                                            <span className={styles.radioLabel}>{pref.label}</span>
                                         </label>
                                     ))}
                                 </div>
