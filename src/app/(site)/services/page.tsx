@@ -15,7 +15,12 @@ import {
     FaCheckCircle,
     FaRocket,
     FaArrowRight,
-    FaTimes
+    FaTimes,
+    FaUser,
+    FaClipboardList,
+    FaCogs,
+    FaMoneyBillWave,
+    FaInfoCircle
 } from "react-icons/fa";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import Link from "next/link";
@@ -242,7 +247,7 @@ export default function ServicesPage() {
                         {/* Contact Information */}
                         <div className={styles.formCard}>
                             <div className={styles.cardHeader}>
-                                <span className={styles.cardIcon}>👤</span>
+                                <span className={styles.cardIcon}><FaUser /></span>
                                 <h2>Contact Information</h2>
                             </div>
 
@@ -317,7 +322,7 @@ export default function ServicesPage() {
                         {/* Project Overview */}
                         <div className={styles.formCard}>
                             <div className={styles.cardHeader}>
-                                <span className={styles.cardIcon}>📋</span>
+                                <span className={styles.cardIcon}><FaClipboardList /></span>
                                 <h2>Project Overview</h2>
                             </div>
 
@@ -374,7 +379,7 @@ export default function ServicesPage() {
                         {/* Technical & Design Specifics */}
                         <div className={styles.formCard}>
                             <div className={styles.cardHeader}>
-                                <span className={styles.cardIcon}>🔧</span>
+                                <span className={styles.cardIcon}><FaCogs /></span>
                                 <h2>Technical & Design Specifics</h2>
                             </div>
 
@@ -444,7 +449,7 @@ export default function ServicesPage() {
                         {/* Timeline & Budget */}
                         <div className={styles.formCard}>
                             <div className={styles.cardHeader}>
-                                <span className={styles.cardIcon}>💰</span>
+                                <span className={styles.cardIcon}><FaMoneyBillWave /></span>
                                 <h2>Timeline & Budget</h2>
                             </div>
 
@@ -497,7 +502,7 @@ export default function ServicesPage() {
                         {/* Additional Information */}
                         <div className={styles.formCard}>
                             <div className={styles.cardHeader}>
-                                <span className={styles.cardIcon}>📌</span>
+                                <span className={styles.cardIcon}><FaInfoCircle /></span>
                                 <h2>Additional Information</h2>
                             </div>
 
