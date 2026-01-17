@@ -265,10 +265,11 @@
 }
 
 .radioOption {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 1rem;
+    padding: 1rem 1rem 1rem 1.25rem;
     background: var(--color-off-white);
     border: 2px solid #E5E7EB;
     border-radius: var(--radius-lg);
@@ -283,6 +284,9 @@
 .radioOption input {
     position: absolute;
     opacity: 0;
+    pointer-events: none;
+    width: 1px;
+    height: 1px;
 }
 
 .radioOption input:checked+.radioCustom {
