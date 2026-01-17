@@ -1,0 +1,76 @@
+=== NEON DATABASE EXPLORATION ===
+Project ID: long-night-95107550
+
+DATABASE VERSION:
+PostgreSQL 17.7 (e429a59) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+
+==================================================
+
+TABLES IN DATABASE:
+1. Account (BASE TABLE)
+2. Session (BASE TABLE)
+3. User (BASE TABLE)
+4. VerificationToken (BASE TABLE)
+5. admin (BASE TABLE)
+6. blog (BASE TABLE)
+
+==================================================
+
+TABLE: Account
+----------------------------------------
+  id: text NOT NULL
+  userId: text NOT NULL
+  type: text NOT NULL
+  provider: text NOT NULL
+  providerAccountId: text NOT NULL
+  refresh_token: text NULL
+  access_token: text NULL
+  expires_at: integer NULL
+  token_type: text NULL
+  scope: text NULL
+  id_token: text NULL
+  session_state: text NULL
+
+TABLE: Session
+----------------------------------------
+  id: text NOT NULL
+  sessionToken: text NOT NULL
+  userId: text NOT NULL
+  expires: timestamp without time zone NOT NULL
+
+TABLE: User
+----------------------------------------
+  id: text NOT NULL
+  name: text NULL
+  email: text NOT NULL
+  emailVerified: timestamp without time zone NULL
+  image: text NULL
+  encryptedData: text NULL
+  role: text NOT NULL DEFAULT 'user'::text
+  createdAt: timestamp without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP
+  updatedAt: timestamp without time zone NOT NULL
+
+TABLE: VerificationToken
+----------------------------------------
+  identifier: text NOT NULL
+  token: text NOT NULL
+  expires: timestamp without time zone NOT NULL
+
+TABLE: admin
+----------------------------------------
+  id: integer NOT NULL DEFAULT nextval('admin_id_seq'::regclass)
+  email: character varying NOT NULL
+  password_hash: character varying NOT NULL
+  created_at: timestamp with time zone NULL DEFAULT now()
+
+TABLE: blog
+----------------------------------------
+  id: integer NOT NULL DEFAULT nextval('blog_id_seq'::regclass)
+  title: character varying NOT NULL
+  content: text NOT NULL
+  created_at: timestamp with time zone NULL DEFAULT now()
+  updated_at: timestamp with time zone NULL DEFAULT now()
+  author_id: integer NULL
+  featured: boolean NULL DEFAULT false
+
+=== EXPLORATION COMPLETE ===

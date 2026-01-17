@@ -1,0 +1,518 @@
+.servicesPage {
+    min-height: 100vh;
+    padding-top: 80px;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    padding: 4rem 1.5rem;
+    text-align: center;
+    overflow: hidden;
+}
+
+.heroBackground {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.95) 0%,
+            rgba(254, 249, 239, 0.9) 50%,
+            rgba(252, 211, 77, 0.15) 100%);
+    z-index: 0;
+}
+
+.heroContainer {
+    position: relative;
+    z-index: 1;
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.heroTag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.25rem;
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--color-copper);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    margin-bottom: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.hero h1 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: var(--color-charcoal);
+    margin-bottom: 1rem;
+}
+
+.gradient {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-copper) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero p {
+    font-size: 1.15rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Form Section */
+.formSection {
+    padding: 3rem 1.5rem 5rem;
+    background: var(--color-off-white);
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.requestForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Form Cards */
+.formCard {
+    background: var(--color-white);
+    border-radius: var(--radius-2xl);
+    padding: 2rem;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(245, 158, 11, 0.1);
+    transition: all 0.3s ease;
+}
+
+.formCard:hover {
+    border-color: rgba(245, 158, 11, 0.25);
+    box-shadow: var(--shadow-xl);
+}
+
+.cardHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--color-off-white);
+}
+
+.cardIcon {
+    font-size: 1.5rem;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(245, 158, 11, 0.1);
+    border-radius: var(--radius-lg);
+}
+
+.cardHeader h2 {
+    font-size: 1.25rem;
+    color: var(--color-charcoal);
+    margin: 0;
+}
+
+/* Form Grid */
+.formGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+}
+
+/* Form Groups */
+.formGroup {
+    margin-bottom: 1rem;
+}
+
+.formGroup label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-charcoal);
+    margin-bottom: 0.5rem;
+}
+
+.required {
+    color: var(--color-primary);
+}
+
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 2px solid #E5E7EB;
+    border-radius: var(--radius-lg);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: var(--color-off-white);
+    font-family: var(--font-body);
+}
+
+.formGroup input:focus,
+.formGroup select:focus,
+.formGroup textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    background: var(--color-white);
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1);
+}
+
+.formGroup select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+}
+
+.formGroup textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Service Type Grid */
+.serviceGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+
+.serviceOption {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.25rem 1rem;
+    background: var(--color-off-white);
+    border: 2px solid #E5E7EB;
+    border-radius: var(--radius-xl);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.serviceOption input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.serviceOption:hover {
+    border-color: var(--color-primary-light);
+    background: rgba(245, 158, 11, 0.05);
+}
+
+.serviceOption.selected {
+    border-color: var(--color-primary);
+    background: rgba(245, 158, 11, 0.1);
+}
+
+.serviceIcon {
+    font-size: 1.5rem;
+    color: var(--color-text-muted);
+    transition: color 0.3s ease;
+}
+
+.serviceOption.selected .serviceIcon {
+    color: var(--color-primary);
+}
+
+.serviceLabel {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    line-height: 1.3;
+}
+
+.serviceOption.selected .serviceLabel {
+    color: var(--color-charcoal);
+    font-weight: 600;
+}
+
+.checkIcon {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 1rem;
+    color: var(--color-primary);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.serviceOption.selected .checkIcon {
+    opacity: 1;
+}
+
+/* Radio Group */
+.radioGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.radioOption {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: var(--color-off-white);
+    border: 2px solid #E5E7EB;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.radioOption:hover {
+    border-color: var(--color-primary-light);
+}
+
+.radioOption input {
+    position: absolute;
+    opacity: 0;
+}
+
+.radioOption input:checked+.radioCustom {
+    border-color: var(--color-primary);
+    background: var(--color-primary);
+}
+
+.radioOption input:checked+.radioCustom::after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.radioOption input:checked~span:last-child {
+    color: var(--color-charcoal);
+    font-weight: 600;
+}
+
+.radioCustom {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #D1D5DB;
+    border-radius: 50%;
+    position: relative;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.radioCustom::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 8px;
+    height: 8px;
+    background: var(--color-white);
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    opacity: 0;
+}
+
+/* Submit Section */
+.submitSection {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.submitBtn {
+    padding: 1.125rem 3rem;
+    font-size: 1.1rem;
+    min-width: 250px;
+}
+
+.submitBtn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: var(--color-white);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.errorMessage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+    padding: 1rem;
+    border-radius: var(--radius-lg);
+    font-weight: 500;
+    background: rgba(239, 68, 68, 0.1);
+    color: #DC2626;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+/* Success Overlay & Modal */
+.successOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1.5rem;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.successModal {
+    background: var(--color-white);
+    border-radius: var(--radius-2xl);
+    padding: 2.5rem;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.closeBtn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: var(--color-off-white);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-muted);
+    transition: all 0.3s ease;
+}
+
+.closeBtn:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #DC2626;
+}
+
+.successAnimation {
+    margin-bottom: 1rem;
+}
+
+.successModal h2 {
+    font-size: 2rem;
+    color: var(--color-charcoal);
+    margin-bottom: 0.5rem;
+}
+
+.successTitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-primary-dark);
+    margin-bottom: 1rem;
+}
+
+.successDesc {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.successActions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .formGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .serviceGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .formCard {
+        padding: 1.5rem;
+    }
+
+    .successModal {
+        padding: 2rem 1.5rem;
+    }
+
+    .successActions {
+        flex-direction: column;
+    }
+
+    .successActions a {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .serviceGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        padding: 3rem 1rem;
+    }
+
+    .formSection {
+        padding: 2rem 1rem 4rem;
+    }
+
+    .submitBtn {
+        width: 100%;
+        min-width: auto;
+    }
+}
