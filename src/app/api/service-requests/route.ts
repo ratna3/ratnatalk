@@ -15,6 +15,7 @@ interface ServiceRequestData {
     email: string;
     phone?: string;
     preferredContact: string;
+    contactHandle?: string;
 
     // Project Overview
     projectTitle: string;
@@ -186,6 +187,7 @@ function generateEmailHtml(data: ServiceRequestData, requestId: number, createdA
                 <div class="field"><span class="label">Email:</span> <span class="value"><a href="mailto:${data.email}">${data.email}</a></span></div>
                 ${data.phone ? `<div class="field"><span class="label">Phone:</span> <span class="value">${data.phone}</span></div>` : ''}
                 <div class="field"><span class="label">Preferred Contact:</span> <span class="badge">${data.preferredContact}</span></div>
+                ${data.contactHandle ? `<div class="field"><span class="label">${data.preferredContact} Handle:</span> <span class="value">${data.contactHandle}</span></div>` : ''}
             </div>
             
             <div class="section">

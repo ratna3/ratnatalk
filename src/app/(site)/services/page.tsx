@@ -69,6 +69,7 @@ const communicationMethods = [
     "Email",
     "Slack",
     "WhatsApp",
+    "Discord",
     "Video Call",
 ];
 
@@ -89,6 +90,7 @@ interface FormData {
     email: string;
     phone: string;
     preferredContact: string;
+    contactHandle: string;
 
     // Project Overview
     projectTitle: string;
@@ -118,6 +120,7 @@ export default function ServicesPage() {
         email: "",
         phone: "",
         preferredContact: "Email",
+        contactHandle: "",
         projectTitle: "",
         serviceTypes: [],
         projectDescription: "",
@@ -189,6 +192,7 @@ export default function ServicesPage() {
                 email: "",
                 phone: "",
                 preferredContact: "Email",
+                contactHandle: "",
                 projectTitle: "",
                 serviceTypes: [],
                 projectDescription: "",
@@ -316,6 +320,33 @@ export default function ServicesPage() {
                                         ))}
                                     </select>
                                 </div>
+
+                                {/* Conditional Contact Handle Field */}
+                                {formData.preferredContact !== "Email" && (
+                                    <div className={styles.formGroup}>
+                                        <label htmlFor="contactHandle">
+                                            {formData.preferredContact === "Slack" && "Slack Workspace/Username"}
+                                            {formData.preferredContact === "WhatsApp" && "WhatsApp Number"}
+                                            {formData.preferredContact === "Discord" && "Discord Username"}
+                                            {formData.preferredContact === "Video Call" && "Preferred Platform (Zoom/Meet/Teams)"}
+                                            <span className={styles.required}>*</span>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="contactHandle"
+                                            name="contactHandle"
+                                            value={formData.contactHandle}
+                                            onChange={handleChange}
+                                            placeholder={
+                                                formData.preferredContact === "Slack" ? "workspace-name or @username" :
+                                                    formData.preferredContact === "WhatsApp" ? "+1 234 567 8900" :
+                                                        formData.preferredContact === "Discord" ? "username#1234 or username" :
+                                                            "e.g., Zoom, Google Meet"
+                                            }
+                                            required
+                                        />
+                                    </div>
+                                )}
                             </div>
                         </div>
 
