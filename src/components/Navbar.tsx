@@ -71,20 +71,27 @@ const Navbar = () => {
                 >
                     <span className={`${styles.hamburger} ${isMobileMenuOpen ? styles.active : ""}`}></span>
                 </button>
+            </div>
 
-                {/* Mobile Menu */}
-                <div className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.open : ""}`}>
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.href}
-                            href={link.href}
-                            className={styles.mobileNavLink}
-                            onClick={() => setIsMobileMenuOpen(false)}
-                        >
-                            {link.label}
-                        </Link>
-                    ))}
-                </div>
+            {/* Mobile Menu - Outside container for proper fixed positioning */}
+            <div className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.open : ""}`}>
+                <button
+                    className={styles.mobileCloseBtn}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    aria-label="Close menu"
+                >
+                    <span className={styles.closeIcon}></span>
+                </button>
+                {navLinks.map((link) => (
+                    <Link
+                        key={link.href}
+                        href={link.href}
+                        className={styles.mobileNavLink}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                        {link.label}
+                    </Link>
+                ))}
             </div>
         </nav>
     );
