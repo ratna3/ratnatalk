@@ -1,8 +1,9 @@
 .footer {
-    background: linear-gradient(180deg, var(--color-off-white) 0%, var(--color-pearl) 100%);
-    padding: 4rem 0 2rem;
-    margin-top: 4rem;
     position: relative;
+    z-index: 2;
+    background: rgba(26, 26, 46, 0.98);
+    padding: 4rem 0 2rem;
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
 }
 
 .footer::before {
@@ -11,8 +12,8 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
-    background: var(--gradient-primary);
+    height: 2px;
+    background: var(--gradient-gold);
 }
 
 .container {
@@ -26,6 +27,7 @@
     justify-content: space-between;
     gap: 3rem;
     flex-wrap: wrap;
+    margin-bottom: 3rem;
 }
 
 .branding {
@@ -36,118 +38,111 @@
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
+    font-family: var(--font-brush);
     font-size: 1.5rem;
-    font-weight: 700;
-    text-decoration: none;
-    margin-bottom: 1rem;
-}
-
-.logoImage {
-    border-radius: var(--radius-md);
-    object-fit: contain;
-}
-
-.logoText {
-    font-family: var(--font-accent);
-    font-size: 1.35rem;
-    font-weight: 700;
-    font-style: italic;
-    background: linear-gradient(135deg, var(--color-charcoal) 0%, var(--color-secondary) 100%);
+    background: var(--gradient-gold);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    letter-spacing: 0.02em;
-    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+    text-decoration: none;
 }
 
-.logo:hover .logoText {
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    background-clip: text;
+.logoIcon {
+    font-size: 1.75rem;
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
 }
 
 .tagline {
-    color: var(--color-text-secondary);
     font-size: 0.95rem;
+    color: rgba(250, 243, 224, 0.7);
     line-height: 1.7;
 }
 
-.linksSection {
-    display: flex;
-    gap: 4rem;
+.linkSection {
+    min-width: 140px;
 }
 
-.linkGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-.linkGroup h4 {
-    color: var(--color-charcoal);
+.linkSection h4 {
     font-family: var(--font-heading);
-    font-size: 1rem;
-    font-weight: 400;
-    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--color-kincha);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.25rem;
 }
 
-.linkGroup a {
-    color: var(--color-text-secondary);
+.linkSection ul {
+    list-style: none;
+}
+
+.linkSection li {
+    margin-bottom: 0.75rem;
+}
+
+.linkSection a {
     font-size: 0.95rem;
+    color: rgba(250, 243, 224, 0.7);
     text-decoration: none;
     transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-.linkGroup a:hover {
-    color: var(--color-primary);
+.linkSection a:hover {
+    color: var(--color-kincha);
     transform: translateX(4px);
-}
-
-.divider {
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--color-secondary), transparent);
-    margin: 2.5rem 0;
 }
 
 .bottomSection {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(212, 175, 55, 0.1);
     flex-wrap: wrap;
     gap: 1rem;
 }
 
-.bottomSection p {
-    color: var(--color-text-muted);
-    font-size: 0.875rem;
+.copyright {
+    font-size: 0.9rem;
+    color: rgba(250, 243, 224, 0.5);
 }
 
-.madeWith {
+.copyright a {
+    color: var(--color-kincha);
+    text-decoration: none;
+}
+
+.socialLinks {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.socialLink {
+    width: 40px;
+    height: 40px;
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 50%;
     display: flex;
     align-items: center;
-    gap: 0.25rem;
+    justify-content: center;
+    color: var(--color-kincha);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
 }
 
-.heart {
-    color: var(--color-secondary);
-    animation: heartbeat 1.5s ease-in-out infinite;
+.socialLink:hover {
+    background: var(--gradient-gold);
+    border-color: transparent;
+    color: var(--color-sumi);
+    transform: translateY(-4px);
 }
 
-@keyframes heartbeat {
-
-    0%,
-    100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.15);
-    }
-}
-
+/* Responsive */
 @media (max-width: 768px) {
     .topSection {
         flex-direction: column;
@@ -158,9 +153,19 @@
         max-width: 100%;
     }
 
-    .linksSection {
+    .linkSection {
+        width: 100%;
+    }
+
+    .linkSection ul {
+        display: flex;
+        flex-wrap: wrap;
         justify-content: center;
-        gap: 3rem;
+        gap: 1rem 2rem;
+    }
+
+    .linkSection li {
+        margin-bottom: 0;
     }
 
     .bottomSection {

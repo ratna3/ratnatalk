@@ -1,118 +1,84 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import styles from "./LandscapeCanvas.module.css";
 
-// Scene images
-import mountainSky from "@/assets/scenes/mountains/sky.png";
-import mountainDistant from "@/assets/scenes/mountains/distant.png";
-import mountainMain from "@/assets/scenes/mountains/main.png";
-import forestMain from "@/assets/scenes/forest/main.png";
-import templeMain from "@/assets/scenes/temple/main.png";
-import gardenMain from "@/assets/scenes/garden/main.png";
-import villageMain from "@/assets/scenes/village/main.png";
-import pondMain from "@/assets/scenes/pond/main.png";
-import goldenDragon from "@/assets/dragon/dragon.png";
+// Single cohesive landscape image
+import landscapeImage from "@/assets/scenes/mountains/landscape.png";
 
 export default function LandscapeCanvas() {
     const [scrollY, setScrollY] = useState(0);
-    const [timeOfDay, setTimeOfDay] = useState<"day" | "night">("day");
+    const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+    const canvasRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        // Determine time of day based on user's local time
-        const hour = new Date().getHours();
-        setTimeOfDay(hour >= 6 && hour < 18 ? "day" : "night");
-
         const handleScroll = () => {
             setScrollY(window.scrollY);
         };
 
+        const handleMouseMove = (e: MouseEvent) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 20;
+            const y = (e.clientY / window.innerHeight - 0.5) * 10;
+            setMousePos({ x, y });
+        };
+
         window.addEventListener("scroll", handleScroll, { passive: true });
-        return () => window.removeEventListener("scroll", handleScroll);
+        window.addEventListener("mousemove", handleMouseMove, { passive: true });
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            window.removeEventListener("mousemove", handleMouseMove);
+        };
     }, []);
 
-    // Calculate parallax offsets
-    const parallaxOffset = (speed: number) => {
-        return scrollY * speed * -1;
-    };
+    // Parallax offset based on scroll
+    const parallaxY = scrollY * 0.3;
 
     return (
-        <div className={`${styles.landscapeCanvas} ${styles[timeOfDay]}`}>
-            {/* Sky Layer - Slowest */}
+        <div ref={canvasRef} className={styles.landscapeCanvas}>
+            {/* Main Background Layer with subtle parallax */}
             <div
-                className={`${styles.layer} ${styles.skyLayer}`}
-                style={{ transform: `translateY(${parallaxOffset(0.1)}px)` }}
-            >
-                <Image
-                    src={mountainSky}
-                    alt="Sky"
-                    fill
-                    priority
-                    className={styles.sceneImage}
-                />
-            </div>
-
-            {/* Distant Mountains Layer */}
-            <div
-                className={`${styles.layer} ${styles.distantLayer}`}
-                style={{ transform: `translateY(${parallaxOffset(0.2)}px)` }}
-            >
-                <Image
-                    src={mountainDistant}
-                    alt="Distant Mountains"
-                    fill
-                    className={styles.sceneImage}
-                />
-            </div>
-
-            {/* Main Mountains Layer */}
-            <div
-                className={`${styles.layer} ${styles.mainLayer}`}
-                style={{ transform: `translateY(${parallaxOffset(0.3)}px)` }}
-            >
-                <Image
-                    src={mountainMain}
-                    alt="Mountains"
-                    fill
-                    className={styles.sceneImage}
-                />
-            </div>
-
-            {/* Golden Dragon */}
-            <div
-                className={styles.dragonLayer}
+                className={styles.backgroundLayer}
                 style={{
-                    transform: `translateY(${parallaxOffset(0.15)}px) translateX(${Math.sin(scrollY * 0.01) * 50
-                        }px)`,
+                    transform: `translateY(${-parallaxY}px) translateX(${mousePos.x * 0.3}px)`,
                 }}
             >
                 <Image
-                    src={goldenDragon}
-                    alt="Golden Dragon"
-                    width={300}
-                    height={300}
-                    className={styles.dragon}
+                    src={landscapeImage}
+                    alt="Japanese Mountain Landscape"
+                    fill
+                    priority
+                    quality={100}
+                    className={styles.landscapeImage}
                 />
             </div>
 
-            {/* Particles - Cherry Blossoms */}
+            {/* Atmospheric mist overlay */}
+            <div className={styles.mistOverlay} />
+
+            {/* Subtle floating particles - like dust in sunlight */}
             <div className={styles.particlesLayer}>
-                {[...Array(20)].map((_, i) => (
+                {[...Array(15)].map((_, i) => (
                     <div
                         key={i}
-                        className={styles.petal}
+                        className={styles.dustParticle}
                         style={{
-                            left: `${Math.random() * 100}%`,
-                            animationDelay: `${Math.random() * 10}s`,
-                            animationDuration: `${10 + Math.random() * 10}s`,
+                            left: `${10 + Math.random() * 80}%`,
+                            top: `${20 + Math.random() * 60}%`,
+                            animationDelay: `${Math.random() * 8}s`,
+                            animationDuration: `${15 + Math.random() * 10}s`,
+                            opacity: 0.3 + Math.random() * 0.4,
                         }}
                     />
                 ))}
             </div>
 
-            {/* Gradient Overlay */}
-            <div className={styles.gradientOverlay} />
+            {/* Bottom gradient fade to content */}
+            <div className={styles.bottomFade} />
+
+            {/* Vignette effect for depth */}
+            <div className={styles.vignette} />
         </div>
     );
 }
