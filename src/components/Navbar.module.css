@@ -3,10 +3,11 @@
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 10000;
     padding: 1rem 0;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     background: transparent;
+    pointer-events: auto;
 }
 
 .navbar.scrolled {
@@ -72,8 +73,10 @@
     color: var(--color-washi);
     text-decoration: none;
     position: relative;
-    padding: 0.25rem 0;
+    padding: 0.5rem 0.75rem;
     transition: color 0.3s ease;
+    pointer-events: auto;
+    cursor: pointer;
 }
 
 .navLink::after {
