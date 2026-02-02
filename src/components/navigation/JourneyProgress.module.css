@@ -1,0 +1,115 @@
+.journeyProgress {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 0.75rem 1.5rem;
+    background: rgba(26, 26, 46, 0.9);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.progressBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: rgba(212, 175, 55, 0.1);
+}
+
+.progressFill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-kincha) 0%, var(--color-beniaka) 50%, var(--color-kincha) 100%);
+    transition: width 0.1s ease-out;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+.sceneIndicators {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding-top: 0.25rem;
+}
+
+.sceneIndicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.5rem;
+    text-decoration: none;
+    opacity: 0.4;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.sceneIndicator:hover {
+    opacity: 0.8;
+    transform: translateY(-4px);
+}
+
+.sceneIndicator.visited {
+    opacity: 0.6;
+}
+
+.sceneIndicator.active {
+    opacity: 1;
+}
+
+.sceneIndicator.active .sceneIcon {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.6));
+}
+
+.sceneIcon {
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.sceneName {
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    color: var(--color-washi);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.dragonIndicator {
+    position: absolute;
+    top: -1.5rem;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+    filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.8));
+    transition: left 0.3s ease-out;
+    animation: dragonFloat 3s ease-in-out infinite;
+}
+
+@keyframes dragonFloat {
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+@media (max-width: 768px) {
+    .sceneName {
+        display: none;
+    }
+
+    .sceneIcon {
+        font-size: 1.25rem;
+    }
+
+    .journeyProgress {
+        padding: 0.5rem 1rem;
+    }
+}
