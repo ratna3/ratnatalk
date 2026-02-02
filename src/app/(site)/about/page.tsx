@@ -27,7 +27,7 @@ const skills = [
 const timeline = [
     {
         year: "2025",
-        title: "Founding Member at Lloyd Structure House Inc",
+        title: "CTO (Chief Technical Officer) at Lloyd Structure House Inc",
         description: "I am effectively managing and giving advice to the team members and CEO of the company. ",
     },
     {
