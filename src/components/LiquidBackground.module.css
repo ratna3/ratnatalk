@@ -4,10 +4,8 @@
     z-index: 0;
     pointer-events: none;
     overflow: hidden;
-    background: linear-gradient(135deg,
-            rgba(248, 250, 252, 1) 0%,
-            rgba(241, 245, 249, 1) 50%,
-            rgba(248, 250, 252, 1) 100%);
+    background: var(--sky-gradient, linear-gradient(135deg, #1A1A2E 0%, #16213E 100%));
+    transition: background 1.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .canvas {

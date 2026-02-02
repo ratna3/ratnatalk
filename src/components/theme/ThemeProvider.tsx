@@ -57,12 +57,16 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
             setSeason(getAutoSeason());
         }
 
-        // Update time every minute when auto
+        // Cycle time every 15 seconds when auto
         const interval = setInterval(() => {
             if (isAuto) {
-                setTimeOfDay(getAutoTimeOfDay());
+                setTimeOfDay((prev) => {
+                    const order: TimeOfDay[] = ["dawn", "day", "dusk", "night"];
+                    const currentIndex = order.indexOf(prev);
+                    return order[(currentIndex + 1) % 4];
+                });
             }
-        }, 60000);
+        }, 15000);
 
         return () => clearInterval(interval);
     }, [isAuto]);
