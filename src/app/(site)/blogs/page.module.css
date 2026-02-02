@@ -191,20 +191,20 @@
 
 .blogCard.featured {
     grid-column: span 2;
-    flex-direction: row;
+    background: linear-gradient(135deg, rgba(40, 40, 60, 0.8) 0%, rgba(26, 26, 46, 0.9) 100%);
+    border-color: rgba(212, 175, 55, 0.3);
 }
 
 @media (max-width: 900px) {
     .blogCard.featured {
         grid-column: span 1;
-        flex-direction: column;
     }
 }
 
 .featuredBadge {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 1.5rem;
+    right: 1.5rem;
     background: var(--gradient-gold);
     color: var(--color-sumi);
     padding: 0.25rem 0.75rem;
@@ -221,7 +221,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    padding-right: 80px;
+    /* Space for featured badge if present */
 }
 
 .blogContent {
@@ -232,20 +234,29 @@
 }
 
 .blogCategory {
-    padding: 0.25rem 0.75rem;
-    background: rgba(212, 175, 55, 0.15);
-    border: 1px solid rgba(212, 175, 55, 0.3);
+    padding: 0.35rem 1rem;
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.2);
     color: var(--color-kincha);
     font-size: 0.75rem;
     font-weight: 600;
     border-radius: 100px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+}
+
+.blogCard:hover .blogCategory {
+    background: var(--gradient-gold);
+    color: var(--color-sumi);
+    border-color: transparent;
 }
 
 .blogDate {
     font-size: 0.85rem;
-    color: rgba(250, 243, 224, 0.6);
+    color: rgba(250, 243, 224, 0.5);
+    font-family: var(--font-heading);
+    letter-spacing: 0.05em;
 }
 
 .blogTitle {
@@ -255,6 +266,23 @@
     margin-bottom: 1rem;
     line-height: 1.3;
     transition: color 0.3s ease;
+}
+
+.blogCard.featured .blogTitle {
+    font-size: 2rem;
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.5rem;
+}
+
+.blogCard:hover .blogTitle {
+    color: var(--color-kincha);
+}
+
+.blogCard.featured:hover .blogTitle {
+    -webkit-text-fill-color: var(--color-kincha);
 }
 
 .blogCard:hover .blogTitle {
