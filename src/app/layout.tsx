@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { Outfit, Space_Grotesk, Playfair_Display } from "next/font/google";
+import { DM_Serif_Display, Source_Sans_3, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import CursorBackground from "@/components/CursorBackground";
+import LiquidBackground from "@/components/LiquidBackground";
 
-const outfit = Outfit({
+const dmSerif = DM_Serif_Display({
   subsets: ["latin"],
-  variable: "--font-outfit",
-  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-dm-serif",
+  weight: ["400"],
 });
 
-const spaceGrotesk = Space_Grotesk({
+const sourceSans = Source_Sans_3({
   subsets: ["latin"],
-  variable: "--font-space",
+  variable: "--font-source-sans",
   weight: ["300", "400", "500", "600", "700"],
 });
 
@@ -39,9 +39,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${outfit.variable} ${spaceGrotesk.variable} ${playfair.variable}`}>
-      <body className={spaceGrotesk.className}>
-        <CursorBackground />
+    <html lang="en" className={`${dmSerif.variable} ${sourceSans.variable} ${playfair.variable}`}>
+      <body className={sourceSans.className}>
+        <LiquidBackground />
         <main>{children}</main>
       </body>
     </html>

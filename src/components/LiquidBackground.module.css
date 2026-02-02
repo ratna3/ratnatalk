@@ -1,0 +1,207 @@
+.liquidBackground {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    background: linear-gradient(135deg,
+            rgba(248, 250, 252, 1) 0%,
+            rgba(241, 245, 249, 1) 50%,
+            rgba(248, 250, 252, 1) 100%);
+}
+
+.canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Animated gradient blobs */
+.blobContainer {
+    position: absolute;
+    inset: 0;
+    filter: blur(80px);
+    opacity: 0.6;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    mix-blend-mode: multiply;
+}
+
+.blob1 {
+    width: 600px;
+    height: 600px;
+    background: linear-gradient(135deg,
+            rgba(37, 99, 235, 0.25) 0%,
+            rgba(124, 58, 237, 0.2) 100%);
+    top: -10%;
+    right: -5%;
+    animation: blobFloat1 25s ease-in-out infinite;
+}
+
+.blob2 {
+    width: 500px;
+    height: 500px;
+    background: linear-gradient(135deg,
+            rgba(124, 58, 237, 0.2) 0%,
+            rgba(219, 112, 147, 0.15) 100%);
+    bottom: -5%;
+    left: -10%;
+    animation: blobFloat2 30s ease-in-out infinite;
+}
+
+.blob3 {
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(135deg,
+            rgba(219, 112, 147, 0.15) 0%,
+            rgba(229, 210, 137, 0.1) 100%);
+    top: 40%;
+    left: 30%;
+    animation: blobFloat3 20s ease-in-out infinite;
+}
+
+.blob4 {
+    width: 350px;
+    height: 350px;
+    background: linear-gradient(135deg,
+            rgba(37, 99, 235, 0.15) 0%,
+            rgba(124, 58, 237, 0.1) 100%);
+    top: 20%;
+    right: 20%;
+    animation: blobFloat4 22s ease-in-out infinite;
+}
+
+/* Iridescent shimmer overlay */
+.shimmerOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg,
+            transparent 40%,
+            rgba(255, 255, 255, 0.03) 45%,
+            rgba(255, 255, 255, 0.05) 50%,
+            rgba(255, 255, 255, 0.03) 55%,
+            transparent 60%);
+    background-size: 200% 200%;
+    animation: shimmer 8s ease-in-out infinite;
+}
+
+@keyframes blobFloat1 {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+
+    25% {
+        transform: translate(-30px, 50px) scale(1.05) rotate(5deg);
+    }
+
+    50% {
+        transform: translate(20px, -30px) scale(0.95) rotate(-5deg);
+    }
+
+    75% {
+        transform: translate(40px, 20px) scale(1.02) rotate(3deg);
+    }
+}
+
+@keyframes blobFloat2 {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+
+    33% {
+        transform: translate(50px, -40px) scale(1.1) rotate(-8deg);
+    }
+
+    66% {
+        transform: translate(-30px, 30px) scale(0.9) rotate(8deg);
+    }
+}
+
+@keyframes blobFloat3 {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(-50px, 50px) scale(1.15);
+    }
+}
+
+@keyframes blobFloat4 {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+
+    25% {
+        transform: translate(30px, -20px) scale(0.95) rotate(-3deg);
+    }
+
+    50% {
+        transform: translate(-20px, 40px) scale(1.05) rotate(5deg);
+    }
+
+    75% {
+        transform: translate(-40px, -10px) scale(1) rotate(-2deg);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% -200%;
+    }
+
+    50% {
+        background-position: 200% 200%;
+    }
+
+    100% {
+        background-position: -200% -200%;
+    }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+
+    .blob,
+    .shimmerOverlay {
+        animation: none;
+    }
+
+    .canvas {
+        display: none;
+    }
+}
+
+/* Simplify on mobile for performance */
+@media (max-width: 768px) {
+    .blobContainer {
+        filter: blur(60px);
+        opacity: 0.4;
+    }
+
+    .blob1,
+    .blob2 {
+        display: block;
+    }
+
+    .blob3,
+    .blob4 {
+        display: none;
+    }
+
+    .canvas {
+        display: none;
+    }
+}

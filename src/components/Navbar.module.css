@@ -10,10 +10,12 @@
 }
 
 .navbar.scrolled {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
     padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(124, 58, 237, 0.08);
 }
 
 .container {
@@ -40,11 +42,11 @@
 }
 
 .logoText {
-    font-family: var(--font-playfair), serif;
+    font-family: var(--font-accent);
     font-size: 1.5rem;
     font-weight: 700;
     font-style: italic;
-    background: linear-gradient(135deg, var(--color-charcoal) 0%, var(--color-primary-dark) 100%);
+    background: linear-gradient(135deg, var(--color-charcoal) 0%, var(--color-secondary) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -53,10 +55,10 @@
 }
 
 .logo:hover .logoText {
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-copper) 100%);
+    background: var(--gradient-primary);
     -webkit-background-clip: text;
     background-clip: text;
-    text-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+    text-shadow: 0 0 30px rgba(124, 58, 237, 0.3);
 }
 
 .navLinks {
@@ -82,8 +84,9 @@
     left: 0;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, var(--color-primary), var(--color-copper));
+    background: var(--gradient-primary);
     transition: width 0.3s ease;
+    border-radius: 2px;
 }
 
 .navLink:hover {
@@ -156,7 +159,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(23, 23, 23, 0.98) 0%, rgba(38, 38, 38, 0.98) 100%);
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(2, 6, 23, 0.98) 100%);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     flex-direction: column;
@@ -166,7 +169,7 @@
     transform: translateX(100%);
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 9999;
-    border-left: 1px solid rgba(245, 158, 11, 0.2);
+    border-left: 1px solid rgba(124, 58, 237, 0.2);
     box-shadow: -10px 0 40px rgba(0, 0, 0, 0.3);
 }
 
@@ -181,7 +184,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.08) 0%, transparent 50%);
+    background: radial-gradient(circle at top right, rgba(124, 58, 237, 0.15) 0%, transparent 50%);
     pointer-events: none;
 }
 
@@ -205,14 +208,14 @@
     transform: translateY(-50%);
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, var(--color-primary), var(--color-copper));
+    background: var(--gradient-primary);
     transition: width 0.3s ease;
     border-radius: 2px;
 }
 
 .mobileNavLink:hover {
-    color: var(--color-primary);
-    background: rgba(245, 158, 11, 0.1);
+    color: var(--color-primary-light);
+    background: rgba(124, 58, 237, 0.1);
     padding-left: 2.5rem;
 }
 
@@ -238,9 +241,10 @@
 }
 
 .mobileCloseBtn:hover {
-    background: rgba(245, 158, 11, 0.2);
-    border-color: var(--color-primary);
+    background: rgba(124, 58, 237, 0.3);
+    border-color: var(--color-secondary);
     transform: rotate(90deg);
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
 }
 
 .closeIcon {
