@@ -63,9 +63,9 @@ const formatDate = (dateString: string): string => {
 };
 
 const stats = [
-  { number: "50+", label: "Articles Published" },
-  { number: "10K+", label: "Readers" },
-  { number: "15+", label: "Certifications" },
+  { number: "20+", label: "Websites Published" },
+  { number: "10+", label: "Software Developed" },
+  { number: "40+", label: "Certifications" },
   { number: "5+", label: "Years Experience" },
 ];
 
