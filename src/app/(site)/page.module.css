@@ -11,7 +11,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 6rem 1.5rem 8rem;
+    padding: 12rem 1.5rem 10rem;
     overflow: hidden;
 }
 
@@ -73,11 +73,11 @@
 
 .heroTitle {
     font-family: var(--font-brush);
-    font-size: clamp(3rem, 8vw, 5rem);
+    font-size: clamp(3.5rem, 8vw, 6rem);
     font-weight: 400;
     line-height: 1.1;
     color: var(--color-washi);
-    margin-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
 }
 
 .heroTitle .gradient {
@@ -89,16 +89,16 @@
 }
 
 .heroDescription {
-    font-size: 1.25rem;
-    color: rgba(250, 243, 224, 0.8);
-    line-height: 1.7;
-    margin-bottom: 2rem;
-    max-width: 500px;
+    font-size: 1.35rem;
+    color: rgba(250, 243, 224, 0.9);
+    line-height: 1.8;
+    margin-bottom: 3.5rem;
+    max-width: 600px;
 }
 
 .heroCta {
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
     flex-wrap: wrap;
 }
 
@@ -218,7 +218,7 @@
 .statsSection {
     position: relative;
     z-index: 2;
-    padding: 4rem 1.5rem;
+    padding: 8rem 1.5rem;
     background: rgba(26, 26, 46, 0.95);
     border-top: 1px solid rgba(212, 175, 55, 0.2);
     border-bottom: 1px solid rgba(212, 175, 55, 0.2);
@@ -270,13 +270,13 @@
 .blogsSection {
     position: relative;
     z-index: 2;
-    padding: 5rem 1.5rem;
+    padding: 10rem 1.5rem;
     background: rgba(26, 26, 46, 0.98);
 }
 
 .sectionHeader {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 5rem;
 }
 
 .sectionTag {
@@ -435,7 +435,7 @@
 .aboutSection {
     position: relative;
     z-index: 2;
-    padding: 5rem 1.5rem;
+    padding: 10rem 1.5rem;
     background: rgba(26, 26, 46, 0.98);
 }
 
@@ -504,7 +504,7 @@
 .ctaSection {
     position: relative;
     z-index: 2;
-    padding: 5rem 1.5rem;
+    padding: 10rem 1.5rem;
     background: linear-gradient(135deg, var(--color-kincha) 0%, var(--color-kincha-dark) 100%);
     text-align: center;
 }
