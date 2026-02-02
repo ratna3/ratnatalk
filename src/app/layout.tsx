@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import LandscapeCanvas from "@/components/landscape/LandscapeCanvas";
 import SmoothScroll from "@/components/landscape/SmoothScroll";
@@ -8,6 +8,18 @@ import InteractiveCreatures from "@/components/interactive/InteractiveCreatures"
 import ParticleField from "@/components/interactive/ParticleField";
 import HiddenCollectibles from "@/components/interactive/HiddenCollectibles";
 import ThemeWrapper from "@/components/theme/ThemeWrapper";
+import MobileOptimizations from "@/components/optimizations/MobileOptimizations";
+import PerformanceMonitor from "@/components/optimizations/PerformanceMonitor";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#FAF3E0" },
+    { media: "(prefers-color-scheme: dark)", color: "#1A1A2E" },
+  ],
+};
 
 export const metadata: Metadata = {
   title: "RK Talks | A Journey Through Thoughts",
@@ -18,6 +30,16 @@ export const metadata: Metadata = {
     title: "RK Talks | A Journey Through Thoughts",
     description: "Welcome to RK Talks - An immersive journey through a Japanese landscape of personal blogs, insights, and professional achievements.",
     type: "website",
+    siteName: "RK Talks",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "RK Talks | A Journey Through Thoughts",
+    description: "An immersive journey through a Japanese landscape of personal blogs and insights.",
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
@@ -28,25 +50,39 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body>
-        <SmoothScroll>
-          <ThemeWrapper>
-            {/* Background layers */}
-            <LandscapeCanvas />
+        {/* Skip link for keyboard users */}
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
 
-            {/* Interactive elements */}
-            <CustomCursor />
-            <InteractiveCreatures />
-            <ParticleField type="petal" count={20} speed={0.8} />
-            <HiddenCollectibles />
+        <MobileOptimizations>
+          <SmoothScroll>
+            <ThemeWrapper>
+              {/* Performance monitoring */}
+              <PerformanceMonitor />
 
-            {/* Navigation */}
-            <JourneyProgress />
+              {/* Background layers */}
+              <LandscapeCanvas />
 
-            {/* Main content */}
-            <main>{children}</main>
-          </ThemeWrapper>
-        </SmoothScroll>
+              {/* Interactive elements (hidden on mobile for performance) */}
+              <CustomCursor />
+              <InteractiveCreatures />
+              <ParticleField type="petal" count={20} speed={0.8} />
+              <HiddenCollectibles />
+
+              {/* Navigation */}
+              <JourneyProgress />
+
+              {/* Main content */}
+              <main id="main-content">{children}</main>
+            </ThemeWrapper>
+          </SmoothScroll>
+        </MobileOptimizations>
       </body>
     </html>
   );

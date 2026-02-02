@@ -363,3 +363,191 @@ p {
   white-space: nowrap;
   border: 0;
 }
+
+/* ===========================================
+   MOBILE RESPONSIVE OVERRIDES
+   =========================================== */
+
+@media (max-width: 768px) {
+  :root {
+    --radius-xl: 16px;
+    --radius-2xl: 20px;
+  }
+
+  body {
+    font-size: 16px;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  /* Larger touch targets */
+  button,
+  a,
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Disable custom scrollbar on mobile */
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+}
+
+/* ===========================================
+   TOUCH DEVICE OPTIMIZATIONS
+   =========================================== */
+
+.touch-device * {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.touch-device button:hover,
+.touch-device a:hover,
+.touch-device [role="button"]:hover {
+  transform: none !important;
+}
+
+/* ===========================================
+   PERFORMANCE OPTIMIZATIONS
+   =========================================== */
+
+/* Reduced animations for low-performance devices */
+.reduced-animations *,
+.reduced-animations *::before,
+.reduced-animations *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+.low-performance *,
+.low-performance *::before,
+.low-performance *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ===========================================
+   CROSS-BROWSER COMPATIBILITY
+   =========================================== */
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-kincha) var(--color-sumi);
+}
+
+/* Safari fixes */
+@supports (-webkit-touch-callout: none) {
+  body {
+    min-height: -webkit-fill-available;
+  }
+
+  html {
+    height: -webkit-fill-available;
+  }
+}
+
+/* IE/Edge fallbacks */
+@supports not (backdrop-filter: blur(10px)) {
+  .glass-card {
+    background: rgba(26, 26, 46, 0.95) !important;
+  }
+}
+
+/* ===========================================
+   PRINT STYLES
+   =========================================== */
+
+@media print {
+
+  *,
+  *::before,
+  *::after {
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+  }
+
+  img {
+    max-width: 100% !important;
+  }
+
+  @page {
+    margin: 2cm;
+  }
+}
+
+/* ===========================================
+   ACCESSIBILITY ENHANCEMENTS
+   =========================================== */
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  :root {
+    --color-kincha: #FFD700;
+    --color-washi: #FFFFFF;
+    --color-sumi: #000000;
+  }
+
+  button,
+  a {
+    border: 2px solid currentColor !important;
+  }
+}
+
+/* Forced colors (Windows High Contrast) */
+@media (forced-colors: active) {
+  * {
+    forced-color-adjust: none;
+  }
+
+  button,
+  a {
+    border: 1px solid CanvasText !important;
+  }
+}
+
+/* Skip link for keyboard navigation */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  background: var(--color-kincha);
+  color: var(--color-sumi);
+  padding: 1rem 2rem;
+  z-index: 10000;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 0;
+}
