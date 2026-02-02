@@ -248,9 +248,9 @@ export default function BlogsPage() {
                                         <span className={styles.readTime}>{blog.readTime}</span>
                                         <Link
                                             href={`/blogs/${blog.id}`}
-                                            className={styles.readMore}
+                                            className={styles.viewArticleBtn}
                                         >
-                                            Read Article
+                                            View Article
                                             <svg
                                                 width="16"
                                                 height="16"
