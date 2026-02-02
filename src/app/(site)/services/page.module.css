@@ -59,6 +59,398 @@
     animation: fadeInUp 0.8s ease-out 0.4s both;
 }
 
+/* Form Section */
+.formSection {
+    position: relative;
+    z-index: 2;
+    padding: 4rem 1.5rem 5rem;
+    background: rgba(26, 26, 46, 0.98);
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.requestForm {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Form Card */
+.formCard {
+    background: rgba(40, 40, 60, 0.8);
+    border-radius: var(--radius-xl);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+}
+
+.cardHeader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.cardHeader h2 {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    color: var(--color-washi);
+    margin: 0;
+}
+
+.cardIcon {
+    width: 45px;
+    height: 45px;
+    background: var(--gradient-gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: var(--color-sumi);
+    flex-shrink: 0;
+}
+
+/* Form Grid & Groups */
+.formGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.formGroup label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-washi);
+}
+
+.required {
+    color: var(--color-beniaka);
+}
+
+.formGroup input,
+.formGroup textarea,
+.formGroup select {
+    padding: 0.875rem 1rem;
+    background: rgba(26, 26, 46, 0.6);
+    border: 2px solid rgba(212, 175, 55, 0.2);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    color: var(--color-washi);
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.formGroup input::placeholder,
+.formGroup textarea::placeholder {
+    color: rgba(250, 243, 224, 0.4);
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus,
+.formGroup select:focus {
+    outline: none;
+    border-color: var(--color-kincha);
+    background: rgba(40, 40, 60, 0.8);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+}
+
+.formGroup textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.formGroup select option {
+    background: var(--color-sumi);
+    color: var(--color-washi);
+}
+
+/* Service Type Grid */
+.serviceGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.serviceOption {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.25rem 1rem;
+    background: rgba(26, 26, 46, 0.6);
+    border: 2px solid rgba(212, 175, 55, 0.2);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.serviceOption input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.serviceOption:hover {
+    border-color: var(--color-kincha);
+    background: rgba(40, 40, 60, 0.8);
+}
+
+.serviceOption.selected {
+    border-color: var(--color-kincha);
+    background: rgba(212, 175, 55, 0.15);
+}
+
+.serviceOption .serviceIcon {
+    font-size: 1.5rem;
+    color: var(--color-kincha);
+}
+
+.serviceOption .serviceLabel {
+    font-size: 0.85rem;
+    color: var(--color-washi);
+    font-weight: 500;
+}
+
+.serviceOption .checkIcon {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    color: var(--color-kincha);
+    opacity: 0;
+    font-size: 0.9rem;
+    transition: opacity 0.3s ease;
+}
+
+.serviceOption.selected .checkIcon {
+    opacity: 1;
+}
+
+/* Radio Group */
+.radioGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.radioOption {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    padding: 0.75rem 1rem;
+    background: rgba(26, 26, 46, 0.4);
+    border: 2px solid transparent;
+    border-radius: var(--radius-md);
+    transition: all 0.3s ease;
+}
+
+.radioOption:hover {
+    background: rgba(40, 40, 60, 0.6);
+    border-color: rgba(212, 175, 55, 0.2);
+}
+
+.radioOption input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.radioOption input:checked+.radioCustom {
+    border-color: var(--color-kincha);
+    background: var(--color-kincha);
+}
+
+.radioOption input:checked+.radioCustom::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--color-sumi);
+    border-radius: 50%;
+}
+
+.radioCustom {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.radioLabel {
+    font-size: 0.95rem;
+    color: var(--color-washi);
+}
+
+/* Submit Section */
+.submitSection {
+    text-align: center;
+    padding-top: 1rem;
+}
+
+.submitBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    min-width: 250px;
+    padding: 1.25rem 2.5rem;
+    background: var(--gradient-gold);
+    color: var(--color-sumi);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all 0.4s ease;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.submitBtn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 50px rgba(212, 175, 55, 0.5);
+}
+
+.submitBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    border-top-color: var(--color-sumi);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.errorMessage {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(255, 100, 100, 0.15);
+    border: 1px solid rgba(255, 100, 100, 0.3);
+    border-radius: var(--radius-md);
+    color: #ff6b6b;
+    font-size: 0.9rem;
+}
+
+.errorMessage span {
+    font-weight: 700;
+    margin-right: 0.5rem;
+}
+
+/* Success Modal */
+.successOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(26, 26, 46, 0.9);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10001;
+    padding: 2rem;
+}
+
+.successModal {
+    position: relative;
+    background: rgba(40, 40, 60, 0.95);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: var(--radius-2xl);
+    padding: 3rem 2rem;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+}
+
+.closeBtn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 50%;
+    color: var(--color-washi);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.closeBtn:hover {
+    background: rgba(212, 175, 55, 0.2);
+    border-color: var(--color-kincha);
+}
+
+.successAnimation {
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.successModal h2 {
+    font-family: var(--font-brush);
+    font-size: 2rem;
+    color: var(--color-kincha);
+    margin-bottom: 0.5rem;
+}
+
+.successTitle {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--color-washi);
+    margin-bottom: 1rem;
+}
+
+.successDesc {
+    font-size: 0.95rem;
+    color: rgba(250, 243, 224, 0.7);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.successActions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
 /* Services Grid */
 .servicesSection {
     position: relative;
