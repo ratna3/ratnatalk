@@ -6,7 +6,9 @@
     z-index: 10000;
     padding: 1rem 0;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    background: transparent;
+    background: rgba(26, 26, 46, 0.7);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.05);
     pointer-events: auto;
 }
 
