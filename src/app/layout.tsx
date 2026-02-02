@@ -5,7 +5,6 @@ import SmoothScroll from "@/components/landscape/SmoothScroll";
 import JourneyProgress from "@/components/navigation/JourneyProgress";
 import CustomCursor from "@/components/interactive/CustomCursor";
 import InteractiveCreatures from "@/components/interactive/InteractiveCreatures";
-import ParticleField from "@/components/interactive/ParticleField";
 import HiddenCollectibles from "@/components/interactive/HiddenCollectibles";
 import ThemeWrapper from "@/components/theme/ThemeWrapper";
 import MobileOptimizations from "@/components/optimizations/MobileOptimizations";
@@ -72,7 +71,6 @@ export default function RootLayout({
               {/* Interactive elements (hidden on mobile for performance) */}
               <CustomCursor />
               <InteractiveCreatures />
-              <ParticleField type="petal" count={20} speed={0.8} />
               <HiddenCollectibles />
 
               {/* Navigation */}
