@@ -282,14 +282,18 @@
 }
 
 .blogsGrid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 2rem;
     max-width: 1200px;
-    margin: 0 auto 2rem;
+    margin: 0 auto 3rem;
 }
 
 .blogCard {
+    flex: 1 1 350px;
+    max-width: 450px;
+    width: 100%;
     background: rgba(40, 40, 60, 0.6);
     backdrop-filter: blur(10px);
     border-radius: var(--radius-xl);
@@ -353,9 +357,11 @@
     border-top: 1px solid rgba(212, 175, 55, 0.15);
 }
 
-.viewAllLink {
+.viewAllContainer {
     display: flex;
     justify-content: center;
+    width: 100%;
+    margin-top: 2rem;
 }
 
 /* About Preview Section */
@@ -367,11 +373,18 @@
 }
 
 .aboutContainer {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 3rem;
+    max-width: 900px;
     margin: 0 auto;
+}
+
+.aboutContent {
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }
 
@@ -393,8 +406,9 @@
     background: rgba(212, 175, 55, 0.08);
     border-left: 4px solid var(--color-kincha);
     padding: 1.5rem;
-    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    border-radius: var(--radius-lg);
     margin-bottom: 2rem;
+    max-width: 600px;
 }
 
 .quoteIcon {
