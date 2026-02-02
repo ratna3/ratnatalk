@@ -42,21 +42,7 @@ export default function JourneyProgress() {
                 />
             </div>
 
-            {/* Scene indicators */}
-            <div className={styles.sceneIndicators}>
-                {scenes.map((scene, index) => (
-                    <a
-                        key={scene.id}
-                        href={scene.page}
-                        className={`${styles.sceneIndicator} ${index === activeScene ? styles.active : ""
-                            } ${index < activeScene ? styles.visited : ""}`}
-                        title={scene.name}
-                    >
-                        <span className={styles.sceneIcon}>{scene.icon}</span>
-                        <span className={styles.sceneName}>{scene.name}</span>
-                    </a>
-                ))}
-            </div>
+
 
             {/* Dragon indicator */}
             <div
