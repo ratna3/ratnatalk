@@ -3,6 +3,10 @@ import "./globals.css";
 import LandscapeCanvas from "@/components/landscape/LandscapeCanvas";
 import SmoothScroll from "@/components/landscape/SmoothScroll";
 import JourneyProgress from "@/components/navigation/JourneyProgress";
+import CustomCursor from "@/components/interactive/CustomCursor";
+import InteractiveCreatures from "@/components/interactive/InteractiveCreatures";
+import ParticleField from "@/components/interactive/ParticleField";
+import HiddenCollectibles from "@/components/interactive/HiddenCollectibles";
 
 export const metadata: Metadata = {
   title: "RK Talks | A Journey Through Thoughts",
@@ -25,8 +29,19 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <SmoothScroll>
+          {/* Background layers */}
           <LandscapeCanvas />
+
+          {/* Interactive elements */}
+          <CustomCursor />
+          <InteractiveCreatures />
+          <ParticleField type="petal" count={20} speed={0.8} />
+          <HiddenCollectibles />
+
+          {/* Navigation */}
           <JourneyProgress />
+
+          {/* Main content */}
           <main>{children}</main>
         </SmoothScroll>
       </body>
