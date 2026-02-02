@@ -41,7 +41,7 @@ const contactInfo = [
     {
         icon: <FaMapMarkerAlt />,
         title: "Location",
-        value: "India",
+        value: "Sol III",
         link: null,
     },
 ];
@@ -183,7 +183,7 @@ export default function ContactPage() {
                         >
                             <h2>Send a Message</h2>
                             <form onSubmit={handleSubmit}>
-                                <div className={styles.formRow}>
+                                <div className={styles.formGrid}>
                                     <div className={styles.formGroup}>
                                         <label htmlFor="name">Your Name</label>
                                         <input
