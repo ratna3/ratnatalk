@@ -7,6 +7,7 @@ import CustomCursor from "@/components/interactive/CustomCursor";
 import InteractiveCreatures from "@/components/interactive/InteractiveCreatures";
 import ParticleField from "@/components/interactive/ParticleField";
 import HiddenCollectibles from "@/components/interactive/HiddenCollectibles";
+import ThemeWrapper from "@/components/theme/ThemeWrapper";
 
 export const metadata: Metadata = {
   title: "RK Talks | A Journey Through Thoughts",
@@ -29,20 +30,22 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <SmoothScroll>
-          {/* Background layers */}
-          <LandscapeCanvas />
+          <ThemeWrapper>
+            {/* Background layers */}
+            <LandscapeCanvas />
 
-          {/* Interactive elements */}
-          <CustomCursor />
-          <InteractiveCreatures />
-          <ParticleField type="petal" count={20} speed={0.8} />
-          <HiddenCollectibles />
+            {/* Interactive elements */}
+            <CustomCursor />
+            <InteractiveCreatures />
+            <ParticleField type="petal" count={20} speed={0.8} />
+            <HiddenCollectibles />
 
-          {/* Navigation */}
-          <JourneyProgress />
+            {/* Navigation */}
+            <JourneyProgress />
 
-          {/* Main content */}
-          <main>{children}</main>
+            {/* Main content */}
+            <main>{children}</main>
+          </ThemeWrapper>
         </SmoothScroll>
       </body>
     </html>

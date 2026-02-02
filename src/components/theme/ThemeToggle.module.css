@@ -1,0 +1,86 @@
+.themeToggle {
+    position: fixed;
+    top: 100px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 1000;
+}
+
+.toggleBtn {
+    width: 50px;
+    height: 50px;
+    background: rgba(26, 26, 46, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.toggleBtn:hover {
+    transform: scale(1.1);
+    border-color: var(--color-kincha);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+}
+
+.toggleBtn:active {
+    transform: scale(0.95);
+}
+
+.icon {
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.toggleBtn:hover .icon {
+    transform: rotate(15deg);
+}
+
+.autoBtn {
+    background: rgba(26, 26, 46, 0.6);
+    border-color: rgba(212, 175, 55, 0.15);
+}
+
+.autoBtn.active {
+    background: rgba(212, 175, 55, 0.2);
+    border-color: var(--color-kincha);
+}
+
+.autoBtn.active .icon {
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .themeToggle {
+        top: auto;
+        bottom: 80px;
+        left: 10px;
+        flex-direction: row;
+    }
+
+    .toggleBtn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .icon {
+        font-size: 1.25rem;
+    }
+}

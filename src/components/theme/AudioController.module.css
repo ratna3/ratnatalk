@@ -1,0 +1,109 @@
+.audioController {
+    position: fixed;
+    bottom: 140px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 100;
+}
+
+.audioBtn {
+    width: 50px;
+    height: 50px;
+    background: rgba(26, 26, 46, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.audioBtn:hover {
+    transform: scale(1.1);
+    border-color: var(--color-kincha);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+}
+
+.audioBtn.active {
+    background: rgba(212, 175, 55, 0.2);
+    border-color: var(--color-kincha);
+}
+
+.icon {
+    font-size: 1.5rem;
+}
+
+.volumeSlider {
+    background: rgba(26, 26, 46, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: var(--radius-lg);
+    padding: 0.5rem;
+}
+
+.volumeSlider input[type="range"] {
+    width: 80px;
+    height: 4px;
+    appearance: none;
+    background: rgba(212, 175, 55, 0.3);
+    border-radius: 2px;
+    outline: none;
+}
+
+.volumeSlider input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    background: var(--gradient-gold);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+.visualizer {
+    display: flex;
+    gap: 3px;
+    height: 20px;
+    align-items: flex-end;
+}
+
+.bar {
+    width: 4px;
+    background: var(--color-kincha);
+    border-radius: 2px;
+    animation: visualize 0.8s ease-in-out infinite;
+}
+
+@keyframes visualize {
+
+    0%,
+    100% {
+        height: 6px;
+    }
+
+    50% {
+        height: 16px;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .audioController {
+        bottom: 130px;
+        right: 10px;
+    }
+
+    .audioBtn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .icon {
+        font-size: 1.25rem;
+    }
+}
