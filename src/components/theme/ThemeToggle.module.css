@@ -42,30 +42,6 @@
     transform: rotate(15deg);
 }
 
-.autoBtn {
-    background: rgba(26, 26, 46, 0.6);
-    border-color: rgba(212, 175, 55, 0.15);
-}
-
-.autoBtn.active {
-    background: rgba(212, 175, 55, 0.2);
-    border-color: var(--color-kincha);
-}
-
-.autoBtn.active .icon {
-    animation: spin 2s linear infinite;
-}
-
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-}
-
 /* Responsive */
 @media (max-width: 768px) {
     .themeToggle {

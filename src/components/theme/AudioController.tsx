@@ -4,149 +4,111 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import styles from "./AudioController.module.css";
 
 interface AudioControllerProps {
-    timeOfDay?: "dawn" | "day" | "dusk" | "night";
     weather?: "clear" | "rain" | "snow" | "fog";
 }
 
-export default function AudioController({ timeOfDay = "day", weather = "clear" }: AudioControllerProps) {
+// Peaceful ambient music URLs for each weather type
+// Using royalty-free ambient sounds from freesound.org or similar sources
+const AMBIENT_MUSIC: Record<string, string> = {
+    clear: "https://cdn.freesound.org/previews/467/467274_1648170-lq.mp3", // Peaceful birds and nature
+    rain: "https://cdn.freesound.org/previews/243/243627_4502871-lq.mp3", // Gentle rain sounds
+    snow: "https://cdn.freesound.org/previews/514/514248_11283554-lq.mp3", // Soft wind with peaceful tones
+    fog: "https://cdn.freesound.org/previews/564/564490_12574645-lq.mp3", // Mysterious calm ambient
+};
+
+export default function AudioController({ weather = "clear" }: AudioControllerProps) {
     const [isMuted, setIsMuted] = useState(true);
-    const [volume, setVolume] = useState(0.3);
+    const [volume, setVolume] = useState(0.4);
     const [isPlaying, setIsPlaying] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
-    const ambientRef = useRef<HTMLAudioElement | null>(null);
-    const weatherRef = useRef<HTMLAudioElement | null>(null);
+    const audioRef = useRef<HTMLAudioElement | null>(null);
 
-    // Note: In production, you would add actual audio files
-    // For now, using Web Audio API for procedural sounds
-    const audioContextRef = useRef<AudioContext | null>(null);
-    const nodesRef = useRef<{
-        oscillator?: OscillatorNode;
-        gain?: GainNode;
-        noise?: AudioBufferSourceNode;
-    }>({});
-
-    const createWhiteNoise = useCallback((audioContext: AudioContext) => {
-        const bufferSize = audioContext.sampleRate * 2;
-        const buffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
-        const output = buffer.getChannelData(0);
-
-        for (let i = 0; i < bufferSize; i++) {
-            output[i] = Math.random() * 2 - 1;
+    // Create and manage audio element
+    const initAudio = useCallback(() => {
+        if (!audioRef.current) {
+            audioRef.current = new Audio();
+            audioRef.current.loop = true;
+            audioRef.current.volume = volume;
         }
+        return audioRef.current;
+    }, [volume]);
 
-        return buffer;
-    }, []);
+    // Change music based on weather
+    useEffect(() => {
+        const audio = audioRef.current;
+        if (!audio || isMuted) return;
 
-    const startAmbientSound = useCallback(() => {
-        if (audioContextRef.current) return;
-
-        try {
-            audioContextRef.current = new AudioContext();
-            const ctx = audioContextRef.current;
-
-            // Create master gain
-            const masterGain = ctx.createGain();
-            masterGain.gain.value = volume * 0.2;
-            masterGain.connect(ctx.destination);
-            nodesRef.current.gain = masterGain;
-
-            // Nature sounds based on time and weather
-            if (weather === "rain") {
-                // Rain sound (filtered noise)
-                const noiseBuffer = createWhiteNoise(ctx);
-                const noise = ctx.createBufferSource();
-                noise.buffer = noiseBuffer;
-                noise.loop = true;
-
-                const filter = ctx.createBiquadFilter();
-                filter.type = "lowpass";
-                filter.frequency.value = 400;
-
-                const noiseGain = ctx.createGain();
-                noiseGain.gain.value = 0.4;
-
-                noise.connect(filter);
-                filter.connect(noiseGain);
-                noiseGain.connect(masterGain);
-                noise.start();
-                nodesRef.current.noise = noise;
-            } else if (timeOfDay === "night") {
-                // Night crickets (subtle oscillator)
-                const osc = ctx.createOscillator();
-                osc.type = "sine";
-                osc.frequency.value = 3500;
-
-                const oscGain = ctx.createGain();
-                oscGain.gain.value = 0;
-
-                // Chirp pattern
-                const chirp = () => {
-                    oscGain.gain.setValueAtTime(0.02, ctx.currentTime);
-                    oscGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.1);
-                };
-
-                setInterval(chirp, 2000 + Math.random() * 3000);
-
-                osc.connect(oscGain);
-                oscGain.connect(masterGain);
-                osc.start();
-                nodesRef.current.oscillator = osc;
-            }
-
-            setIsPlaying(true);
-        } catch (error) {
-            console.log("Audio not supported");
+        const musicUrl = AMBIENT_MUSIC[weather];
+        if (audio.src !== musicUrl) {
+            setIsLoading(true);
+            audio.src = musicUrl;
+            audio.load();
+            audio.play()
+                .then(() => {
+                    setIsPlaying(true);
+                    setIsLoading(false);
+                })
+                .catch(() => {
+                    setIsLoading(false);
+                    console.log("Audio playback failed - user interaction required");
+                });
         }
-    }, [volume, weather, timeOfDay, createWhiteNoise]);
-
-    const stopAmbientSound = useCallback(() => {
-        if (nodesRef.current.oscillator) {
-            nodesRef.current.oscillator.stop();
-        }
-        if (nodesRef.current.noise) {
-            nodesRef.current.noise.stop();
-        }
-        if (audioContextRef.current) {
-            audioContextRef.current.close();
-            audioContextRef.current = null;
-        }
-        nodesRef.current = {};
-        setIsPlaying(false);
-    }, []);
-
-    const toggleMute = () => {
-        if (isMuted) {
-            setIsMuted(false);
-            startAmbientSound();
-        } else {
-            setIsMuted(true);
-            stopAmbientSound();
-        }
-    };
+    }, [weather, isMuted]);
 
     // Update volume
     useEffect(() => {
-        if (nodesRef.current.gain) {
-            nodesRef.current.gain.gain.value = volume * 0.2;
+        if (audioRef.current) {
+            audioRef.current.volume = volume;
         }
     }, [volume]);
+
+    // Toggle mute/unmute
+    const toggleMute = async () => {
+        const audio = initAudio();
+
+        if (isMuted) {
+            setIsMuted(false);
+            setIsLoading(true);
+            audio.src = AMBIENT_MUSIC[weather];
+            audio.volume = volume;
+
+            try {
+                await audio.play();
+                setIsPlaying(true);
+            } catch (error) {
+                console.log("Audio playback failed");
+            }
+            setIsLoading(false);
+        } else {
+            setIsMuted(true);
+            audio.pause();
+            setIsPlaying(false);
+        }
+    };
 
     // Cleanup on unmount
     useEffect(() => {
         return () => {
-            stopAmbientSound();
+            if (audioRef.current) {
+                audioRef.current.pause();
+                audioRef.current = null;
+            }
         };
-    }, [stopAmbientSound]);
+    }, []);
 
     return (
         <div className={styles.audioController}>
             <button
-                className={`${styles.audioBtn} ${!isMuted ? styles.active : ""}`}
+                className={`${styles.audioBtn} ${!isMuted ? styles.active : ""} ${isLoading ? styles.loading : ""}`}
                 onClick={toggleMute}
-                aria-label={isMuted ? "Unmute ambient sounds" : "Mute ambient sounds"}
-                title={isMuted ? "Enable ambient sounds" : "Disable ambient sounds"}
+                aria-label={isMuted ? "Play peaceful ambient music" : "Pause ambient music"}
+                title={isMuted ? "Enable ambient music" : "Disable ambient music"}
+                disabled={isLoading}
             >
-                <span className={styles.icon}>{isMuted ? "🔇" : "🔊"}</span>
+                <span className={styles.icon}>
+                    {isLoading ? "⏳" : isMuted ? "🔇" : "🎵"}
+                </span>
             </button>
 
             {!isMuted && (

@@ -8,7 +8,7 @@ import AudioController from "./AudioController";
 import { ReactNode } from "react";
 
 function ThemeContent({ children }: { children: ReactNode }) {
-    const { timeOfDay, weather } = useTheme();
+    const { weather } = useTheme();
 
     return (
         <>
@@ -18,8 +18,8 @@ function ThemeContent({ children }: { children: ReactNode }) {
             {/* Theme Controls */}
             <ThemeToggle />
 
-            {/* Audio */}
-            <AudioController timeOfDay={timeOfDay} weather={weather} />
+            {/* Audio - Peaceful ambient music for each weather */}
+            <AudioController weather={weather} />
 
             {/* Achievements */}
             <AchievementSystem />

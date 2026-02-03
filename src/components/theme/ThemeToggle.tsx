@@ -3,22 +3,22 @@
 import { useTheme } from "./ThemeProvider";
 import styles from "./ThemeToggle.module.css";
 
-const TIME_ICONS = {
-    dawn: "🌅",
-    day: "☀️",
-    dusk: "🌇",
-    night: "🌙",
-};
-
 const WEATHER_ICONS = {
-    clear: "✨",
+    clear: "☀️",
     rain: "🌧️",
     snow: "❄️",
     fog: "🌫️",
 };
 
+const WEATHER_LABELS = {
+    clear: "Clear & Sunny",
+    rain: "Rainy",
+    snow: "Snowy",
+    fog: "Foggy",
+};
+
 export default function ThemeToggle() {
-    const { timeOfDay, weather, isAuto, cycleTimeOfDay, setWeather, toggleAuto } = useTheme();
+    const { weather, setWeather } = useTheme();
 
     const cycleWeather = () => {
         const order: ("clear" | "rain" | "snow" | "fog")[] = ["clear", "rain", "snow", "fog"];
@@ -28,34 +28,14 @@ export default function ThemeToggle() {
 
     return (
         <div className={styles.themeToggle}>
-            {/* Time Toggle */}
-            <button
-                className={styles.toggleBtn}
-                onClick={cycleTimeOfDay}
-                aria-label={`Current time: ${timeOfDay}. Click to change.`}
-                title={`Time: ${timeOfDay}${isAuto ? " (auto)" : ""}`}
-            >
-                <span className={styles.icon}>{TIME_ICONS[timeOfDay]}</span>
-            </button>
-
-            {/* Weather Toggle */}
+            {/* Weather Toggle - Single Button */}
             <button
                 className={styles.toggleBtn}
                 onClick={cycleWeather}
-                aria-label={`Current weather: ${weather}. Click to change.`}
-                title={`Weather: ${weather}`}
+                aria-label={`Current weather: ${WEATHER_LABELS[weather]}. Click to change.`}
+                title={`Weather: ${WEATHER_LABELS[weather]}`}
             >
                 <span className={styles.icon}>{WEATHER_ICONS[weather]}</span>
-            </button>
-
-            {/* Auto Toggle */}
-            <button
-                className={`${styles.toggleBtn} ${styles.autoBtn} ${isAuto ? styles.active : ""}`}
-                onClick={toggleAuto}
-                aria-label={isAuto ? "Auto mode on" : "Auto mode off"}
-                title={isAuto ? "Auto time (on)" : "Manual time"}
-            >
-                <span className={styles.icon}>{isAuto ? "🔄" : "⏸️"}</span>
             </button>
         </div>
     );
