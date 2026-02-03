@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import styles from "./HiddenCollectibles.module.css";
 
 interface Collectible {
@@ -27,44 +27,71 @@ const EMOJIS = {
     fan: "🪭",
 };
 
+// Generate unique session ID
+function generateSessionId(): string {
+    return `session_${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
+}
+
 export default function HiddenCollectibles() {
-    const [collectibles, setCollectibles] = useState<Collectible[]>([]);
+    const [collectibles, setCollectibles] = useState<Collectible[]>(COLLECTIBLES);
     const [showNotification, setShowNotification] = useState(false);
     const [lastCollected, setLastCollected] = useState<Collectible | null>(null);
     const [totalCollected, setTotalCollected] = useState(0);
+    const sessionIdRef = useRef<string>("");
 
-    // Load saved progress from localStorage
+    // Initialize session and cleanup on unmount/refresh
     useEffect(() => {
-        const saved = localStorage.getItem("rk-collectibles");
-        if (saved) {
-            const savedIds = JSON.parse(saved);
-            setCollectibles(
-                COLLECTIBLES.map((c) => ({
-                    ...c,
-                    collected: savedIds.includes(c.id),
-                }))
-            );
-            setTotalCollected(savedIds.length);
-        } else {
-            setCollectibles(COLLECTIBLES);
-        }
+        // Generate new session ID on each page load (reset on refresh)
+        sessionIdRef.current = generateSessionId();
+
+        // Cleanup function to clear session data when page unloads
+        const cleanup = async () => {
+            if (sessionIdRef.current) {
+                // Use sendBeacon for reliable cleanup on page unload
+                navigator.sendBeacon?.(
+                    `/api/collectibles?sessionId=${sessionIdRef.current}`,
+                    JSON.stringify({ _method: "DELETE" })
+                );
+            }
+        };
+
+        // Handle page unload
+        window.addEventListener("beforeunload", cleanup);
+
+        return () => {
+            window.removeEventListener("beforeunload", cleanup);
+            // Also cleanup on component unmount
+            if (sessionIdRef.current) {
+                fetch(`/api/collectibles?sessionId=${sessionIdRef.current}`, {
+                    method: "DELETE",
+                }).catch(() => { });
+            }
+        };
     }, []);
 
-    const handleCollect = useCallback((collectible: Collectible) => {
+    const handleCollect = useCallback(async (collectible: Collectible) => {
         if (collectible.collected) return;
 
-        // Update state
+        // Update state immediately for responsive UI
         setCollectibles((prev) =>
             prev.map((c) =>
                 c.id === collectible.id ? { ...c, collected: true } : c
             )
         );
 
-        // Save to localStorage
-        const saved = localStorage.getItem("rk-collectibles");
-        const savedIds = saved ? JSON.parse(saved) : [];
-        savedIds.push(collectible.id);
-        localStorage.setItem("rk-collectibles", JSON.stringify(savedIds));
+        // Store in database
+        try {
+            await fetch("/api/collectibles", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    sessionId: sessionIdRef.current,
+                    collectibleId: collectible.id,
+                }),
+            });
+        } catch (error) {
+            console.error("Failed to store collectible:", error);
+        }
 
         // Show notification
         setLastCollected(collectible);
