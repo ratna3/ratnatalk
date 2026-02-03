@@ -7,13 +7,13 @@ interface AudioControllerProps {
     weather?: "clear" | "rain" | "snow" | "fog";
 }
 
-// Peaceful ambient music URLs for each weather type
-// Using royalty-free ambient sounds from freesound.org or similar sources
+// Local ambient music files for each weather type (in public/audio folder)
+// These files loop infinitely for a peaceful ambient experience
 const AMBIENT_MUSIC: Record<string, string> = {
-    clear: "https://cdn.freesound.org/previews/467/467274_1648170-lq.mp3", // Peaceful birds and nature
-    rain: "https://cdn.freesound.org/previews/243/243627_4502871-lq.mp3", // Gentle rain sounds
-    snow: "https://cdn.freesound.org/previews/514/514248_11283554-lq.mp3", // Soft wind with peaceful tones
-    fog: "https://cdn.freesound.org/previews/564/564490_12574645-lq.mp3", // Mysterious calm ambient
+    clear: "/audio/sunny.mp3",  // Peaceful sunny day sounds
+    rain: "/audio/rain.mp3",    // Gentle rain ambiance
+    snow: "/audio/snow.mp3",    // Soft winter sounds
+    fog: "/audio/fog.mp3",      // Mysterious calm ambient
 };
 
 export default function AudioController({ weather = "clear" }: AudioControllerProps) {
