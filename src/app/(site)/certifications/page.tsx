@@ -737,21 +737,22 @@ export default function CertificationsPage() {
                         ref={filterRef}
                         className={`${styles.categories} scroll-reveal ${filterVisible ? "visible" : ""}`}
                     >
-                        {categories.map((category) => (
-                            <button
-                                key={category}
-                                className={`${styles.categoryBtn} ${selectedCategory === category ? styles.active : ""
-                                    }`}
-                                onClick={() => setSelectedCategory(category)}
-                            >
-                                {category}
-                                {category !== "All" && (
-                                    <span className={styles.categoryCount}>
-                                        {certifications.filter((c) => c.category === category).length}
-                                    </span>
-                                )}
-                            </button>
-                        ))}
+                        {categories.map((category) => {
+                            const count = category === "All"
+                                ? certifications.length
+                                : certifications.filter((c) => c.category === category).length;
+                            return (
+                                <button
+                                    key={category}
+                                    className={`${styles.categoryBtn} ${selectedCategory === category ? styles.active : ""
+                                        }`}
+                                    onClick={() => setSelectedCategory(category)}
+                                >
+                                    <span className={styles.categoryName}>{category}</span>
+                                    <span className={styles.categoryCount}>{count}</span>
+                                </button>
+                            );
+                        })}
                     </div>
                 </div>
             </section>
