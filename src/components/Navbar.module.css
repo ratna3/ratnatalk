@@ -290,12 +290,16 @@
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    z-index: 1000;
+    z-index: 100001;
+    color: var(--color-kincha);
+    font-size: 1.5rem;
+    font-weight: 300;
 }
 
 .mobileCloseBtn:hover {
     background: rgba(212, 175, 55, 0.2);
     border-color: rgba(212, 175, 55, 0.5);
+    color: #fff;
 }
 
 /* Close icon (X) */
