@@ -398,6 +398,142 @@
     transition-delay: 0.4s;
 }
 
+/* Desktop Side Menu Button */
+.sideMenuBtn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 10001;
+    transition: all 0.3s ease;
+    margin-left: 1rem;
+}
+
+.sideMenuBtn:hover {
+    background: rgba(212, 175, 55, 0.2);
+    border-color: rgba(212, 175, 55, 0.5);
+}
+
+/* Side Menu Overlay */
+.sideMenuOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 999998;
+}
+
+.sideMenuOverlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Side Menu Panel */
+.sideMenu {
+    position: fixed;
+    top: 0;
+    right: -320px;
+    width: 300px;
+    height: 100vh;
+    background: #1A1A2E;
+    z-index: 999999;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.5);
+    border-left: 1px solid rgba(212, 175, 55, 0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+.sideMenu.open {
+    right: 0;
+}
+
+/* Side Menu Close Button */
+.sideMenuCloseBtn {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 44px;
+    height: 44px;
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    color: var(--color-kincha);
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.sideMenuCloseBtn:hover {
+    background: rgba(212, 175, 55, 0.2);
+    border-color: rgba(212, 175, 55, 0.5);
+    color: #fff;
+}
+
+/* Side Menu Content */
+.sideMenuContent {
+    display: flex;
+    flex-direction: column;
+    padding: 5rem 2rem 2rem;
+    gap: 1.5rem;
+}
+
+/* Side Menu Title */
+.sideMenuTitle {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-kincha);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+/* Side Menu Link */
+.sideMenuLink {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--color-washi);
+    text-decoration: none;
+    padding: 1rem 1.25rem;
+    background: rgba(212, 175, 55, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.sideMenuLink:hover {
+    background: rgba(212, 175, 55, 0.15);
+    border-color: rgba(212, 175, 55, 0.4);
+    color: var(--color-kincha);
+    transform: translateX(-5px);
+}
+
+/* Side Menu Icon */
+.sideMenuIcon {
+    font-size: 1.5rem;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .navLinks {
@@ -410,5 +546,10 @@
 
     .mobileMenu {
         display: flex;
+    }
+
+    /* Hide desktop side menu on mobile */
+    .sideMenuBtn {
+        display: none;
     }
 }

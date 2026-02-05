@@ -8,6 +8,7 @@ import styles from "./Navbar.module.css";
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -18,9 +19,9 @@ const Navbar = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    // Lock body scroll when mobile menu is open
+    // Lock body scroll when mobile menu or side menu is open
     useEffect(() => {
-        if (isMobileMenuOpen) {
+        if (isMobileMenuOpen || isSideMenuOpen) {
             document.body.style.overflow = 'hidden';
         } else {
             document.body.style.overflow = '';
@@ -30,8 +31,9 @@ const Navbar = () => {
         return () => {
             document.body.style.overflow = '';
         };
-    }, [isMobileMenuOpen]);
+    }, [isMobileMenuOpen, isSideMenuOpen]);
 
+    // Main navigation links (without Admin)
     const navLinks = [
         { href: "/", label: "Home" },
         { href: "/blogs", label: "Blogs" },
@@ -39,6 +41,11 @@ const Navbar = () => {
         { href: "/services", label: "Services" },
         { href: "/about", label: "About" },
         { href: "/contact", label: "Contact" },
+    ];
+
+    // All links including Admin for mobile menu
+    const allNavLinks = [
+        ...navLinks,
         { href: "/login", label: "Admin" },
     ];
 
@@ -65,6 +72,16 @@ const Navbar = () => {
                     ))}
                 </div>
 
+                {/* Desktop Hamburger for Side Menu */}
+                <button
+                    className={styles.sideMenuBtn}
+                    onClick={() => setIsSideMenuOpen(!isSideMenuOpen)}
+                    aria-label="Toggle side menu"
+                >
+                    <span className={`${styles.hamburger} ${isSideMenuOpen ? styles.active : ""}`}></span>
+                </button>
+
+                {/* Mobile Hamburger */}
                 <button
                     className={styles.mobileMenuBtn}
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -72,6 +89,34 @@ const Navbar = () => {
                 >
                     <span className={`${styles.hamburger} ${isMobileMenuOpen ? styles.active : ""}`}></span>
                 </button>
+            </div>
+
+            {/* Side Menu Overlay */}
+            <div
+                className={`${styles.sideMenuOverlay} ${isSideMenuOpen ? styles.open : ""}`}
+                onClick={() => setIsSideMenuOpen(false)}
+            />
+
+            {/* Side Menu (Desktop - Admin Login) */}
+            <div className={`${styles.sideMenu} ${isSideMenuOpen ? styles.open : ""}`}>
+                <button
+                    className={styles.sideMenuCloseBtn}
+                    onClick={() => setIsSideMenuOpen(false)}
+                    aria-label="Close side menu"
+                >
+                    ✕
+                </button>
+                <div className={styles.sideMenuContent}>
+                    <h3 className={styles.sideMenuTitle}>Admin Access</h3>
+                    <Link
+                        href="/login"
+                        className={styles.sideMenuLink}
+                        onClick={() => setIsSideMenuOpen(false)}
+                    >
+                        <span className={styles.sideMenuIcon}>🔐</span>
+                        Admin Login
+                    </Link>
+                </div>
             </div>
 
             {/* Mobile Menu - Outside container for proper fixed positioning */}
@@ -83,7 +128,7 @@ const Navbar = () => {
                 >
                     ✕
                 </button>
-                {navLinks.map((link) => (
+                {allNavLinks.map((link) => (
                     <Link
                         key={link.href}
                         href={link.href}
