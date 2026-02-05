@@ -76,13 +76,6 @@ const Navbar = () => {
 
             {/* Mobile Menu - Outside container for proper fixed positioning */}
             <div className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.open : ""}`}>
-                <button
-                    className={styles.mobileCloseBtn}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    aria-label="Close menu"
-                >
-                    <span className={styles.closeIcon}></span>
-                </button>
                 {navLinks.map((link) => (
                     <Link
                         key={link.href}
