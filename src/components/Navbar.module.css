@@ -150,22 +150,24 @@
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background: #1A1A2E;
+    width: 100vw;
+    height: 100vh;
+    background-color: #1A1A2E !important;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 2rem;
-    z-index: 100000;
+    z-index: 999999;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.4s ease;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+    overflow: hidden;
 }
 
 .mobileMenu.open {
     opacity: 1;
     visibility: visible;
+    display: flex;
 }
 
 .mobileMenu .navLink {
@@ -290,7 +292,7 @@
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    z-index: 100001;
+    z-index: 9999999;
     color: var(--color-kincha);
     font-size: 1.5rem;
     font-weight: 300;
