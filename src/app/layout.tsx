@@ -34,10 +34,10 @@ export const metadata: Metadata = {
     url: "https://rktalks.vercel.app",
     images: [
       {
-        url: "/images/logo.png",
-        width: 800,
-        height: 800,
-        alt: "RK Talks - Ratna Kirti Logo",
+        url: "/images/og_banner.png",
+        width: 1200,
+        height: 630,
+        alt: "RK Talks - Ratna Kirti - 10x DevSecOps Engineer",
       },
     ],
     locale: "en_US",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "RK Talks | Ratna Kirti - 10x DevSecOps Engineer",
     description: "The Ultimate 10x DevSecOps Engineer with 40+ certifications. Cybersecurity Expert. The Final Boss of Gen Z.",
-    images: ["/images/logo.png"],
+    images: ["/images/og_banner.png"],
     creator: "@ratnakirti",
   },
   robots: {
