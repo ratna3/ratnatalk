@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import styles from "./page.module.css";
@@ -12,6 +13,8 @@ import {
 } from "react-icons/fa";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import ScrollIndicator from "@/components/ScrollIndicator";
+import JourneyCarousel from "@/components/JourneyCarousel";
+import FullscreenGallery from "@/components/FullscreenGallery";
 
 const LottieAnimation = dynamic(() => import("@/components/LottieAnimation"), {
     ssr: false,
@@ -75,12 +78,135 @@ const values = [
     },
 ];
 
+// Journey sections with images and enhanced stories
+const journeySections = [
+    {
+        id: "school",
+        title: "The Foundation: City Montessori School",
+        subtitle: "Where Excellence Was Born",
+        story: `My journey of excellence began within the hallowed halls of City Montessori School (CMS) in Lucknow—officially recognized by the Guinness World Records as the world's largest school. In this extraordinary institution, where over 55,000 students pursue academic excellence, I learned to not just compete, but to excel amidst extraordinary scale and diversity.
+
+CMS wasn't merely an educational institution; it was a crucible that forged my character. Here, I discovered that true mastery demands more than technical prowess—it requires leadership, resilience, and the ability to stand out in a sea of exceptional peers. The school's philosophy of "Jai Jagat" (Victory to the World) instilled in me a global perspective that continues to drive my ambitions today.`,
+        images: [
+            "/images/about/school/WhatsApp Image 2026-02-05 at 11.53.32 AM.jpeg",
+            "/images/about/school/WhatsApp Image 2026-02-05 at 11.55.14 AM.jpeg",
+            "/images/about/school/WhatsApp Image 2026-02-05 at 11.57.39 AM.jpeg",
+        ],
+    },
+    {
+        id: "lucknow",
+        title: "The City of Nawabs",
+        subtitle: "Where a Digital Architect Was Forged",
+        story: `In the vibrant heart of Lucknow, Uttar Pradesh—the legendary City of Nawabs—a digital architect was being forged. This historic city, renowned for its rich cultural heritage, exquisite cuisine, and timeless elegance, became the backdrop of my formative years.
+
+For me, the world was never just a collection of objects—it was a symphony of interconnected systems waiting to be understood and mastered. From early childhood, while others saw a computer as a mere tool, I saw it as an infinite canvas of possibilities. Whether it was the intricate puzzle of hardware architecture or the logical elegance of software design, technology didn't just "click"—it felt like a second language I was born to speak. The tehzeeb (etiquette) and culture of Lucknow taught me grace under pressure, while its competitive academic environment sharpened my technical edge.`,
+        images: [
+            "/images/about/lucknow/WhatsApp Image 2026-02-05 at 1.00.17 PM.jpeg",
+            "/images/about/lucknow/WhatsApp Image 2026-02-05 at 12.33.18 PM.jpeg",
+            "/images/about/lucknow/WhatsApp Image 2026-02-05 at 12.35.52 PM.jpeg",
+            "/images/about/lucknow/WhatsApp Image 2026-02-06 at 2.21.50 PM.jpeg",
+            "/images/about/lucknow/WhatsApp Image 2026-02-06 at 2.21.51 PM.jpeg",
+            "/images/about/lucknow/WhatsApp Image 2026-02-06 at 2.23.24 PM.jpeg",
+            "/images/about/lucknow/WhatsApp Image 2026-02-06 at 2.24.50 PM.jpeg",
+            "/images/about/lucknow/WhatsApp Image 2026-02-06 at 2.30.38 PM.jpeg",
+        ],
+    },
+    {
+        id: "knox",
+        title: "The Knox Transformation",
+        subtitle: "From Gifted Student to Global Engineer",
+        story: `Crossing the globe to Knox College in Galesburg, Illinois, marked my transformation from a gifted student to a world-class engineer. My dedication and exceptional academic performance at CMS were rewarded with a prestigious international scholarship—a testament to years of relentless pursuit of excellence.
+
+At Knox, I didn't just learn programming languages; I absorbed the philosophy of software craftsmanship. I spent my time dissecting real-world applications, understanding enterprise architectures, and ensuring that every line of code I wrote served a purpose in the global economy. The American liberal arts education broadened my perspective, teaching me to think critically, communicate effectively, and approach problems with creativity and rigor. Knox College became the forge where my technical skills were refined into professional-grade tools.`,
+        images: [
+            "/images/about/knox/WhatsApp Image 2026-02-05 at 1.02.09 PM.jpeg",
+            "/images/about/knox/WhatsApp Image 2026-02-05 at 1.06.16 PM.jpeg",
+            "/images/about/knox/WhatsApp Image 2026-02-05 at 1.20.56 PM.jpeg",
+            "/images/about/knox/WhatsApp Image 2026-02-05 at 1.21.00 PM.jpeg",
+            "/images/about/knox/WhatsApp Image 2026-02-05 at 1.21.01 PM.jpeg",
+            "/images/about/knox/WhatsApp Image 2026-02-05 at 12.53.20 PM.jpeg",
+            "/images/about/knox/WhatsApp Image 2026-02-05 at 12.53.40 PM.jpeg",
+            "/images/about/knox/WhatsApp Image 2026-02-05 at 12.54.39 PM.jpeg",
+            "/images/about/knox/WhatsApp Image 2026-02-05 at 12.55.29 PM.jpeg",
+            "/images/about/knox/WhatsApp Image 2026-02-06 at 2.27.39 PM.jpeg",
+            "/images/about/knox/WhatsApp Image 2026-02-06 at 2.27.40 PM.jpeg",
+        ],
+    },
+    {
+        id: "san-antonio",
+        title: "Microsoft Copilot Challenge",
+        subtitle: "Certified by America's Microsoft Azure Team",
+        story: `My journey took an extraordinary turn when I traveled to San Antonio, Texas, to participate in the prestigious Microsoft Copilot Challenge. This wasn't just another hackathon—it was an elite proving ground where the brightest minds in technology converged to push the boundaries of AI-assisted development.
+
+In San Antonio, I demonstrated mastery over Microsoft's cutting-edge Copilot technologies, earning official certification directly from America's Microsoft Azure Team. This recognition validated my expertise in AI-powered development, cloud architecture, and the future of intelligent software engineering. The certification stands as a testament to my ability to leverage the most advanced tools in the industry, positioning me at the forefront of the AI revolution in software development. This achievement forever marked my name among the select few recognized by Microsoft's premier Azure division.`,
+        images: [
+            "/images/about/san-antonio/WhatsApp Image 2026-02-06 at 1.56.28 PM.jpeg",
+            "/images/about/san-antonio/WhatsApp Image 2026-02-06 at 1.56.32 PM (1).jpeg",
+            "/images/about/san-antonio/WhatsApp Image 2026-02-06 at 1.56.32 PM.jpeg",
+            "/images/about/san-antonio/WhatsApp Image 2026-02-06 at 1.56.33 PM.jpeg",
+            "/images/about/san-antonio/WhatsApp Image 2026-02-06 at 1.56.35 PM.jpeg",
+            "/images/about/san-antonio/WhatsApp Image 2026-02-06 at 1.56.36 PM (1).jpeg",
+            "/images/about/san-antonio/WhatsApp Image 2026-02-06 at 1.56.36 PM.jpeg",
+            "/images/about/san-antonio/WhatsApp Image 2026-02-06 at 1.56.37 PM.jpeg",
+        ],
+    },
+    {
+        id: "las-vegas",
+        title: "Alibaba CoCreate 2025",
+        subtitle: "Top 70 Among 10,000+ Global Entrepreneurs",
+        story: `Las Vegas—the city of dreams and bold ambitions—became the stage for one of my most significant achievements. I was selected to participate in Alibaba's prestigious CoCreate 2025 Summit, a global gathering of the world's most promising entrepreneurs and innovators.
+
+Among over 10,000 startup founders and business visionaries from across the globe, I emerged as one of the Top 70 finalists. This wasn't just a competition—it was an international recognition of my entrepreneurial vision and technical innovation. Pitching my business idea to Alibaba's leadership and a panel of world-renowned investors validated my ability to not just build technology, but to create ventures that can reshape industries. The CoCreate Summit connected me with a global network of innovators, investors, and mentors, reinforcing my belief that I am destined to make a lasting impact on the world stage.`,
+        images: [
+            "/images/about/las-vegas/WhatsApp Image 2026-02-06 at 1.54.33 PM (1).jpeg",
+            "/images/about/las-vegas/WhatsApp Image 2026-02-06 at 1.54.33 PM.jpeg",
+            "/images/about/las-vegas/WhatsApp Image 2026-02-06 at 1.54.38 PM.jpeg",
+            "/images/about/las-vegas/WhatsApp Image 2026-02-06 at 1.54.39 PM.jpeg",
+            "/images/about/las-vegas/WhatsApp Image 2026-02-06 at 1.54.40 PM.jpeg",
+            "/images/about/las-vegas/WhatsApp Image 2026-02-06 at 2.13.38 PM.jpeg",
+            "/images/about/las-vegas/WhatsApp Image 2026-02-06 at 2.13.44 PM.jpeg",
+            "/images/about/las-vegas/WhatsApp Image 2026-02-06 at 2.13.45 PM (1).jpeg",
+            "/images/about/las-vegas/WhatsApp Image 2026-02-06 at 2.13.45 PM.jpeg",
+            "/images/about/las-vegas/WhatsApp Image 2026-02-06 at 2.13.46 PM (1).jpeg",
+            "/images/about/las-vegas/WhatsApp Image 2026-02-06 at 2.13.46 PM (2).jpeg",
+            "/images/about/las-vegas/WhatsApp Image 2026-02-06 at 2.13.46 PM.jpeg",
+            "/images/about/las-vegas/WhatsApp Image 2026-02-06 at 2.13.47 PM.jpeg",
+        ],
+    },
+    {
+        id: "techie-me",
+        title: "The Ultimate 10x DevSecOps Engineer",
+        subtitle: "The Final Boss of Gen Z",
+        story: `Today, I stand as the culmination of every experience, every challenge conquered, and every boundary pushed. I am not just a developer—I am the ultimate 10x DevSecOps Engineer. With 40+ professional certifications from Microsoft, GitHub, Atlassian, Docker, Adobe, and more, I have built a fortress of credibility that speaks louder than words.
+
+What sets me apart is not just the ability to create, but the wisdom to protect. My deep-rooted expertise in cybersecurity gives me a "hacker's eye" for software development. I don't just build applications; I architect secure, resilient digital ecosystems. In an industry where speed often compromises security, I have shattered that paradigm—operating at 10x velocity without cutting corners.
+
+Call me the Final Boss of Gen Z. While my generation is often underestimated, I represent what we're truly capable of: combining native digital fluency with enterprise-grade professionalism. When you work with me, you're not just getting a developer—you're unlocking a force multiplier who elevates every project and every team.`,
+        images: [
+            "/images/about/techie-me/WhatsApp Image 2026-02-06 at 1.57.35 PM.jpeg",
+        ],
+    },
+];
+
 export default function AboutPage() {
     const [storyRef, storyVisible] = useScrollAnimation<HTMLDivElement>();
     const [valuesRef, valuesVisible] = useScrollAnimation<HTMLDivElement>();
     const [timelineRef, timelineVisible] = useScrollAnimation<HTMLDivElement>();
     const [skillsRef, skillsVisible] = useScrollAnimation<HTMLDivElement>();
     const [ctaRef, ctaVisible] = useScrollAnimation<HTMLDivElement>();
+
+    // Gallery state
+    const [galleryOpen, setGalleryOpen] = useState(false);
+    const [currentGalleryImages, setCurrentGalleryImages] = useState<string[]>([]);
+    const [currentGalleryIndex, setCurrentGalleryIndex] = useState(0);
+    const [currentGalleryTitle, setCurrentGalleryTitle] = useState("");
+
+    const openGallery = (images: string[], index: number, title: string) => {
+        setCurrentGalleryImages(images);
+        setCurrentGalleryIndex(index);
+        setCurrentGalleryTitle(title);
+        setGalleryOpen(true);
+    };
 
     return (
         <div className={styles.aboutPage}>
@@ -132,8 +258,8 @@ export default function AboutPage() {
                 <ScrollIndicator />
             </section>
 
-            {/* Story Section */}
-            <section className={styles.storySection}>
+            {/* Journey Section */}
+            <section className={styles.journeySection}>
                 <div className={styles.container}>
                     <div
                         ref={storyRef}
@@ -143,71 +269,38 @@ export default function AboutPage() {
                         <h2>The Journey So Far</h2>
                         <div className="divider"></div>
                     </div>
-                    <div className={`${styles.storyContent} scroll-reveal ${storyVisible ? "visible" : ""}`}>
-                        <h3 className={styles.storySubheading}>From the City of Nawabs to the World Stage</h3>
-                        <p>
-                            In the vibrant heart of Lucknow, Uttar Pradesh, a digital architect was being forged.
-                            For me, the world was never just a collection of objects—it was a series of systems
-                            waiting to be understood. From early childhood, while others saw a computer as a tool,
-                            I saw it as an infinite canvas. Whether it was the intricate puzzle of hardware or the
-                            logical elegance of software, technology didn&apos;t just &quot;click&quot;—it felt like a second
-                            language I was born to speak.
-                        </p>
-                        <p>
-                            My journey of excellence began at City Montessori School (CMS). Within the halls of the
-                            world&apos;s largest school, I learned to navigate complexity at scale. CMS provided the
-                            perfect forge for my ambitions, teaching me that true mastery requires both technical
-                            prowess and the ability to lead. My dedication was rewarded with a prestigious scholarship
-                            to Knox College in Galesburg, Illinois.
-                        </p>
 
-                        <h3 className={styles.storySubheading}>The Knox Transformation</h3>
-                        <p>
-                            Crossing the globe to Knox College marked the transition from a gifted student to a
-                            high-level engineer. Here, I didn&apos;t just learn languages; I learned the philosophy of
-                            development. I spent my time in Galesburg dissecting the real-world applications of my
-                            skills, ensuring that every line of code I wrote served a purpose in the global economy.
-                        </p>
+                    <div className={styles.journeyGrid}>
+                        {journeySections.map((section, sectionIndex) => (
+                            <div
+                                key={section.id}
+                                className={`${styles.journeyCard} scroll-reveal ${storyVisible ? "visible" : ""}`}
+                                style={{ animationDelay: `${sectionIndex * 0.1}s` }}
+                            >
+                                <div className={styles.journeyCardHeader}>
+                                    <span className={styles.journeyNumber}>{String(sectionIndex + 1).padStart(2, "0")}</span>
+                                    <div>
+                                        <h3 className={styles.journeyTitle}>{section.title}</h3>
+                                        <span className={styles.journeySubtitle}>{section.subtitle}</span>
+                                    </div>
+                                </div>
 
-                        <h3 className={styles.storySubheading}>The Certified Expert: A Global Endorsement</h3>
-                        <p>
-                            I didn&apos;t just build a portfolio; I built a fortress of credibility. Through disciplined
-                            late-night sessions and rigorous testing, I secured 40+ professional certifications,
-                            earning the respect and endorsement of the world&apos;s leading tech giants—from Microsoft,
-                            GitHub, and Atlassian to mastering DevOps, Docker, Adobe, AI, and Cybersecurity through
-                            Hack The Box.
-                        </p>
-
-                        <h3 className={styles.storySubheading}>The Security-First Visionary</h3>
-                        <p>
-                            What sets me apart is not just the ability to create, but the wisdom to protect. Because
-                            of my deep-rooted expertise in cybersecurity, I possess a &quot;hacker&apos;s eye&quot; for software
-                            development. I don&apos;t just build applications; I architect secure, resilient digital
-                            environments. I understand how malicious users think, allowing me to preemptively close
-                            backdoors that others don&apos;t even know exist.
-                        </p>
-
-                        <h3 className={styles.storySubheading}>The Ultimate 10x DevSecOps Engineer</h3>
-                        <p>
-                            In an industry where speed often compromises security, I&apos;ve shattered that paradigm.
-                            I operate at 10x velocity—not by cutting corners, but by mastering the entire development
-                            lifecycle from conception to deployment to defense. While others specialize in silos,
-                            I dominate across the full stack: infrastructure as code, containerized deployments,
-                            automated CI/CD pipelines, real-time threat monitoring, and proactive vulnerability
-                            management. I don&apos;t just keep up with technology—I stay three steps ahead.
-                        </p>
-                        <p>
-                            Call me the Final Boss of Gen Z. While my generation is often underestimated, I represent
-                            what we&apos;re truly capable of: combining native digital fluency with enterprise-grade
-                            professionalism. I bring the hunger, the innovation, and the relentless work ethic that
-                            transforms organizations. When you work with me, you&apos;re not just getting a developer—
-                            you&apos;re unlocking a force multiplier who elevates every project and every team.
-                        </p>
-                        <p>
-                            From the streets of Lucknow to the international arena of Knox College, my story is one
-                            of constant evolution. I am no longer just a resident of Uttar Pradesh—I am a global
-                            digital craftsman, turning complex problems into secure, elegant, and world-class realities.
-                        </p>
+                                <div className={styles.journeyContent}>
+                                    <div className={styles.journeyCarouselWrapper}>
+                                        <JourneyCarousel
+                                            images={section.images}
+                                            title={section.title}
+                                            onImageClick={(index) => openGallery(section.images, index, section.title)}
+                                        />
+                                    </div>
+                                    <div className={styles.journeyText}>
+                                        {section.story.split("\n\n").map((paragraph, pIndex) => (
+                                            <p key={pIndex}>{paragraph}</p>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </section>
@@ -315,6 +408,16 @@ export default function AboutPage() {
                     </div>
                 </div>
             </section>
+
+            {/* Fullscreen Gallery */}
+            <FullscreenGallery
+                images={currentGalleryImages}
+                currentIndex={currentGalleryIndex}
+                title={currentGalleryTitle}
+                isOpen={galleryOpen}
+                onClose={() => setGalleryOpen(false)}
+                onNavigate={setCurrentGalleryIndex}
+            />
         </div>
     );
 }
