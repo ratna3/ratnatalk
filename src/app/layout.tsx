@@ -21,24 +21,45 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "RK Talks | A Journey Through Thoughts",
-  description: "Welcome to RK Talks - An immersive journey through a Japanese landscape of personal blogs, insights, and professional achievements.",
-  keywords: ["RK Talks", "Blog", "Personal Blog", "Certifications", "Insights", "Tech Blog", "Portfolio"],
-  authors: [{ name: "RK" }],
+  title: "RK Talks | Ratna Kirti - 10x DevSecOps Engineer",
+  description: "Welcome to RK Talks - Portfolio of Ratna Kirti, the Ultimate 10x DevSecOps Engineer with 40+ certifications. Cybersecurity Expert. The Final Boss of Gen Z.",
+  keywords: ["RK Talks", "Ratna Kirti", "DevSecOps", "Cybersecurity", "10x Engineer", "Portfolio", "Blog", "Certifications", "Microsoft", "Azure"],
+  authors: [{ name: "Ratna Kirti" }],
+  metadataBase: new URL("https://rktalks.vercel.app"),
   openGraph: {
-    title: "RK Talks | A Journey Through Thoughts",
-    description: "Welcome to RK Talks - An immersive journey through a Japanese landscape of personal blogs, insights, and professional achievements.",
+    title: "RK Talks | Ratna Kirti - 10x DevSecOps Engineer",
+    description: "Portfolio of Ratna Kirti - The Ultimate 10x DevSecOps Engineer with 40+ certifications. Cybersecurity Expert. The Final Boss of Gen Z.",
     type: "website",
     siteName: "RK Talks",
+    url: "https://rktalks.vercel.app",
+    images: [
+      {
+        url: "/images/logo.png",
+        width: 800,
+        height: 800,
+        alt: "RK Talks - Ratna Kirti Logo",
+      },
+    ],
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "RK Talks | A Journey Through Thoughts",
-    description: "An immersive journey through a Japanese landscape of personal blogs and insights.",
+    title: "RK Talks | Ratna Kirti - 10x DevSecOps Engineer",
+    description: "The Ultimate 10x DevSecOps Engineer with 40+ certifications. Cybersecurity Expert. The Final Boss of Gen Z.",
+    images: ["/images/logo.png"],
+    creator: "@ratnakirti",
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
   },
 };
 
