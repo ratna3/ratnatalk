@@ -1,8 +1,9 @@
 /* Journey Carousel Container */
 .carouselContainer {
     width: 100%;
-    max-width: 500px;
+    max-width: min(500px, 100%);
     margin: 0 auto;
+    overflow: hidden;
 }
 
 .carouselWrapper {
@@ -233,6 +234,11 @@
 @media (max-width: 768px) {
     .carouselContainer {
         max-width: 100%;
+        padding: 0;
+    }
+
+    .carouselWrapper {
+        border-radius: var(--radius-lg);
     }
 
     .navButton {
@@ -247,5 +253,39 @@
 
     .nextButton {
         right: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .carouselWrapper {
+        aspect-ratio: 16/12;
+    }
+
+    .navButton {
+        width: 32px;
+        height: 32px;
+    }
+
+    .navButton svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .counter {
+        padding: 4px 8px;
+        font-size: 0.7rem;
+    }
+
+    .dotsContainer {
+        gap: 6px;
+    }
+
+    .dot {
+        width: 8px;
+        height: 8px;
+    }
+
+    .dot.activeDot {
+        width: 18px;
     }
 }

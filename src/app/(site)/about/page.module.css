@@ -120,7 +120,7 @@
 .heroImageWrapper {
     position: relative;
     width: 100%;
-    max-width: 450px;
+    max-width: min(450px, 90vw);
     aspect-ratio: 1;
     margin: 0 auto;
     border-radius: var(--radius-2xl);
@@ -130,6 +130,7 @@
     animation: fadeInUp 1s ease-out 0.4s both;
     transform: rotate(3deg);
     transition: all 0.5s ease;
+    overflow: hidden;
 }
 
 .heroImageWrapper:hover {
@@ -535,15 +536,24 @@
         grid-template-columns: 1fr;
         text-align: center;
         gap: 3rem;
+        padding: 0 1rem;
     }
 
     .heroStats {
         justify-content: center;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+    }
+
+    .heroImageWrapper {
+        max-width: 80vw;
+        transform: rotate(0deg);
     }
 
     /* Journey Section Responsive */
     .journeyCard {
         padding: 1.5rem;
+        overflow: hidden;
     }
 
     .journeyCardHeader {
@@ -567,6 +577,7 @@
     .journeyCarouselWrapper {
         position: relative;
         top: 0;
+        max-width: 100%;
     }
 
     .journeyText p:first-child::first-letter {
@@ -593,5 +604,52 @@
     .timelineItem:nth-child(odd) .timelineContent {
         width: 100%;
         margin: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 7rem 1rem 4rem;
+    }
+
+    .heroContent h1 {
+        font-size: clamp(2rem, 10vw, 3rem);
+    }
+
+    .heroStats {
+        gap: 1rem;
+    }
+
+    .heroStatNumber {
+        font-size: 1.8rem;
+    }
+
+    .heroImageWrapper {
+        max-width: 90vw;
+    }
+
+    .sectionHeader h2 {
+        font-size: 1.75rem;
+    }
+
+    .journeyCard {
+        padding: 1rem;
+    }
+
+    .storySection,
+    .journeySection {
+        padding: 4rem 1rem;
+    }
+
+    .valuesSection {
+        padding: 4rem 1rem;
+    }
+
+    .valuesGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .valueCard {
+        padding: 1.5rem;
     }
 }
